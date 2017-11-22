@@ -20,8 +20,9 @@ public class ProxyUtil {
     private static List<ProxyDaXiang> daXiangList=new ArrayList<ProxyDaXiang>();
     private static int i=0;
 
-    public static ProxyDaXiang getProxy() throws IOException {
+    public synchronized static ProxyDaXiang getProxy() throws IOException {
         if(i>=daXiangList.size()){
+            logger.info("重新拿");
             daXiangList=new ArrayList<ProxyDaXiang>();
             i=0;
             CloseableHttpClient client = HttpClientUtil.generateClient(null);
@@ -51,6 +52,7 @@ public class ProxyUtil {
                 daXiangList.add(proxyDaXiang);
             }
         }
+        logger.info("老的数据");
         ProxyDaXiang res=daXiangList.get(i);
         i++;
         return res;

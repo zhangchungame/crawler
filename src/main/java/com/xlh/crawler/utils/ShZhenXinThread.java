@@ -2,8 +2,10 @@ package com.xlh.crawler.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.xlh.crawler.dto.CdmEntDtoCorpInfo;
 import com.xlh.crawler.dto.CraCorpInfo;
 import com.xlh.crawler.dto.ProxyDaXiang;
+import com.xlh.crawler.mapper.CdmEntDtoCorpInfoMapper;
 import com.xlh.crawler.mapper.CraCorpInfoMapper;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -26,6 +28,7 @@ import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,24 +39,52 @@ import java.util.regex.Pattern;
 
 public class ShZhenXinThread extends Thread{
     private static Logger logger = LoggerFactory.getLogger(ShZhenXinThread.class);
-    @Autowired
     private CraCorpInfoMapper craCorpInfoMapper;
+    private CdmEntDtoCorpInfoMapper cdmEntDtoCorpInfoMapper;
+
+
     private Semaphore semaphore;
-    public ShZhenXinThread(Semaphore semaphore){
+    private CdmEntDtoCorpInfo cdmEntDtoCorpInfo;
+    private ProxyDaXiang proxyDaXiang;
+    public ShZhenXinThread(Semaphore semaphore, CdmEntDtoCorpInfo cdmEntDtoCorpInfo,ProxyDaXiang proxyDaXiang){
         this.semaphore=semaphore;
+        this.cdmEntDtoCorpInfo=cdmEntDtoCorpInfo;
+        this.proxyDaXiang=proxyDaXiang;
     }
+
+    public CraCorpInfoMapper getCraCorpInfoMapper() {
+        return craCorpInfoMapper;
+    }
+
+    public void setCraCorpInfoMapper(CraCorpInfoMapper craCorpInfoMapper) {
+        this.craCorpInfoMapper = craCorpInfoMapper;
+    }
+
+    public CdmEntDtoCorpInfoMapper getCdmEntDtoCorpInfoMapper() {
+        return cdmEntDtoCorpInfoMapper;
+    }
+
+    public void setCdmEntDtoCorpInfoMapper(CdmEntDtoCorpInfoMapper cdmEntDtoCorpInfoMapper) {
+        this.cdmEntDtoCorpInfoMapper = cdmEntDtoCorpInfoMapper;
+    }
+
     @Override
     public void run(){
         try {
-            long eatTime=(long) (Math.random()*10);
-            System.out.println(Thread.currentThread().getId()+" 正在吃饭");
-//            TimeUnit.SECONDS.sleep(3000);
-            currentThread().sleep(3000);
-            System.out.println(Thread.currentThread().getId()+" 已经吃完");
-            semaphore.release();//归还许可
-        } catch (InterruptedException e) {
+             ProxyDaXiang daXiang=proxyDaXiang;
+             int retsize=test(cdmEntDtoCorpInfo.getEnterpriseName(),daXiang);
+            if(retsize==0){
+                cdmEntDtoCorpInfo.setStatus(2);
+            }else{
+                cdmEntDtoCorpInfo.setStatus(1);
+            }
+            cdmEntDtoCorpInfoMapper.updateByPrimaryKey(cdmEntDtoCorpInfo);
+            logger.info("更新了数据id为{}", cdmEntDtoCorpInfo.getId());
+        } catch (Exception e) {
+            logger.info("run exception={}", e.getMessage());
             e.printStackTrace();
         }
+        semaphore.release();//归还许可
     }
 
 
