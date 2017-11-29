@@ -82,7 +82,6 @@ public class ShZhenXinThread extends Thread{
             logger.info("更新了数据id为{}", cdmEntDtoCorpInfo.getId());
         } catch (Exception e) {
             logger.info("run exception={}", e.getMessage());
-            e.printStackTrace();
         }
         semaphore.release();//归还许可
     }

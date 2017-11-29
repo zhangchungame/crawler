@@ -46,7 +46,7 @@ public class ThreadTestSemaphore {
         Semaphore semaphore=new Semaphore(10);//总共有5个许可
         while (page <= totalPage) {
             sqlLimit.setStart(0);
-            sqlLimit.setLimit(10);
+            sqlLimit.setLimit(5);
             List<CdmEntDtoCorpInfo> list = cdmEntDtoCorpInfoMapper.selectByPage(sqlLimit);
             ProxyDaXiang daXiang=ProxyUtil.getProxy();
             for (int i = 0; i < list.size(); i++) {
