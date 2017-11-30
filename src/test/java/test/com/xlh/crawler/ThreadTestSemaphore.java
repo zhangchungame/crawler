@@ -34,32 +34,33 @@ public class ThreadTestSemaphore {
 
     @Test
     public void mysql() throws Exception {
-        Example example = new Example(CdmEntDtoCorpInfo.class);
-        example.createCriteria().andLike("enterpriseName", "%上海%").andEqualTo("status", 0);
-        int count = cdmEntDtoCorpInfoMapper.selectCountByExample(example);
+        while(true){
+            Thread.sleep(1000);
+            Example example = new Example(CdmEntDtoCorpInfo.class);
+            example.createCriteria().andLike("enterpriseName", "%上海%").andEqualTo("status", 0);
+            int count = cdmEntDtoCorpInfoMapper.selectCountByExample(example);
 
-        SqlLimit sqlLimit = new SqlLimit();
-        int page = 0;
-        int totalPage = count / 10;
+            SqlLimit sqlLimit = new SqlLimit();
+            int page = 0;
+            int totalPage = count / 10;
 
 
-        Semaphore semaphore=new Semaphore(10);//总共有5个许可
-        while (page <= totalPage) {
-            sqlLimit.setStart(0);
-            sqlLimit.setLimit(5);
-            List<CdmEntDtoCorpInfo> list = cdmEntDtoCorpInfoMapper.selectByPage(sqlLimit);
-            ProxyDaXiang daXiang=ProxyUtil.getProxy();
-            for (int i = 0; i < list.size(); i++) {
-                semaphore.acquire();
-                ShZhenXinThread shZhenXinThread= new ShZhenXinThread(semaphore,list.get(i),daXiang);
-                shZhenXinThread.setCdmEntDtoCorpInfoMapper(cdmEntDtoCorpInfoMapper);
-                shZhenXinThread.setCraCorpInfoMapper(craCorpInfoMapper);
-                shZhenXinThread.start();
+            Semaphore semaphore=new Semaphore(10);//总共有5个许可
+            while (page <= totalPage) {
+                sqlLimit.setStart(0);
+                sqlLimit.setLimit(5);
+                List<CdmEntDtoCorpInfo> list = cdmEntDtoCorpInfoMapper.selectByPage(sqlLimit);
+                ProxyDaXiang daXiang=ProxyUtil.getProxy();
+                for (int i = 0; i < list.size(); i++) {
+                    semaphore.acquire();
+                    ShZhenXinThread shZhenXinThread= new ShZhenXinThread(semaphore,list.get(i),daXiang);
+                    shZhenXinThread.setCdmEntDtoCorpInfoMapper(cdmEntDtoCorpInfoMapper);
+                    shZhenXinThread.setCraCorpInfoMapper(craCorpInfoMapper);
+                    shZhenXinThread.start();
+                }
+                page++;
             }
-            page++;
         }
-
-
     }
 
 //    @Test
