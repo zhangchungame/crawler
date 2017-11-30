@@ -67,7 +67,7 @@ public class HttpClientUtil {
                     return false;
                 }
                 if (exception instanceof NoHttpResponseException) {// 如果服务器丢掉了连接，那么就重试
-                    return true;
+                    return false;
                 }
                 if (exception instanceof SSLHandshakeException) {// 不要重试SSL握手异常
                     return false;
