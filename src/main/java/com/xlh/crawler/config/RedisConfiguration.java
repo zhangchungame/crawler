@@ -83,9 +83,9 @@ public class RedisConfiguration extends CachingConfigurerSupport {
         logger.info("JedisPool注入成功！！");
         logger.info("redis地址：" + host + ":" + port);
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
-        jedisPoolConfig.setMaxIdle(8);
+        jedisPoolConfig.setMaxIdle(20);
         jedisPoolConfig.setMaxWaitMillis(60000);
-        jedisPoolConfig.setMaxTotal(20);
+        jedisPoolConfig.setMaxTotal(40);
 
         JedisPool jedisPool = new JedisPool(jedisPoolConfig, host, port, 3000, "redis",database);
 

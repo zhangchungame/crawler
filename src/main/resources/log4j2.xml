@@ -6,7 +6,7 @@
         <!--${sys:catalina.home}表示linux中环境变量中的tomcat根目录 -->
 
         <!--<Property name="log_path">d:/logs</Property>-->
-        <Property name="log_path">/usr/local/deploy/logs/crawler/</Property>
+        <Property name="log_path">/home/zc/tmpfile/</Property>
 
     </properties>
     <appenders>

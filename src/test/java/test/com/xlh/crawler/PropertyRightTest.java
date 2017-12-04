@@ -3,6 +3,8 @@ package test.com.xlh.crawler;
 import com.xlh.crawler.dto.ProxyDaXiang;
 import com.xlh.crawler.utils.HttpClientUtil;
 import com.xlh.crawler.utils.ProxyUtil;
+import com.xlh.crawler.utils.TesserocrUtil;
+import net.sourceforge.tess4j.TesseractException;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -49,5 +51,17 @@ public class PropertyRightTest {
         // 将文件输出到本地
         fout.flush();
         EntityUtils.consume(entity);
+    }
+
+    @Test
+    public void test2(){
+        CloseableHttpClient client=HttpClientUtil.generateClient(null);
+        try {
+            int veryCode= TesserocrUtil.imageRecog(client);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (TesseractException e) {
+            e.printStackTrace();
+        }
     }
 }

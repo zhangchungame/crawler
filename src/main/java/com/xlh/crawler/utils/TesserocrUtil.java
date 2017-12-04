@@ -27,7 +27,7 @@ public class TesserocrUtil {
         HttpEntity entity = response.getEntity();
         InputStream in = entity.getContent();
         String fileName=String.valueOf((new Date()).getTime());
-        File file = new File("d:/logs/"+fileName+".jpg");
+        File file = new File("/home/zc/tmpfile/"+fileName+".jpg");
         FileOutputStream fout = new FileOutputStream(file);
         int l;
         byte[] tmp = new byte[1024];
@@ -38,7 +38,7 @@ public class TesserocrUtil {
         // 将文件输出到本地
         fout.flush();
         EntityUtils.consume(entity);
-        instance.setDatapath("C:/Program Files (x86)/Tesseract-OCR/tessdata");
+        instance.setDatapath("/usr/share/tesseract-ocr/tessdata");
         String str = instance.doOCR(file);
         System.out.println("文件："+fileName+"识别结果："+str);
         String pattern="(\\d)(\\+|\\-)(\\d)";
