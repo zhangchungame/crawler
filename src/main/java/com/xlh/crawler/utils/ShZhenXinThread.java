@@ -7,6 +7,7 @@ import com.xlh.crawler.dto.CraCorpInfo;
 import com.xlh.crawler.dto.ProxyDaXiang;
 import com.xlh.crawler.mapper.CdmEntDtoCorpInfoMapper;
 import com.xlh.crawler.mapper.CraCorpInfoMapper;
+import com.xlh.crawler.service.IpPoolService;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -42,6 +43,8 @@ public class ShZhenXinThread extends Thread{
     private CraCorpInfoMapper craCorpInfoMapper;
     private CdmEntDtoCorpInfoMapper cdmEntDtoCorpInfoMapper;
 
+    private IpPoolService ipPoolService;
+
 
     private Semaphore semaphore;
     private CdmEntDtoCorpInfo cdmEntDtoCorpInfo;
@@ -50,6 +53,14 @@ public class ShZhenXinThread extends Thread{
         this.semaphore=semaphore;
         this.cdmEntDtoCorpInfo=cdmEntDtoCorpInfo;
         this.proxyDaXiang=proxyDaXiang;
+    }
+
+    public IpPoolService getIpPoolService() {
+        return ipPoolService;
+    }
+
+    public void setIpPoolService(IpPoolService ipPoolService) {
+        this.ipPoolService = ipPoolService;
     }
 
     public CraCorpInfoMapper getCraCorpInfoMapper() {
@@ -71,7 +82,9 @@ public class ShZhenXinThread extends Thread{
     @Override
     public void run(){
         try {
-             ProxyDaXiang daXiang=proxyDaXiang;
+             ProxyDaXiang daXiang=new ProxyDaXiang();
+             daXiang.setIp(proxyDaXiang.getIp());
+             daXiang.setPort(proxyDaXiang.getPort());
              int retsize=test(cdmEntDtoCorpInfo.getEnterpriseName(),daXiang);
             if(retsize==0){
                 cdmEntDtoCorpInfo.setStatus(2);
@@ -82,6 +95,7 @@ public class ShZhenXinThread extends Thread{
             logger.info("更新了数据id为{}", cdmEntDtoCorpInfo.getId());
         } catch (Exception e) {
             logger.info("run exception={}", e.getMessage());
+//            proxyDaXiang=ipPoolService.getZhenxinIp();
         }
         semaphore.release();//归还许可
     }

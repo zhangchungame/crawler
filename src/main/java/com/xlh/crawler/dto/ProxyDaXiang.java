@@ -1,5 +1,7 @@
 package com.xlh.crawler.dto;
 
+import com.alibaba.fastjson.JSON;
+
 public class ProxyDaXiang {
     private String ip;
     private String port;
@@ -18,5 +20,10 @@ public class ProxyDaXiang {
 
     public void setPort(String port) {
         this.port = port;
+    }
+
+    @Override
+    public String toString(){
+        return JSON.toJSONString(this);
     }
 }
