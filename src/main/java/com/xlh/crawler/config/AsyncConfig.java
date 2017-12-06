@@ -14,11 +14,11 @@ public class AsyncConfig {
     此处成员变量应该使用@Value从配置中读取
      */
     /** Set the ThreadPoolExecutor's core pool size. */
-    private int corePoolSize = 5;
+    private int corePoolSize = 10;
     /** Set the ThreadPoolExecutor's maximum pool size. */
     private int maxPoolSize = 100;
     /** Set the capacity for the ThreadPoolExecutor's BlockingQueue. */
-    private int queueCapacity = 10;
+    private int queueCapacity = 20;
 
     @Bean(name = "taskExecutorOne")
     public Executor taskExecutor() {

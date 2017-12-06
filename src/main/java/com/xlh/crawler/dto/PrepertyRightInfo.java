@@ -1,6 +1,7 @@
 package com.xlh.crawler.dto;
 
 public class PrepertyRightInfo {
+    private int enterpriseId;
     private String enterpriseName;
     private String rightType;
     private String rightNo;
@@ -8,6 +9,14 @@ public class PrepertyRightInfo {
     private String applicant;
     private String filingDate;
     private String mainClassNo;
+
+    public int getEnterpriseId() {
+        return enterpriseId;
+    }
+
+    public void setEnterpriseId(int enterpriseId) {
+        this.enterpriseId = enterpriseId;
+    }
 
     public String getEnterpriseName() {
         return enterpriseName;

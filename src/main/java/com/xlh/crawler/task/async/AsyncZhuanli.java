@@ -1,5 +1,6 @@
 package com.xlh.crawler.task.async;
 
+import com.alibaba.fastjson.JSON;
 import com.xlh.crawler.dto.*;
 import com.xlh.crawler.mapper.CdmEntDtoCorpInfoMapper;
 import com.xlh.crawler.mapper.CraCorpInfoMapper;
@@ -9,6 +10,8 @@ import com.xlh.crawler.utils.HttpClientUtil;
 import com.xlh.crawler.utils.ProxyUtil;
 import com.xlh.crawler.utils.ShZhenXinThread;
 import com.xlh.crawler.utils.TesserocrUtil;
+import net.sourceforge.tess4j.ITesseract;
+import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -32,11 +35,16 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Example;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Semaphore;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Component
 public class AsyncZhuanli {
@@ -53,8 +61,13 @@ public class AsyncZhuanli {
 
     public String getRespons(HttpClient client, String enterpriseName) throws Exception {
         HttpGet httpGet = new HttpGet("http://cpquery.sipo.gov.cn/txnPantentInfoList.do");
-        client.execute(httpGet);
-        int veryCode = TesserocrUtil.imageRecog(client);
+        HttpResponse response = client.execute(httpGet);
+        HttpEntity entity = response.getEntity();
+        String resp = EntityUtils.toString(entity, "UTF-8");
+        if (resp.equals("")) {
+            throw new Exception("返回空值");
+        }
+        int veryCode = imageRecog(client,0);
 //        int veryCode=121;
         HttpPost post = new HttpPost("http://cpquery.sipo.gov.cn/freeze.main?txn-code=checkImgServlet");
 
@@ -64,9 +77,9 @@ public class AsyncZhuanli {
         //设置参数到请求对象中
         UrlEncodedFormEntity entity2 = new UrlEncodedFormEntity(nvps, "utf-8");
         post.setEntity(entity2);
-        HttpResponse response = client.execute(post);
-        HttpEntity entity = response.getEntity();
-        String resp = EntityUtils.toString(entity, "UTF-8");
+        response = client.execute(post);
+        entity = response.getEntity();
+        resp = EntityUtils.toString(entity, "UTF-8");
         System.out.println("检查图片：" + resp);
         if (!"0".equals(resp)) {
             throw new Exception("图片异常");
@@ -78,7 +91,7 @@ public class AsyncZhuanli {
         return resp;
     }
 
-    @Async("taskExecutorZhenxin")
+    @Async("taskExecutorZhuanli")
     public void dealResp(CraCorpInfo craCorpInfo, ProxyDaXiang daXiang, Semaphore semaphore) {
         try {
             String enterpriseName = craCorpInfo.getEnterpriseName();
@@ -104,19 +117,14 @@ public class AsyncZhuanli {
                 insertDb(doc, enterpriseName, list);
             }
             for (PrepertyRightInfo item : list) {
+                item.setEnterpriseId(craCorpInfo.getId());
                 prepertyRightInfoMapper.insert(item);
             }
             craCorpInfo.setRightStatus(result);
+            logger.info("craCorpInfo={}", JSON.toJSONString(craCorpInfo));
             craCorpInfoMapper.updateByPrimaryKey(craCorpInfo);
-        } catch (IOException e) {
-            e.printStackTrace();
-            daXiang = ipPoolService.getZhenxinIp();
-        } catch (TesseractException e) {
-            daXiang = ipPoolService.getZhenxinIp();
-            e.printStackTrace();
         } catch (Exception e) {
-            e.printStackTrace();
-            daXiang = ipPoolService.getZhenxinIp();
+            logger.info("daxiang={}    exception={}", JSON.toJSONString(daXiang),e.getMessage());
         }
         semaphore.release();
     }
@@ -140,5 +148,54 @@ public class AsyncZhuanli {
             return 1;
         }
         return new Integer(pagination.get(0).attr("data-totalpage"));
+    }
+
+
+    private int imageRecog(HttpClient client,int times) throws Exception {
+        if(times>10){
+            throw new Exception("超过10次未识别");
+        }
+        ITesseract instance = new Tesseract();
+        HttpGet httpGet = new HttpGet("http://cpquery.sipo.gov.cn/freeze.main?txn-code=createImgServlet&freshStept=1");
+        HttpResponse response = client.execute(httpGet);
+        HttpEntity entity = response.getEntity();
+        InputStream in = entity.getContent();
+        String fileName = String.valueOf((new Date()).getTime());
+        File file = new File("d:/logs/" + fileName + ".jpg");
+//        File file = new File("/home/zc/tmpfile/"+fileName+".jpg");
+        FileOutputStream fout = new FileOutputStream(file);
+        int l;
+        byte[] tmp = new byte[1024];
+        int line = 0;
+        while ((l = in.read(tmp)) != -1) {
+            fout.write(tmp, 0, l);
+            line++;
+            // 注意这里如果用OutputStream.write(buff)的话，图片会失真
+        }
+        // 将文件输出到本地
+        fout.flush();
+        EntityUtils.consume(entity);
+        instance.setDatapath("C:/Program Files (x86)/Tesseract-OCR/tessdata");
+//        instance.setDatapath("/usr/share/tesseract-ocr/tessdata");
+        String str = instance.doOCR(file);
+        str=str.replace("-","-").replace("—","-");
+        logger.info("文件：" + fileName + "识别结果：" + str);
+        String pattern = "(\\d)(\\+|\\-)(\\d)";
+        Pattern r = Pattern.compile(pattern);
+        Matcher m = r.matcher(str);
+        if (m.find()) {
+            int first = new Integer(m.group(1));
+            int sec = new Integer(m.group(3));
+            int result;
+            if (m.group(2).equals("+")) {
+                result = first + sec;
+            } else {
+                result = first - sec;
+            }
+            return result;
+        } else {
+            times++;
+            return imageRecog(client,times);
+        }
     }
 }

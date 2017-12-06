@@ -37,7 +37,7 @@ public class AsyncTask {
     private AsyncIpTest asyncIpTest;
 
     @Autowired
-    private  AsyncZhuanli asyncZhuanli;
+    private AsyncZhuanli asyncZhuanli;
 
     @Autowired
     private IpPoolService ipPoolService;
@@ -51,30 +51,26 @@ public class AsyncTask {
         while (true) {
             if (jedis.llen("ListZhenxin") < 4 || jedis.llen("ListZhuanli") < 4) {
 //            if(jedis.llen("ListZhenxin")<4){
+                logger.info("小于要求数量，开始拉取");
                 try {
-                    logger.info("小于要求数量，开始拉取");
-                    try {
-                        List<ProxyDaXiang> listProxy = getIp();
-                        for (ProxyDaXiang daXiang : listProxy) {
-                            semaphore.acquire();
-                            asyncIpTest.testIp(daXiang, semaphore);
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    List<ProxyDaXiang> listProxy = getIp();
+                    for (ProxyDaXiang daXiang : listProxy) {
+                        semaphore.acquire();
+                        asyncIpTest.testIp(daXiang, semaphore);
                     }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                } catch (Exception e) {
+                    logger.info("exception={}",e.getMessage());
                 }
             }
             try {
-                Thread.sleep(1000);
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    @Async("taskExecutorZhenxin")
+    @Async("taskExecutorZhuanli")
     public void startUp() {
         while (true) {
             try {
@@ -92,27 +88,28 @@ public class AsyncTask {
 
 
             Semaphore semaphore = new Semaphore(10);//总共有5个许可
+
             while (page <= totalPage) {
-                RowBounds rowBounds = new RowBounds(0, 5);
-                List<CraCorpInfo> list = craCorpInfoMapper.selectByExampleAndRowBounds(example, rowBounds);
-                if (list.size() < 1) {
-                    break;
-                }
-                ProxyDaXiang daXiang = ipPoolService.getZhuanliIp();
-                for (int i = 0; i < list.size(); i++) {
-                    try {
-                        semaphore.acquire();
-                        asyncZhuanli.dealResp(list.get(i),daXiang,semaphore);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                try {
+                    ProxyDaXiang daXiang = ipPoolService.getZhuanliIp();
+                    RowBounds rowBounds = new RowBounds(0, 15);
+                    List<CraCorpInfo> list = craCorpInfoMapper.selectByExampleAndRowBounds(example, rowBounds);
+                    if (list.size() < 1) {
+                        break;
                     }
+                    for (int i = 0; i < list.size(); i++) {
+                        semaphore.acquire();
+                        asyncZhuanli.dealResp(list.get(i), daXiang, semaphore);
+                    }
+                    page++;
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-                page++;
             }
         }
     }
 
-    public List<ProxyDaXiang> getIp() throws IOException {
+    public List<ProxyDaXiang> getIp() throws Exception {
 //        ProxyDaXiang proxyDaXiang=new ProxyDaXiang();
 //        List<ProxyDaXiang> list=new ArrayList<>();
 //        for(int i=0;i<10;i++){
@@ -122,21 +119,12 @@ public class AsyncTask {
 //        }
 //        return list;
         CloseableHttpClient client = HttpClientUtil.generateClient(null);
-        HttpGet httpGet = new HttpGet("http://tvp.daxiangdaili.com/ip/?tid=557552170840411&num=5&delay=1&filter=on&area=上海");
+        HttpGet httpGet = new HttpGet("http://tvp.daxiangdaili.com/ip/?tid=557552170840411&num=20&filter=on");
         HttpResponse response = client.execute(httpGet);
         HttpEntity entity = response.getEntity();
         String result = EntityUtils.toString(entity, "UTF-8");
         if (result.contains("ERROR")) {
-            httpGet = new HttpGet("http://tvp.daxiangdaili.com/ip/?tid=557552170840411&num=5&delay=3&filter=on");
-            response = client.execute(httpGet);
-            entity = response.getEntity();
-            result = EntityUtils.toString(entity, "UTF-8");
-            if (result.contains("ERROR")) {
-                httpGet = new HttpGet("http://tvp.daxiangdaili.com/ip/?tid=557552170840411&num=5");
-                response = client.execute(httpGet);
-                entity = response.getEntity();
-                result = EntityUtils.toString(entity, "UTF-8");
-            }
+            throw new Exception("拉取IP接口失败"+result);
         }
         logger.info("proxy result={}", result);
         List<ProxyDaXiang> daXiangList = new ArrayList<>();
