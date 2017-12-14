@@ -27,7 +27,7 @@ public class ProxyUtil {
             daXiangList=new ArrayList<ProxyDaXiang>();
             i=0;
             CloseableHttpClient client = HttpClientUtil.generateClient(null);
-            HttpGet httpGet=new HttpGet("http://tvp.daxiangdaili.com/ip/?tid=557552170840411&num=5&delay=1&filter=on&area=上海");
+            HttpGet httpGet=new HttpGet("http://pvt.daxiangdaili.com/ip/?tid=557552170840411&num=2&category=2&sortby=time");
             HttpResponse response = client.execute(httpGet);
             HttpEntity entity = response.getEntity();
             String result = EntityUtils.toString(entity, "UTF-8");
@@ -66,8 +66,14 @@ public class ProxyUtil {
     private static boolean testIp(ProxyDaXiang proxyDaXiang){
         try{
             CloseableHttpClient client = HttpClientUtil.generateClient(proxyDaXiang);
-            HttpGet httpGet=new HttpGet("http://www.baidu.com/");
+//            HttpGet httpGet=new HttpGet("http://www.baidu.com/");
+            HttpGet httpGet=new HttpGet("http://ln.gsxt.gov.cn/saicpub/");
             HttpResponse response = client.execute(httpGet);
+            HttpEntity entity = response.getEntity();
+            String resp= EntityUtils.toString(entity,"UTF-8");
+            if(resp.contains("500 Internal Privoxy Error")){
+                return false;
+            }
             return  true;
         }catch (ClientProtocolException e) {
             logger.info("ClientProtocolException ={}",e.getMessage());

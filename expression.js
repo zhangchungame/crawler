@@ -12,3 +12,13 @@ function userresponse(a, b) {
         n - q[o] >= 0 ? (m = parseInt(Math.random() * i[o].length, 10), p += i[o][m], n -= q[o]) : (i.splice(o, 1), q.splice(o, 1), o -= 1);
     return p
 }
+
+
+
+function fromCharCode(json) {
+    var bbb=[];
+    for(var i=0;i<json.length;i++){
+        bbb.push(String.fromCharCode(json[i]));
+    }
+    return bbb.join("");
+}
