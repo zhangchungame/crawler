@@ -87,34 +87,34 @@ public class JiyanTest {
         System.out.println(resp);
         jsonObject=JSON.parseObject(resp);
 
-        resp=httpGet(client,"http://www.gsxt.gov.cn/corp-query-search-1.html?tab=ent_tab&token="+String.valueOf(token)+"&searchword=草地&geetest_challenge="+challenge+"&geetest_validate="+jsonObject.getString("validate")+"&geetest_seccode="+jsonObject.getString("validate")+URLEncoder.encode("|jordan","UTF-8"));
+//        resp=httpGet(client,"http://www.gsxt.gov.cn/corp-query-search-1.html?tab=ent_tab&token="+String.valueOf(token)+"&searchword=草地&geetest_challenge="+challenge+"&geetest_validate="+jsonObject.getString("validate")+"&geetest_seccode="+jsonObject.getString("validate")+URLEncoder.encode("|jordan","UTF-8"));
 
 
 //        http://www.gsxt.gov.cn/corp-query-search-1.html?tab=ent_tab&token=120953816&searchword=%E6%9D%A5%E4%BC%8A%E4%BB%BD&geetest_challenge=072dc3ae4366427c58463a14386c8e153j&geetest_validate=6419b2482ebd8d034e5a2ec99eab98c7&geetest_seccode=6419b2482ebd8d034e5a2ec99eab98c7|jordan
-//        HttpPost post=new HttpPost("http://www.gsxt.gov.cn/corp-query-search-1.html");
-//        post.setHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
-//        post.setHeader("Content-Encoding", "gzip");
-//        post.setHeader("Accept-Language", "zh-CN");
-//        post.setHeader("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
-//        post.setHeader("Content-Security-Policy:", "script-src 'self' 'unsafe-eval' 'unsafe-inline' static.geetest.com api.geetest.com www.gsxt.gov.cn s4.cnzz.com c.cnzz.com hm.baidu.com");
-//        post.setHeader("Content-Type", "application/x-www-form-urlencoded");
-//        post.setHeader("host", "www.gsxt.gov.cn");
-//        post.setHeader("Origin", "http://www.gsxt.gov.cn");
-//        post.setHeader("Referer", "http://www.gsxt.gov.cn/index.html");
-//        List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-//        nvps.add(new BasicNameValuePair("tab", "ent_tab"));
-//        nvps.add(new BasicNameValuePair("token", String.valueOf(token)));
-//        nvps.add(new BasicNameValuePair("searchword", "草地"));
-//        nvps.add(new BasicNameValuePair("geetest_challenge", challenge));
-//        nvps.add(new BasicNameValuePair("geetest_validate", jsonObject.getString("validate")));
-//        nvps.add(new BasicNameValuePair("geetest_seccode", jsonObject.getString("validate")+"|jordan"));
-//        //设置参数到请求对象中
-//        UrlEncodedFormEntity entity2 = new UrlEncodedFormEntity(nvps, "utf-8");
-//        post.setEntity(entity2);
-//        HttpResponse response = client.execute(post);
-//        HttpEntity entity = response.getEntity();
-//        resp = EntityUtils.toString(entity, "UTF-8");
-//        System.out.println(resp);
+        HttpPost post=new HttpPost("http://www.gsxt.gov.cn/corp-query-search-1.html");
+        post.setHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
+        post.setHeader("Content-Encoding", "gzip");
+        post.setHeader("Accept-Language", "zh-CN");
+        post.setHeader("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
+
+        post.setHeader("Content-Type", "application/x-www-form-urlencoded");
+        post.setHeader("host", "www.gsxt.gov.cn");
+        post.setHeader("Origin", "http://www.gsxt.gov.cn");
+        post.setHeader("Referer", "http://www.gsxt.gov.cn/index.html");
+        List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+        nvps.add(new BasicNameValuePair("tab", "ent_tab"));
+        nvps.add(new BasicNameValuePair("token", String.valueOf(token)));
+        nvps.add(new BasicNameValuePair("searchword", "草地"));
+        nvps.add(new BasicNameValuePair("geetest_challenge", jsonObject.getString("challenge")));
+        nvps.add(new BasicNameValuePair("geetest_validate", jsonObject.getString("validate")));
+        nvps.add(new BasicNameValuePair("geetest_seccode", jsonObject.getString("validate")+"|jordan"));
+        //设置参数到请求对象中
+        UrlEncodedFormEntity entity2 = new UrlEncodedFormEntity(nvps, "utf-8");
+        post.setEntity(entity2);
+        HttpResponse response = client.execute(post);
+        HttpEntity entity = response.getEntity();
+        resp = EntityUtils.toString(entity, "UTF-8");
+        System.out.println(resp);
 //
 //
 //        tab=ent_tab&token=120953816&searchword=草地&geetest_challenge=072dc3ae4366427c58463a14386c8e153j&geetest_validate=6419b2482ebd8d034e5a2ec99eab98c7&geetest_seccode=6419b2482ebd8d034e5a2ec99eab98c7|jordan
