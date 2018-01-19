@@ -44,9 +44,9 @@ public class JiyanTest {
         int second = calendar.get(Calendar.SECOND);
         String v = String.valueOf(minute) + String.valueOf(second);
 //        String resp = httpGet(client, "http://www.baidu.com?r=dd"+ URLEncoder.encode("|s","UTF-8"));
-        String resp = httpGet(client, "http://www.gsxt.gov.cn/index.html");
+//        String resp = httpGet(client, "http://www.gsxt.gov.cn/index.html");
 
-        resp=httpGet(client,"http://www.gsxt.gov.cn/SearchItemCaptcha");
+        String resp=httpGet(client,"http://www.gsxt.gov.cn/SearchItemCaptcha");
         JSONObject jsonObject= JSON.parseObject(resp);
         resp = httpGet(client, "http://www.gsxt.gov.cn/corp-query-custom-geetest-image.gif?v=" + v);
 //        System.out.println(resp);
@@ -80,14 +80,14 @@ public class JiyanTest {
             throw new Exception("请求错误");
         }
         int token=new Integer(location_info) ^ 536870911;
-        resp=httpGet(client,"http://www.gsxt.gov.cn/corp-query-search-test.html?searchword=草地");
+        resp=httpGet(client,"http://www.gsxt.gov.cn/corp-query-search-test.html?searchword=三福互娱（北京）文化有限公司");
         System.out.println(resp);
         String challenge=jsonObject.getString("challenge");
         resp=httpGet(client,"http://jiyanapi.c2567.com/shibie?user=dandinglong&pass=aaa222&gt=1d2c042096e050f07cb35ff3df5afd92&challenge="+jsonObject.getString("challenge")+"&referer=http://www.gsxt.gov.cn&return=json&format=utf8");
         System.out.println(resp);
         jsonObject=JSON.parseObject(resp);
 
-//        resp=httpGet(client,"http://www.gsxt.gov.cn/corp-query-search-1.html?tab=ent_tab&token="+String.valueOf(token)+"&searchword=草地&geetest_challenge="+challenge+"&geetest_validate="+jsonObject.getString("validate")+"&geetest_seccode="+jsonObject.getString("validate")+URLEncoder.encode("|jordan","UTF-8"));
+//        resp=httpGet(client,"http://www.gsxt.gov.cn/corp-query-search-1.html?tab=ent_tab&token="+String.valueOf(token)+"&searchword=三福互娱（北京）文化有限公司&geetest_challenge="+challenge+"&geetest_validate="+jsonObject.getString("validate")+"&geetest_seccode="+jsonObject.getString("validate")+URLEncoder.encode("|jordan","UTF-8"));
 
 
 //        http://www.gsxt.gov.cn/corp-query-search-1.html?tab=ent_tab&token=120953816&searchword=%E6%9D%A5%E4%BC%8A%E4%BB%BD&geetest_challenge=072dc3ae4366427c58463a14386c8e153j&geetest_validate=6419b2482ebd8d034e5a2ec99eab98c7&geetest_seccode=6419b2482ebd8d034e5a2ec99eab98c7|jordan
@@ -104,7 +104,7 @@ public class JiyanTest {
         List<NameValuePair> nvps = new ArrayList<NameValuePair>();
         nvps.add(new BasicNameValuePair("tab", "ent_tab"));
         nvps.add(new BasicNameValuePair("token", String.valueOf(token)));
-        nvps.add(new BasicNameValuePair("searchword", "草地"));
+        nvps.add(new BasicNameValuePair("searchword", "三福互娱（北京）文化有限公司"));
         nvps.add(new BasicNameValuePair("geetest_challenge", jsonObject.getString("challenge")));
         nvps.add(new BasicNameValuePair("geetest_validate", jsonObject.getString("validate")));
         nvps.add(new BasicNameValuePair("geetest_seccode", jsonObject.getString("validate")+"|jordan"));
@@ -117,7 +117,7 @@ public class JiyanTest {
         System.out.println(resp);
 //
 //
-//        tab=ent_tab&token=120953816&searchword=草地&geetest_challenge=072dc3ae4366427c58463a14386c8e153j&geetest_validate=6419b2482ebd8d034e5a2ec99eab98c7&geetest_seccode=6419b2482ebd8d034e5a2ec99eab98c7|jordan
+//        tab=ent_tab&token=120953816&searchword=三福互娱（北京）文化有限公司&geetest_challenge=072dc3ae4366427c58463a14386c8e153j&geetest_validate=6419b2482ebd8d034e5a2ec99eab98c7&geetest_seccode=6419b2482ebd8d034e5a2ec99eab98c7|jordan
 ////        /corp - query - geetest - validate - input.html ? token = " + location_info,
 ////        http://www.gsxt.gov.cn/corp-query-custom-geetest-image.gif?v=69
 //        /corp-query-custom-geetest-image.gif?v=" + timestamp,
@@ -157,16 +157,10 @@ public class JiyanTest {
     private String httpGet(CloseableHttpClient client, String url) throws IOException {
         System.out.println(url);
         HttpGet get = new HttpGet(url);
-        get.setHeader("Content-Encoding", "gzip");
-        get.setHeader("Accept-Language", "zh-CN");
-        get.setHeader("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
-        get.setHeader("Content-Security-Policy:", "script-src 'self' 'unsafe-eval' 'unsafe-inline' static.geetest.com api.geetest.com www.gsxt.gov.cn s4.cnzz.com c.cnzz.com hm.baidu.com");
-        get.setHeader("Content-Type", "text/html;charset=UTF-8");
-//        get.setHeader("Date", "text/html;charset=UTF-8");
-        get.setHeader("Vary", "Accept-Encoding, Accept-Encoding");
-        get.setHeader("X-Cache", "bypass");
-        get.setHeader("X-Content-Type-Options", "nosniff");
-        get.setHeader("X-XSS-Protection", "1; mode=block");
+        get.setHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
+        get.setHeader("Accept-Encoding", "gzip, deflate");
+        get.setHeader("Accept-Language", "zh-CN,zh;q=0.8");
+        get.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.25 Safari/537.36");
         HttpResponse response = client.execute(get);
         HttpEntity entity = response.getEntity();
         String resp = EntityUtils.toString(entity, "UTF-8");
