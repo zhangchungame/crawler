@@ -44,8 +44,8 @@ public class JsFileTest {
         HttpGet httpget = new HttpGet("http://www.gsxt.gov.cn/SearchItemCaptcha");
 
         CookieStore cookieStore=new BasicCookieStore();
-        BasicClientCookie cookie = new BasicClientCookie("__jsluid", "08940aa083a8fdaba71bd82dc4db3474");
-        cookieStore.addCookie(cookie);
+        BasicClientCookie cookie1 = new BasicClientCookie("__jsluid", "08940aa083a8fdaba71bd82dc4db3474");
+        cookieStore.addCookie(cookie1);
 
         BasicClientCookie cookie2 = new BasicClientCookie("__jsl_clearance", "1516608719.103|0|9IBYX7J9kvOS13KqcvOBJcAW9j4%3D");
         cookieStore.addCookie(cookie2);
@@ -53,14 +53,14 @@ public class JsFileTest {
         CloseableHttpResponse response = client.execute(httpget, context);
         String resp;
         try {
-            cookieStore = context.getCookieStore();
-            cookieStore.clear();
-            cookieStore.addCookie(cookie);
-            cookieStore.addCookie(cookie2);
-//            List<Cookie> cookies = cookieStore.getCookies();
-//            for (Cookie cookie : cookies) {
-//                System.out.println("key:" + cookie.getName() + "  value:" + cookie.getValue());
-//            }
+//            cookieStore = context.getCookieStore();
+//            cookieStore.clear();
+//            cookieStore.addCookie(cookie);
+//            cookieStore.addCookie(cookie2);
+            List<Cookie> cookies = cookieStore.getCookies();
+            for (Cookie cookie : cookies) {
+                System.out.println("key:" + cookie.getName() + "  value:" + cookie.getValue());
+            }
             HttpEntity httpEntity = response.getEntity();
             resp = EntityUtils.toString(httpEntity, "UTF-8");
 
