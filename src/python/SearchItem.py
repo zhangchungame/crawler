@@ -32,6 +32,21 @@ def getImageGif(session):
     url=url+(localTime.tm_min+localTime.tm_sec)
     session.get(url)
 
+
+
+ctxt = PyV8.JSContext()
+ctxt.enter()
+func = ctxt.eval("""(function(json){
+return eval( json.map( function(item){ return String.fromCharCode(item);}).join(""));
+})""")
+jsonaaa=json.loads("[102,117,110,99,116,105,111,110,32,99,104,101,99,107,95,98,114,111,119,115,101,114,40,100,97,116,97,41,123,32,10,32,32,32,32,32,108,111,99,97,116,105,111,110,95,105,110,102,111,32,61,32,100,97,116,97,46,118,97,108,117,101,32,94,32,53,51,54,56,55,48,57,49,49,10,125,32,10,108,111,99,97,116,105,111,110,95,105,110,102,111,32,61,32,52,49,57,51,51,52,54,48,51,56,59]")
+aaa=func(json)
+
+
+
+
+
+
 session=requests.session()
 headers={'Host': 'www.gsxt.gov.cn',
          'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:57.0) Gecko/20100101 Firefox/57.0',
