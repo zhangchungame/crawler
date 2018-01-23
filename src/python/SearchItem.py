@@ -36,18 +36,26 @@ headers={'Host': 'www.gsxt.gov.cn',
          'Cache-Control': 'max-age=0, no-cache'}
 loginurl="http://www.gsxt.gov.cn/SearchItemCaptcha"
 result=requests.get(loginurl,headers=headers)
-jsluid= result.cookies['__jsluid']
+mycookies= result.cookies
 resp=result.text
 resp=resp[8:]
 tmp=resp.split('</script')
 resp=tmp[0]
 resp=resp.replace("eval(y.replace", "var aaa=(y.replace");
-resp = resp + "aaa=aaa.replace(\"while(window._phantom||window.__phantomas){};\",\"\");bbb=aaa.split(\"setTimeout\");aaa=bbb[0]+\"return dc;}}\";aaa=aaa.replace(\"var l=\",\"{fa:\");var ffa=eval(\"(\"+aaa+\")\");var fffa=ffa.fa();";
+resp = resp + "aaa=aaa.replace(\"while(window._phantom||window.__phantomas){};\", \"\");bbb = aaa.split(\"setTimeout\");aaa = bbb[0] + \"return dc;}\";aaa = aaa.replace(\"var l=\", \"\");";
 
 # getcookie()
 ctxt = PyV8.JSContext()
 ctxt.enter()
 func = ctxt.eval(resp)
-bbb= ctxt.eval(func)
+fu=ctxt.eval("("+func+")")
+jslarr= fu().split("=")
+jsl_clearance=jslarr[1]
 
-print 1
+mycookies['__jsl_clearance']=jsl_clearance
+result=requests.get(loginurl,headers=headers,cookies=mycookies)
+
+
+
+
+print result.cookies
