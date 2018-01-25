@@ -1,25 +1,26 @@
-#coding:UTF-8
+# coding:UTF-8
 
 import threading
 import time
 import redis
 
 
-pool = redis.ConnectionPool(host='172.16.11.70', port=6379, db=8,password='redis')
-r = redis.Redis(connection_pool=pool)
+class MyThread(threading.Thread):
+    def __init__(self, num):
+        threading.Thread.__init__(self)
+        self.num = num
 
-r.set("aaa","bbb")
-print r.get("aaa")
-r.rpush("sdf","ddd")
-hello="helo"
-def mythread():
-    print hello
+    def run(self):  # 定义每个线程要运行的函数
+        print("running on number:%s" % self.num)
+        time.sleep(3)
+        print "self end" + str(self.num)
+    def stop(self):
+        self.__stop()
 
-def main():
-    t=threading.Thread(target=mythread)
-    t2=threading.Thread(target=mythread)
-    t.start()
-    t2.start()
-    print "end"
 
-main()
+
+
+t1 = MyThread(1)
+t1.start()
+# t1.stop()
+print 'end aaaa'

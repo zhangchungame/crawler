@@ -4,7 +4,11 @@ import PyV8
 import json
 import time
 import re
+import redis
+from bs4 import BeautifulSoup
 
+
+redisPool = redis.ConnectionPool(host='172.16.11.70', port=6379, db=8, password='redis')
 def getGTChallenge(session):
     loginurl="http://www.gsxt.gov.cn/SearchItemCaptcha"
     result=session.get(loginurl)
@@ -69,6 +73,7 @@ def jianYan(session,challengeJson):
     url="http://jiyanapi.c2567.com/shibie?user=dandinglong&pass=aaa222&gt="+challengeJson["gt"]+"&challenge="+challengeJson["challenge"]+"&referer=http://www.gsxt.gov.cn&return=json&format=utf8"
     resp=session.get(url);
     jiyanJson=  json.loads(resp.text)
+    print resp.text
     return jiyanJson
 
 def querySearch(session,jiYanJson,token,keyword):
@@ -83,11 +88,41 @@ def querySearch(session,jiYanJson,token,keyword):
         'searchword':keyword
     }
     resp=session.post(url,postData)
-    print resp.text
+    return resp.text ,postData
+
+def dealPageUrl(html):
+    pageNums=0
+    r = redis.Redis(connection_pool=redisPool)
+    soup = BeautifulSoup(html)
+    urlsItem=soup.find_all("a",class_="search_list_item db")
+    for urlItem in urlsItem:
+        print "urlItem['href']=",urlItem['href']
+        r.rpush("corpUrlList",urlItem['href'])
+    if len(urlsItem)>1:
+        pageForm=soup.find_all(id="pageForm")
+        tabAs=pageForm[0].find_all("a",text=re.compile("\d+"))
+        pageNums=len(tabAs)
+    return pageNums
+
+def dealPageUrlNum(session,pageNums,postData):
+    url="http://www.gsxt.gov.cn/corp-query-search-advancetest.html"
+    r = redis.Redis(connection_pool=redisPool)
+    for i in range(pageNums):
+        postData['page']=i+1
+        resp=session.get(url,params=postData)
+        soup = BeautifulSoup(resp.text)
+        urlsItem=soup.find_all("a",class_="search_list_item db")
+        for urlItem in urlsItem:
+            print "urlItem['href']=",urlItem['href']
+            r.rpush("corpUrlList",urlItem['href'])
 
 
-def getCorpUrl(keyword):
+def getCorpUrl(keyword,proxy):
     session=requests.session()
+    session.timeout=1
+    session.max_redirects=2
+    if proxy:
+        session.proxies={ "http": "http://"+proxy, "https": "http://"+proxy, }
     headers={'Host': 'www.gsxt.gov.cn',
              'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:57.0) Gecko/20100101 Firefox/57.0',
              'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -103,9 +138,15 @@ def getCorpUrl(keyword):
     localtion_info= getImageGif(session)
     token=getValidateInput(session,localtion_info)
     searchTest(session,keyword)
-    return querySearch(session,jiyanJson,token,keyword)
+    html,postData=querySearch(session,jiyanJson,token,keyword)
+    pageNums=dealPageUrl(html)
+    print 'pageNums=',pageNums
+    dealPageUrlNum(session,pageNums,postData)
+    return 1
 
-getCorpUrl("启信宝")
+
+
+
 
 
 
