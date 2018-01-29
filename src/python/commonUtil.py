@@ -8,7 +8,7 @@ class ThreadTimeOut(threading.Thread):
         try:
             self.threadTimeOut()
         except Exception,e:
-            print e.message
+            print "commonUtil run "+e.message
 
     def __init__(self, threads):
         threading.Thread.__init__(self)
@@ -19,7 +19,9 @@ class ThreadTimeOut(threading.Thread):
             for i in reversed(range(len(self.threads))):
                 thread=self.threads[i]
                 if thread.isAlive():
-                    thread.dealTimeOut()
+                    pass
+                    # thread.dealTimeOut()
                 else:
+                    print "thread dead"
                     del self.threads[i]
             time.sleep(2)
