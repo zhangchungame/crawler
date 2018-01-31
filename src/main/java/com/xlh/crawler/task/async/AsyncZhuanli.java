@@ -67,7 +67,19 @@ public class AsyncZhuanli {
         if (resp.equals("")) {
             throw new Exception("返回空值");
         }
-        int veryCode = imageRecog(client,0);
+        ZhuanliVerificationCode zhuanliVerificationCode=imageRecog(client,0);
+        System.out.println("zhuanliVerificationCode======================"+JSON.toJSONString(zhuanliVerificationCode));
+        String pattern = "(\\d)(\\+|\\-)(\\d)";
+        Pattern r = Pattern.compile(pattern);
+        Matcher m = r.matcher(zhuanliVerificationCode.getCode());
+        int veryCode;
+        int first = new Integer(m.group(1));
+        int sec = new Integer(m.group(3));
+        if (m.group(2).equals("+")) {
+            veryCode = first + sec;
+        } else {
+            veryCode = first - sec;
+        }
 //        int veryCode=121;
         HttpPost post = new HttpPost("http://cpquery.sipo.gov.cn/freeze.main?txn-code=checkImgServlet");
 
@@ -151,7 +163,8 @@ public class AsyncZhuanli {
     }
 
 
-    private int imageRecog(HttpClient client,int times) throws Exception {
+    private ZhuanliVerificationCode imageRecog(HttpClient client,int times) throws Exception {
+        ZhuanliVerificationCode result=new ZhuanliVerificationCode();
         if(times>10){
             throw new Exception("超过10次未识别");
         }
@@ -161,7 +174,7 @@ public class AsyncZhuanli {
         HttpEntity entity = response.getEntity();
         InputStream in = entity.getContent();
         String fileName = String.valueOf((new Date()).getTime());
-        File file = new File("d:/logs/" + fileName + ".jpg");
+        File file = new File("d:/logs/yanzhengma/" + fileName + ".jpg");
 //        File file = new File("/home/zc/tmpfile/"+fileName+".jpg");
         FileOutputStream fout = new FileOutputStream(file);
         int l;
@@ -184,14 +197,15 @@ public class AsyncZhuanli {
         Pattern r = Pattern.compile(pattern);
         Matcher m = r.matcher(str);
         if (m.find()) {
-            int first = new Integer(m.group(1));
-            int sec = new Integer(m.group(3));
-            int result;
-            if (m.group(2).equals("+")) {
-                result = first + sec;
-            } else {
-                result = first - sec;
-            }
+//            int first = new Integer(m.group(1));
+//            int sec = new Integer(m.group(3));
+//            if (m.group(2).equals("+")) {
+//                result = first + sec;
+//            } else {
+//                result = first - sec;
+//            }
+            result.setCode(str);
+            result.setFileName(fileName+".jpg");
             return result;
         } else {
             times++;

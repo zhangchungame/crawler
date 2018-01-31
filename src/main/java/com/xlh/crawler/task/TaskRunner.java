@@ -26,7 +26,7 @@ public class TaskRunner implements ApplicationRunner, Ordered {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         asyncTask.ipPoolInsert();
-        asyncZhenxin.startUp();
+//        asyncZhenxin.startUp();
         asyncTask.startUp();
     }
 }

@@ -87,7 +87,7 @@ public class AsyncTask {
             int totalPage = count / 10;
 
 
-            Semaphore semaphore = new Semaphore(10);//总共有5个许可
+            Semaphore semaphore = new Semaphore(1);//总共有5个许可
 
             while (page <= totalPage) {
                 try {
