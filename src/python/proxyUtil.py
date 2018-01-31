@@ -40,18 +40,16 @@ class proxyCheckInsert(threading.Thread):
         self.session.max_redirects=1
         try:
             self.startReqTime=time.time()
-            loginurl="http://www.gsxt.gov.cn/SearchItemCaptcha"
-            result=self.session.get(loginurl)
-            if "y.replace(" not in result.text:
-                raise Exception("被屏蔽了")
-            # resp=self.session.get("http://ip.chinaz.com/getip.aspx")
-            # print "second req start "+str(self.threadNum)
-            # self.startReqTime=time.time()
-            # resp=self.session.get("http://ip.chinaz.com/getip.aspx")
-            # text=resp.text
-            # print self.proxy+"==="+text
-            # if text.find("address")==-1:
-            #     raise Exception("no address",self.proxy)
+            # loginurl="http://www.gsxt.gov.cn/SearchItemCaptcha"
+            # result=self.session.get(loginurl)
+            # if "y.replace(" not in result.text:
+            #     raise Exception("被屏蔽了")
+            resp=self.session.get("http://ip.chinaz.com/getip.aspx")
+            text=resp.text
+            print self.proxy+"==="+text
+            ip=self.proxy.split(":")[0]
+            if text.find(ip)==-1:
+                raise Exception("no address",self.proxy)
             return self.proxy
         except Exception,e:
             print "check message "+str(self.threadNum),e.message
