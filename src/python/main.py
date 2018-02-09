@@ -1,10 +1,12 @@
 #coding:UTF-8
-import proxyUtil
-import SearchItem,commonUtil
-import threading,time
-import pymysql
+import threading
+import time
+
+import SearchItem
+import commonUtil
 import configUtil
-from DBUtils.PooledDB import PooledDB
+import proxyUtil
+
 #
 conn = configUtil.pool.connection()  #以后每次需要数据库连接就是用connection（）函数获取连接就好了
 cursor=conn.cursor()

@@ -1,0 +1,2793 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Recruiter Desktop----Zhaopin.com</title>
+    <link type="text/css" rel="stylesheet" href="//img01.zhaopin.cn/2014/common/css/reset.css">
+    <link type="text/css" rel="stylesheet" href="//img00.zhaopin.cn/2014/rd2/css/head.css">
+    <link rel="stylesheet" href="//img00.zhaopin.cn/2012/css/rd/rd_basic.css"/>
+    <link rel="stylesheet" href="//img00.zhaopin.cn/2012/css/rd/resumes_common.css"/>
+    <link rel="stylesheet" href="//img00.zhaopin.cn/2012/css/rd/resumes_index.css"/>
+    <link rel="stylesheet" href="//img00.zhaopin.cn/2012/css/rd/resumes_item.css"/>
+    <link rel="stylesheet" href="//img00.zhaopin.cn/2012/css/rd/resumes_result.css"/>
+    <link rel="stylesheet" href="//img00.zhaopin.cn/2012/css/ui/xw_selection/set-selection.css"/>
+    <link rel="stylesheet" href="//img00.zhaopin.cn/2012/css/ui/xw_rdAllUi/style.css"/>
+    <link rel="stylesheet" href="//img00.zhaopin.cn/2012/css/rd/resume_search.css"/>
+    <link rel="stylesheet" href="//img01.zhaopin.cn/2014/rd2/css/job_issue.css"/>
+
+    <style type="text/css">
+        #resumeList .table_tr_rd_bg {
+            background: #ffeac0;
+        }
+
+        .survey1 {
+            width: 12px;
+            padding: 30px 7px 12px;
+            color: #fff;
+            left: 50%;
+            margin-left: 480px;
+            top: 123px;
+            position: fixed;
+            background: url(//img02.zhaopin.cn/2012/img/rd/survey_img.png) 0 0 no-repeat;
+            cursor: pointer;
+            _position: absolute;
+            _top: expression(documentElement.scrollTop+123);
+            background-color: #f9931f;
+        }
+
+        .survey1:hover {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .survey1_img {
+            top: 290px;
+            _top: expression(documentElement.scrollTop+290);
+            background: url(//img02.zhaopin.cn/2012/img/rd/survey_img_1.png) 0 0 no-repeat;
+            background-color: #0f7acc;
+        }
+
+        /*左侧满意度调查入口样式*/
+        .Msurvey {
+            display: none;
+            border: 1px solid #8dc11f;
+            width: 24px;
+            font-size: 12px;
+            cursor: pointer;
+            position: fixed;
+            top: 136px;
+            left: 0;
+            _position: absolute;
+            _top: expression(documentElement.scrollTop+136);
+        }
+
+        .Msurvey .Misno {
+            width: 24px;
+            height: 182px;
+        }
+
+        .Msurvey .Mclose {
+            background: url(//img02.zhaopin.cn/2012/img/rd/manyidu-close.gif) no-repeat 5px 7px #fff;
+            width: 14px;
+            padding: 22px 5px 2px 5px;
+        }
+
+        /*左侧满意度调查入口样式END*/
+    </style>
+
+    <script type="text/javascript" src="//img01.zhaopin.cn/2012/js/jquery-1.6.4.min.js"></script>
+    <script type="text/javascript" src="//img01.zhaopin.cn/2012/js/ui/jquery.zlzp.popupbase-140106.js"></script>
+    <script type="text/javascript"
+            src="//img01.zhaopin.cn/2012/js/ui/xw_selection/jquery.zlzp.selection-140106.js"></script>
+    <script type="text/javascript" src="//img01.zhaopin.cn/2012/js/arrdata.js"></script>
+    <script type="text/javascript" src="//img01.zhaopin.cn/2012/js/basedata.js"></script>
+    <script type="text/javascript" src="//img01.zhaopin.cn/2012/js/ui/xw_rdAllUi/all-ui-min-140106.js"></script>
+
+    <script type="text/javascript" src="//img03.zhaopin.cn/rd2/s/include/js/displaylayer.js"></script>
+    <script type="text/javascript" src="//img03.zhaopin.cn/rd2/s/js/erd2/popupdiv_shim.js"></script>
+
+    <script type="text/javascript" src="/Scripts/apply/listDetail.js"></script>
+    <script type="text/javascript" src="/Scripts/apply/search_business_ext.js"></script>
+    <script type="text/javascript" src="/Scripts/apply/jquery.artDialog.js"></script>
+    <script type="text/javascript" src="/Scripts/apply/ResumeState.js?version=20150924"></script>
+    <script type="text/javascript" src="/Scripts/apply/jquery_plugin.js"></script>
+    <script type="text/javascript" src="/Scripts/apply/search_control_com.js"></script>
+    <script type="text/javascript" src="/Scripts/apply/utilscript.js"></script>
+
+</head>
+<body>
+<!--areas head-->
+<input type="hidden" value="接口获取"/><!-- begin top -->
+<link type="text/css" rel="stylesheet" href="//img00.zhaopin.cn/2014/rd2/css/head.css">
+<script type="text/javascript">    if (typeof jQuery == 'undefined') document.write(decodeURIComponent('%3Cscript%20type%3D%22text%2Fjavascript%22%20src%3D%22https%3A%2F%2Fimg01.zhaopin.cn%2F2012%2Fjs%2Fjquery-1.6.4.min.js%22%3E%3C%2Fscript%3E'))</script>
+<div class="posRelat" id="RD_topCon">
+    <div class="top_control" id="top_control">
+        <div class="textCon">
+            <div class="showLogin"><!-- 显示部门名称 -->[<span title='上海信隆行信息科技股份有限公司'>上海信隆行信息科技股份有限公司</span>]</div>
+            <div class="links">                                <!-- 显示切换到CS系统 --><a
+                    href="//jobads.zhaopin.com/News/Feedback"
+                    class="__ga__xiaoxizhongxin_xiaoxizhongxindianjiliang_001">消息中心</a><em>|</em> <a
+                    href="//img09.zhaopin.cn/2012/other/rdhelp201211/index.htm" target="_blank">帮助</a><em>|</em> <a
+                    href="//rd2.zhaopin.com/s/setup/password.asp">修改密码</a><em>|</em> <a href="#"
+                                                                                        onclick="location.href = '//rd2.zhaopin.com/s/loginmgr/logout.asp';return false;">退出</a>
+            </div>
+        </div>
+    </div>    <!-- begin top menu -->
+    <div class="rd_nav_line">
+        <div id="RD_MenuCon">
+            <div id="comp_logo"><a href="//rd2.zhaopin.com/s/homepage.asp"><!--显示Logo--> <img class='logoImg'
+                                                                                              src='//img01.zhaopin.cn/2014/rd2/img/rd_logo1.png'
+                                                                                              title='网聘5.0'/></a></div>
+            <div id="RD_menu">
+                <ul id="RD_menu_ul">
+                    <li class="RD_menuItem" id="RD_menuItem_home"><a href="//rd2.zhaopin.com/s/homepage.asp">首页</a></li>
+                    <li class="RD_menuItem" id="RD_menuItem_vaca"><a
+                            href="//rd2.zhaopin.com/s/vacainfo/PositionManage.asp">职位管理</a>
+                        <div class="menu_box none">
+                            <div class="RD_subMenu_outer"><a href="//rd2.zhaopin.com/s/vacainfo/PositionUpdate.asp">发布新职位</a>
+                                <a href="//ihr.zhaopin.com/onsite/job/publish.do?positionType=1" id="lnk_daomian"
+                                   onclick="dyweTrackEvent('positionmanage', 'positionmanagedaomian')">发布卓聘保面试</a> <a
+                                        href="//ihr.zhaopin.com/bms/joblist/?positionType=1" id="lnk_daomianlist"
+                                        onclick="dyweTrackEvent('positionmanage', 'managebms')">管理卓聘保面试</a> <a
+                                        href="//jobads.zhaopin.com/Position/PositionManage">管理职位列表</a> <a
+                                        href="//rd2.zhaopin.com/s/vacainfo/TemplateManage.asp">设置职位模板</a></div>
+                        </div>
+                    </li>
+                    <li class="RD_menuItem" id="RD_menuItem_resu"><!--根据应聘简历版本决定使用新简历收件箱还是旧简历收件箱--> <a
+                            href="//rd2.zhaopin.com/RdApply/Resumes/Apply/index">简历管理</a>
+                        <div class="menu_box none">
+                            <div class="RD_subMenu_outer"><a
+                                    href="//rd2.zhaopin.com/s/resuadmi/vacancyList.asp">简历收件箱</a> <a
+                                    href="//ihr.zhaopin.com/talk/" class="__ga__chat_rdentry01_001">约聊</a> <a
+                                    href="//rd2.zhaopin.com/RdApply/Resumes/Resume/Index">简历夹管理</a> <a
+                                    href="//rd2.zhaopin.com/RdApply/Resumes/Resume/Recycle">回收站</a> <a
+                                    href="//rd2.zhaopin.com/s/help/resumeFolder.html" target="_blank"
+                                    class="ask-icon"></a></div>
+                        </div>
+                    </li>
+                    <li class="RD_menuItem" id="RD_menuItem_sear"><a
+                            href="//rdsearch.zhaopin.com/Home/SearchByCustom?source=rd">简历库</a>
+                        <div class="menu_box none">
+                            <div class="RD_subMenu_outer"><a
+                                    href="//rdsearch.zhaopin.com/Home/SearchByCustom?source=rd"><span>搜索简历</span></a> <a
+                                    href="//rd2.zhaopin.com/s/resuadmi/ShowFavoriteResumes_recent.asp"><span>已下载的简历</span></a>
+                                <!--<a href="//ihr.zhaopin.com/talk/"><span>沟通记录</span></a>--></div>
+                        </div>
+                    </li>
+                    <li class="RD_menuItem menu_hi"><a target="_blank" class="__ga__RDDHGAODUAN_RDDHGAODUAN001_001"
+                                                       href="http://hr.highpin.cn/Recruiter/ProductIntroduction?pagetype=2&loginname=dur38392082b&accountnumber=CC383920829&IsAdmin=true&code=85C3E7DD687365B07624B15859AD9A87">高端招聘<span
+                            class="hi_hot"></span></a></li>
+                    <li class="RD_menuItem" id="RD_menuItem_repo"><a
+                            href="//rd2.zhaopin.com/s/report2/rpt_pos.asp">统计报表</a>
+                        <div class="menu_box none">
+                            <div class="RD_subMenu_outer"><a href="//rd2.zhaopin.com/s/report2/rpt_pos.asp"><span>职位发布效果统计</span></a>
+                                <a href="//rd2.zhaopin.com/s/report2/rpt_sms.asp"><span>短信发送统计</span></a> <a
+                                        href="//rd2.zhaopin.com/s/report/operalog.asp"><span>操作日志</span></a></div>
+                        </div>
+                    </li>
+                    <li class="RD_menuItem" id="RD_menuItem_campus"><a target="_blank"
+                                                                       href="//cct.zhaopin.com">智联场场通</a></li>
+                    <li class="RD_menuItem"><a target="_blank" class="__ga__RDDHCEPING_RDDHCEPING001_001"
+                                               href="//eas.zhaopin.com/CompanyPlatform/PartnerLogin.aspx?resource=rd">使用测评</a>
+                    </li>                    <!-- 易聘用户显示HR助手 -->
+                    <li class="RD_menuItem" style="border-right:1px solid #EBEBEB;"><a href="#">控制面板</a>
+                        <div class="menu_box none" id="RD_menuItem_config_Popup">
+                            <div onclick="event.cancelBubble=true;" class="RD_subMenu_outer popupMoreMenuItems"><a
+                                    class="configMenuItem">用户管理</a> <a href="//rd2.zhaopin.com/s/setup/userInfo.asp">修改用户信息和密码</a>
+                                <a href="//rd2.zhaopin.com/s/setup/emailTemplate.asp"
+                                   class="configSubMenuItem">设置信件模板</a> <a
+                                        href="//ihr.zhaopin.com/zlCoins/loadZLCoinsRecords.do">我的优惠券</a><!-- 用户显示设置项 -->
+                                <a class='configMenuItem'>管理员专用设置</a><a href='//jobads.zhaopin.com/customer/userlist'>管理所有用户</a><a
+                                        href='//rd2.zhaopin.com/s/compinfo/FilialeShow.asp'>修改公司设置</a><a
+                                        href='//rd2.zhaopin.com/s/report/contInfo.asp'>产品消费明细</a><a
+                                        class='__ga__refreshschemelist_entry_001' onclick='refreshGrey();'
+                                        style='cursor:pointer;'>智能刷新订单</a></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>    <!-- end top menu --> <input id="business_info_rd" type="hidden"
+                                           value="userId%3d149449684%26loginname%3ddur38392082b%26name%3d%e4%b8%8a%e6%b5%b7%e4%bf%a1%e9%9a%86%e8%a1%8c%e4%bf%a1%e6%81%af%e7%a7%91%e6%8a%80%e8%82%a1%e4%bb%bd%e6%9c%89%e9%99%90%e5%85%ac%e5%8f%b8%26hashCode%3d992742CA895902F9EE616F8F6A156D7C%26timestamp%3d1518108912574%26orgid%3d38392082%26orgnum%3dCC383920829"/>
+    <input id="zp_info_code" type="hidden" value="85C3E7DD687365B07624B15859AD9A87"/></div><!-- end top -->
+<div id="live25" class="live800_20130926"><a href="javascript:void(0)"
+                                             onclick="NTKF.im_openInPageChat('kf_9051_1502273649464');"><img
+        src="//img03.zhaopin.cn/2012/img/rdimpic.png" border="0"></a></div>
+<script type="text/javascript">    var lis = document.getElementById("RD_menu_ul").children;
+var nowshow = 0;
+for (var i = 0; i <= lis.length - 1; i++) {
+    lis[i].onmouseover = function () {
+        var subMenu = this.getElementsByTagName("div");
+        if (subMenu.length > 0) {
+            subMenu[0].style.display = "block";
+        }
+    };
+    lis[i].onmouseout = function () {
+        var subMenu = this.getElementsByTagName("div");
+        if (subMenu.length > 0) {
+            subMenu[0].style.display = "none";
+        }
+    };
+}
+
+function loadJS(id, fileUrl, callback) {
+    var scriptTag = document.getElementById(id);
+    var oHead = document.getElementsByTagName('HEAD').item(0);
+    var oScript = document.createElement("script");
+    if (scriptTag) oHead.removeChild(scriptTag);
+    oScript.id = id;
+    oScript.type = "text/javascript";
+    oScript.src = fileUrl;
+    if (callback) {
+        if (window.navigator.userAgent.toLowerCase().indexOf("msie") > -1) {
+            oScript.onreadystatechange = function () {
+                if (oScript.readyState == "loaded" || oScript.readyState == "complete") {
+                    callback();
+                }
+            };
+        } else {
+            oScript.onload = function () {
+                callback();
+            };
+        }
+    }
+    oHead.appendChild(oScript);
+}
+
+function openMiddlePage() {
+    this.newWindow = window.open('//rd2.zhaopin.com/s/live800.asp', '', "toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=1,width=570,height=424");
+    this.newWindow.focus();
+    this.newWindow.opener = window;
+    return false;
+}
+
+function getArgs(str) {
+    var args = new Object();
+    var query = str;
+    var pairs = query.split("&");
+    for (var i = 0; i < pairs.length; i++) {
+        var pos = pairs[i].indexOf('=');
+        if (pos == -1) continue;
+        var argname = pairs[i].substring(0, pos);
+        var value = pairs[i].substring(pos + 1);
+        value = decodeURIComponent(value);
+        args[argname] = value;
+    }
+    return args;
+}
+
+var uid = getArgs(decodeURIComponent($('#business_info_rd').val())).orgid;
+var uName = getArgs(decodeURIComponent($('#business_info_rd').val())).loginname;
+NTKF_PARAM = {
+    siteid: "kf_9051",
+    settingid: "kf_9051_1502273649464",
+    uid: uid,
+    uname: uName,
+    isvip: "",
+    userlevel: "",
+    erpparam: ""
+};</script>
+<script type="text/javascript" src="//img01.zhaopin.cn/2012/js/rd2/rdnotice.js?version=20160822"></script>
+<script type="text/javascript" src="//dl.ntalker.com/js/xn6/ntkfstat.js?siteid=kf_9051"></script>
+<!--second menu-->
+<div class="resumes-index">
+    <script type="text/javascript" src="/scripts/apply/zui.trover.js"></script>
+    <div class="resumes-index-top">
+        <div id="breadcrumb" style="width: 950px; height: 30px;">
+            <div class="textCon">
+                我的位置：<a href="//rd2.zhaopin.com/s/resuadmi/vacancyList.asp">简历管理</a>&nbsp;&gt;&nbsp;主动投递简历
+            </div>
+        </div>
+        <div class="amendtips" style="display: none">
+            您修改了职位下部分工作地点的职位信息，简历数量会在24小时同步，数据不一致给您带来的不便，敬请谅解。
+        </div>
+    </div>
+</div>
+<!--body-->
+<div class="resumes-index-main">
+    <!--areas show-->
+    <script src="//rd2.zhaopin.com/s/js/forapply/rd_func.js" type="text/javascript"></script>
+    <!--warlock.deng 简历导出和简历转发 BEGIN-->
+    <script type="text/javascript" src="//img01.zhaopin.cn/2012/js/ui/jquery.zlzp.autocomplete.js"></script>
+    <script type="text/javascript" src="//img01.zhaopin.cn/2012/js/ui/jquery.zlzp.popupdiv.js"></script>
+    <script src="//rd2.zhaopin.com/s/js/forapply/resume_out.js" type="text/javascript"></script>
+    <!--warlock.deng 简历导出和简历转发 END-->
+    <script type="text/javascript" src="//img01.zhaopin.cn/2012/js/za/smp.min.js"></script>
+    <script type="text/javascript" src="/Scripts/apply/ajaxbase.js"></script>
+    <link type="text/css" rel="stylesheet"
+          href="//img00.zhaopin.cn/2012/css/ui/jquery.zlzp.popupdiv.css?version=20150721">
+    <link type="text/css" rel="stylesheet" href="//img00.zhaopin.cn/2012/css/rd/rd2newlayer.css">
+    <link type="text/css" rel="stylesheet" href="//img00.zhaopin.cn/2012/css/rd/rdmatching.css">
+
+    <script language="javascript" type="text/javascript" src="//img07.zhaopin.cn/2014/rd2/js/robTalentInfo.js"></script>
+    <div class="select-index">
+        <div class="resumes-index-title">
+            <a class="menu current">主动投递简历
+                <select name="SF_1_1_38" id="SF_1_1_38">
+                    <option value="2,9">最近一周</option>
+                    <option value="3,9">最近两周</option>
+                    <option value="4,9">最近一个月</option>
+                </select> </a>
+            <!--Blacklist:False-->
+
+            <a class="fl-button " href="//rd2.zhaopin.com/s/resuadmi/vacancyList.asp">按职位查看简历</a>
+            <div class="fr-button">
+                <div id="devRecentlySerch" class="last-search">
+                    上一次筛选条件：<span>无</span>
+                </div>
+                <div id="devSearcherSwitcher" class="rd-resume-input">
+                    <input type="button" onfocus="this.blur()" title="选择筛选器"
+                           value="选择筛选器" class="rd-popinput popinput-small"
+                           id="searcherSwitcher_input"/>
+                </div>
+            </div>
+        </div>
+        <form action="/RdApply/Resumes/Apply/getcustomsearchpanel" data-ajax="true" data-ajax-begin="loadingPanel"
+              data-ajax-method="post" data-ajax-mode="replace" data-ajax-success="refreshControl"
+              data-ajax-update="#customSearch" id="form2" method="post" name="form2"
+              onkeydown="if(event.keyCode==13){return false;}">
+            <div>
+                <script type="text/javascript">
+                    var arrSelf = [['1', 'cvLabelWaiting', '待定'], ['2', 'cvLabelnoPass', '不符合职位要求'], ['3', 'cvLabelPass', '等待通知面试'], ['4', 'cvLabelColor1', '分公司总经理面试'], ['5', 'cvLabelColor2', '机构面试'], ['8', 'cvLabelColor5', '嘉兴信贷面试'], ['9', 'cvLabelColor6', '财务'], ['11', 'cvLabelColor12', 'J江阴面试'], ['12', 'cvLabelColor1', '电子商务面试'], ['14', 'cvLabelColor1', 'hr&行政'], ['15', 'cvLabelColor1', '投行项目经理'], ['16', 'cvLabelColor1', '产品经理'], ['17', 'cvLabelColor7', '供应商管理/商家运营']];
+                </script>
+
+                <div id="customSearch">
+                    <div class="resumes-result-title clearfix">
+                        <div class="search-key form-input ">
+                            <div class="search-item-name">
+                                关键词
+                            </div>
+                            <select class="choosekey" id="choosekey">
+                                <option value="SF_1_1_3" title="职位">职位</option>
+                                <option value="SF_1_1_47" title="工作和项目经验">工作和项目经验</option>
+                                <option value="SF_1_1_4" title="全文">全文</option>
+                                <option value="SF_1_1_5" title="简历ID">简历ID</option>
+                                <option value="SF_1_1_6" title="邮箱">邮箱</option>
+                                <option value="SF_1_1_7" title="姓名">姓名</option>
+
+                            </select>
+                            <input type="text" placeholder="请输入求职者任职的职位名称" class="rd-input input-keywords"
+                                   value="" maxlength="200" name="SF_1_1_3" id="SF_1_1_3"
+                                   style="color: rgb(153, 153, 153);"/>
+                            <div class="rd-checkbox-nearly">
+                                <input type="hidden" id="SF_1_1_3_ContainFields" name="SF_1_1_3_ContainFields"
+                                       value="JobName_All,JobName_Last" class="contain-field"/>
+                                <label class="contain-keyword">
+                                    <input id="SF_1_1_3_SelectField" name="SF_1_1_3_SelectField"
+                                           type="checkbox" class="contain-near"/><span
+                                        class="rd-checkbox-span">只搜最近一份工作</span></label>
+                            </div>
+                        </div>
+                        <div class="resumes-result-item form-input">
+                            <div class="search-item-name">
+                                公司名称
+                            </div>
+                            <input id="SF_1_1_9" name="SF_1_1_9" maxlength="200"
+                                   class="rd-input input-xnormal" type="text" value="" placeholder="请输入公司名称关键词"
+                                   style="color: rgb(153, 153, 153);"/>
+                            <div class="rd-checkbox-nearly">
+                                <input type="hidden" id="SF_1_1_9_ContainFields" name="SF_1_1_9_ContainFields"
+                                       value="CompanyName_All,CompanyName_Last"/>
+                                <label for="SF_1_1_9_SelectField">
+                                    <input id="SF_1_1_9_SelectField" name="SF_1_1_9_SelectField"
+                                           type="checkbox"/><span class="rd-checkbox-span">只搜最近一份工作</span></label>
+                            </div>
+                        </div>
+                        <div class="resumes-result-item form-input">
+                            <div class="search-item-name">
+                                标签
+                            </div>
+                            <div class="rd-resume-input" id="Selector_SF_1_1_10">
+                                <input type="button" onfocus="this.blur()" class="rd-popinput popinput-normal"
+                                       name="button_SF_1_1_10F" id="button_SF_1_1_10F"/>
+                                <input type="hidden" value="" name="SF_1_1_10" id="SF_1_1_10"/>
+                            </div>
+                        </div>
+                    </div>
+                    <script type="text/javascript" language="javascript">
+
+                        $(document).ready(function () {
+
+                            ZUI.controlManage.initControl({
+                                data: arrSelf,
+                                type: 'selectPosition',
+                                selectType: "skillauto",
+                                outInput: 'button_SF_1_1_10F',
+                                hiddenInput: 'SF_1_1_10',
+                                title: '标签(本登录点标签)'
+                            });
+
+                            initKeywordSelect("", "");
+                            initLastCheck("SF_1_1_9", "");
+
+                            var dSelect = $('#choosekey');
+                            dSelect.unbind();
+                            dSelect.change(function (e) {
+                                var key = $(this).children('option:selected').val();
+                                initKeywordsInput(key);
+                            });
+                        });
+
+                        function initKeywordsInput(key) {
+                            var dSelect = $('#choosekey');
+                            var text = dSelect.find('option:selected').text();
+                            if (key == 'SF_1_1_3') {
+                                text = "任职的职位名";
+                            }
+                            else if (key == 'SF_1_1_4') {
+                                text = "的简历信息";
+                            }
+                            else {
+                                text = "的" + text;
+                            }
+                            var placeholder;
+                            if (key == 'SF_1_1_47') {
+                                placeholder = "求职者" + text;
+                            }
+                            else {
+                                placeholder = "请输入求职者" + text;
+                            }
+                            var keywords = $(".input-keywords");
+                            var value = keywords.val();
+                            if (value == keywords.attr('placeholder')) {
+                                value = placeholder;
+                            }
+                            dSelect.next().remove();
+                            dSelect.after('<input type="text" placeholder="' + placeholder + '" class="rd-input input-keywords" maxlength="200" name="' + key + '" id="' + key + '" value="' + value + '"  style="color: rgb(51, 51, 51);" />');
+                            var near = $(".contain-near");
+                            if (key === 'SF_1_1_3' || key === 'SF_1_1_47') {
+                                near.attr("disabled", false);
+                                near.attr("id", key + isSelectFieldSuffix);
+                                near.attr("name", key + isSelectFieldSuffix);
+
+                                var contain = $(".contain-field");
+                                contain.attr("id", key + containFieldsSuffix);
+                                contain.attr("name", key + containFieldsSuffix);
+                                contain.val(key === 'SF_1_1_3' ? 'JobName_All,JobName_Last' : 'Work_All,Work_Last');
+                            }
+                            else {
+                                near.removeAttr("checked");
+                                near.attr("disabled", true);
+                            }
+                            keywords = $(".input-keywords");
+                            var valPlaceHolder = keywords.attr('placeholder');
+                            if ($.trim(keywords.val()) === "" || $.trim(keywords.val()) === valPlaceHolder) {
+                                keywords.val(valPlaceHolder).css("color", "#999");
+                            }
+                            keywords.unbind('blur');
+                            keywords.unbind('focus');
+                            keywords.blur(function () {
+                                if ($.trim(keywords.val()) === "" || keywords.val() === valPlaceHolder) {
+                                    keywords.val(valPlaceHolder).css("color", "#999");
+                                }
+                            }).focus(function () {
+                                if ($.trim(keywords.val()) === valPlaceHolder) {
+                                    keywords.val('');
+                                }
+                                keywords.css("color", "#333");
+                            });
+                            return false;
+                        }
+
+                        //初始化关键词控件
+                        function initKeywordSelect(key, value) {
+                            if (key === '') return;
+                            $('#choosekey').find("option[value='" + key + "']").attr("selected", true);
+                            if (key === 'SF_1_1_3' || key === 'SF_1_1_47') {
+                                initLastCheck(key, value);
+                            }
+                            initKeywordsInput(key);
+                        }
+
+                        //初始化只搜最近一份工作
+                        function initLastCheck(key, value) {
+                            if (value === undefined || value === "") {
+                                return;
+                            }
+                            var arrValue = value.split(":");
+                            var arrContainField = $("#" + key + containFieldsSuffix).val().split(",");
+                            var isSelectedField = false;
+                            if (arrValue.length > 1 && arrContainField !== null) {
+                                for (var i = 0; i < arrContainField.length; i++) {
+                                    if (arrValue[0] === arrContainField[i]) {
+                                        isSelectedField = i > 0 ? true : false;
+                                        break;
+                                    }
+                                }
+                            }
+                            var control = $("#" + key);
+                            $("#" + key + isSelectFieldSuffix).attr("checked", isSelectedField);
+                            control.css('color', (control.attr("placeholder") !== control.val() && control.val().length > 0) ? '#333' : '#999');
+                        }
+
+                    </script>
+                    <div class="form-paddingtop clearfix">
+                        <div class="resumes-result-item form-input">
+                            <div class="search-item-name">现居住地</div>
+                            <div id="Selector_SF_1_1_11" class="rd-resume-input">
+                                <input id="button_SF_1_1_11F" name="button_SF_1_1_11F"
+                                       class="rd-popinput popinput-normal" onfocus="this.blur()" type="button"/>
+                                <input id="SF_1_1_11" name="SF_1_1_11" value="" type="hidden"/>
+                            </div>
+                        </div>
+                        <div class="resumes-result-item select-item form-input">
+                            <div class="search-item-name">学 历</div>
+                            <select id="SF_1_1_12_min" name="SF_1_1_12" class="rd-select select-xsmall"></select>
+                            <div id="div_SF_1_1_12" class="item-name-select">-</div>
+                            <select id="SF_1_1_12_max" name="SF_1_1_12" class="rd-select select-xsmall"></select>
+                        </div>
+                        <div class="resumes-result-item select-item form-input">
+                            <div class="search-item-name">工作年限</div>
+                            <select id="SF_1_1_13_min" name="SF_1_1_13" class="rd-select select-xsmall"></select>
+                            <div id="div_SF_1_1_13" class="item-name-select">-</div>
+                            <select id="SF_1_1_13_max" name="SF_1_1_13" class="rd-select select-xsmall"></select>
+                        </div>
+                        <div class="resumes-result-item form-input">
+                            <div class="search-item-name">职位类别</div>
+                            <div id="Selector_SF_1_1_14" class="rd-resume-input">
+                                <input id="button_SF_1_1_14F" name="button_SF_1_1_14F"
+                                       class="rd-popinput popinput-normal" onfocus="this.blur()" type="button"/>
+                                <input id="SF_1_1_14" name="SF_1_1_14" value="" type="hidden"/>
+                            </div>
+                        </div>
+                        <div class="resumes-result-item form-input">
+                            <div class="search-item-name">年 龄</div>
+                            <input id="SF_1_1_15_min" name="SF_1_1_15" value="" class="rd-input input-xsmall" min="0"
+                                   max="100" type="text" data-type="number">
+                            <div class="item-name-select">-</div>
+                            <input id="SF_1_1_15_max" name="SF_1_1_15" value="" class="rd-input input-xsmall" min="0"
+                                   max="100" type="text" data-type="number">
+                        </div>
+                        <div class="resumes-result-item form-input">
+                            <div class="search-item-name">所在行业</div>
+                            <div id="Selector_SF_1_1_16" class="rd-resume-input">
+                                <input id="button_SF_1_1_16F" name="button_SF_1_1_16F"
+                                       class="rd-popinput popinput-normal" onfocus="this.blur()" type="button"/>
+                                <input id="SF_1_1_16" name="SF_1_1_16" value="" type="hidden"/>
+                            </div>
+                        </div>
+                        <div class="resumes-result-item form-input">
+                            <div class="search-item-name">简历来源</div>
+                            <select id="SF_1_1_41" name="SF_1_1_41" class="rd-select popinput-normal"></select>
+                        </div>
+                        <div class="resumes-result-item form-input">
+                            <div class="search-item-name">户口所在地</div>
+                            <div id="Selector_SF_1_1_24" class="rd-resume-input">
+                                <input id="button_SF_1_1_24F" name="button_SF_1_1_24F"
+                                       class="rd-popinput popinput-normal" onfocus="this.blur()" type="button"/>
+                                <input id="SF_1_1_24" name="SF_1_1_24" value="" type="hidden"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <script type="text/javascript">
+                    $(document).ready(function () {
+
+                        lib_singleSelect("SF_1_1_41", arrResumeSource, "1;2;4");
+
+                        ZUI.controlManage.initControl({
+                            type: 'selectCity',
+                            district: [],
+                            title: "户口所在地",
+                            outInput: "button_SF_1_1_24F",
+                            hiddenInput: "SF_1_1_24"
+                        });
+                        $("#button_SF_1_1_16F").selectPosition({
+                            outInput: "button_SF_1_1_16F", hiddenInput: "SF_1_1_16", data: arrIndustry, title: "所在行业"
+                        });
+                        ZUI.controlManage.initControl({
+                            type: 'selectPosition',
+                            outInput: 'button_SF_1_1_14F',
+                            hiddenInput: 'SF_1_1_14',
+                            selectType: 'job',
+                            data: arrJobtype,
+                            title: '职位类别'
+                        });
+                        lib_select("SF_1_1_13", arrWorkYear, "");
+
+                        lib_select("SF_1_1_12", arrEducation, "");
+
+                        ZUI.controlManage.initControl({
+                            type: 'selectCity',
+                            title: "现居住地",
+                            outInput: "button_SF_1_1_11F",
+                            hiddenInput: "SF_1_1_11"
+                        });
+                    });
+                </script>
+                <input type="hidden" name="orderBy" id="orderBy" value="CreateTime"/>
+                <input type="hidden" name="curTotalRecord" id="curTotalRecord" value="-1"/>
+                <div class="result-form-bottom">
+                    <div id="HrQueryConditionSettings" class="btn-search fc315">
+                        更多筛选条件
+                    </div>
+                    <div class="fleft fc315 btn-search" id="saveConditionDiv">
+                        <a href="javascript:void(0)" id="saveConditionSettings">保存为筛选器</a>
+                    </div>
+                    <div class="save-control">
+                        <input type="text" id='searcher-name' placeholder="请输入筛选器名称"
+                               class="filter-signature"/>
+                        <input type="button" id="save-searcher" value="确认"
+                               class="confirm-btn"/>
+                        <input type="button" id="cancel-searcher" value="取消"
+                               class="confirm-btn"/>
+                        <img src="//img00.zhaopin.cn/2012/img/rd/loading1202.gif"
+                             id='loading_img' class="loading-ico" style="display: none"/>
+                        <span class="note-msg" style="display: none">保存成功！</span>
+                    </div>
+                    <div class="layer-input-error-tips fc990000">
+                    </div>
+                    <div class="search-submit resumes-result-button input-submit-big" id="searchSubmit">
+                        <button type="submit" onclick="$('#click_search_op_type').val(0)">筛选简历</button>
+                    </div>
+                    <div class="result-tips-icon fc315 icon-padding">
+                        <a href="javascript:void(0)" id="clearConditionSettings">清空筛选条件</a>
+                    </div>
+                    <div class="clear">
+                    </div>
+                    <div class="search-tip-on">
+                        <span class="toggle-btn"></span>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(".f_close").click(function () {
+                    WriteExpiredCookie();
+                });
+
+                //ShowWarning();
+            })
+
+            function ShowWarning() {
+                var expiredremindflag = $.cookie("rd_apply_expiredremindflag");
+                //如果cookie过期且过期简历数量大于0则显示
+                if (expiredremindflag == null || expiredremindflag == "") {
+                    var positionid = $("#SF_1_1_45").val();
+                    var groupid = $("#SF_1_1_44").val();
+                    var expiredResumeCount = GetExpiredResumeCount(positionid, groupid);
+                    if (expiredResumeCount != "0") {
+                        //$("#bExpiredRemind").html("你有" + expiredResumeCount + "份简历即将过期，过期将自动标为不合适，请尽快处理，不要错过人才。");
+                        $(".past-warn").removeAttr("hidden");
+                        $(".past-warn").show();
+                    } else {
+                        $(".past-warn").hide()
+                    }
+                }
+                else
+                    $(".past-warn").hide();
+            }
+
+            function WriteExpiredCookie() {
+                //写入cookie
+                var date = new Date();
+                date.setTime(date.getTime() + (1 * 4 * 60 * 60 * 1000)); //天*小时*分*秒*毫秒
+                //这里的domain要和当前请求的域一致，否则无法写入cookie
+                $.cookie("rd_apply_expiredremindflag", "hide", {
+                    expires: date,
+                    path: "/rdapply/",
+                    domain: "rd2.zhaopin.com",
+                    secure: false
+                });
+
+                $(".past-warn").hide();
+            }
+
+            function GetExpiredResumeCount(positionid, groupid) {
+                var str = $.ajax({
+                    type: "GET",
+                    url: "/RdApply/Resumes/Apply/GetExpiredResumeCount?positionid=" + positionid + "&groupid=" + groupid + "&rand=" + Math.random(),
+                    async: false,
+                    cache: false
+                }).responseText;
+                //alert(str);
+                return str;
+            }
+        </script>
+        <div class="add_container clearfix mt10">
+            <!-- 头部气泡框 begin -->
+            <div class="index_con" id="home_poptips" style="display: none;">
+                <div class="chat-bubble">
+                    <div class="addbox">
+                        <div class="addstylec marb6">新简历太少？立即购买置顶服</div>
+                        <div class="addstylec">务,效果提升<font class="addnumber">8</font>倍! <a
+                                href="//e.zhaopin.com/products/1/redirectorder.do"
+                                class="addzd_bubble __ga__jianliguanlitips_jianliguanlitipstanchu_001">职位置顶</a></div>
+                        <i class="addposi_common addposi_close"></i>
+                    </div>
+                    <i class="chat-bubble-arrow-border"></i>
+                    <i class="chat-bubble-arrow"></i>
+                </div>
+            </div>
+            <!-- 头部气泡框 end -->
+            <ul class="tab-ul fl" id="UlResumeState">
+                <li><span id="submitWait" class="__ga__RDresume_pending_001 f_cur nogap">
+                <img class="mr5" width="13" height="16" align="absmiddle"
+                     src="//img00.zhaopin.cn/2014/rd2/img/Inboxstatuico-dcla.png">
+                待处理<font style="" id="f_resume_state_num_1"></font></span>
+                </li>
+                <li><span id="submitBack" class="__ga__RDresume_alternate_001  nogap">
+                <img class="mr5" width="12" height="10" align="absmiddle"
+                     src="//img00.zhaopin.cn/2014/rd2/img/Inboxstatuico-bx.png">
+                待沟通<font style="" id="f_resume_state_num_2"></font></span></li>
+                <li class="on">
+            <span id="submitHaveSend" class="__ga__RDresume_sentmail_001  nogap">
+                <img class="mr5" width="15" height="14" align="absmiddle"
+                     src="//img00.zhaopin.cn/2014/rd2/img/Inboxstatuico-yfs.png">
+                已发面试邀请<font style="" id="f_resume_state_num_3"></font>
+                <select id="selFeedbackState" name="selFeedbackState" style="display:none;">
+                    <option value="-1">-全部状态-</option>
+                    <option value="1">已接受</option>
+                    <option value="2">已拒绝</option>
+                    <option value="0">待确认</option>
+
+                </select>
+            </span>
+                </li>
+                <li><span id="submitImproper" class="__ga__RDresume_refuse_001  nogap">
+                <img class="mr5" width="13" height="16" align="absmiddle"
+                     src="//img00.zhaopin.cn/2014/rd2/img/Inboxstatuico-bhs.png">
+                不合适<font style="" id="f_resume_state_num_4"></font></span></li>
+            </ul>
+
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var btnid = "";
+                //标签点击事件
+                $("#UlResumeState li span").click(function (e) {
+                    var resumeState = $("#ResumeState").val();
+                    btnid = this.id;
+                    //alert(btnid+"$"+resumeState);
+                    if (btnid == "submitBack" && resumeState != "2") {
+                        SetResumeStateValue(2, true);
+                        ShowExpiredCheckBox(true);
+                    } else if (btnid == "submitHaveSend" && resumeState != "3") {
+                        $("select[name='selFeedbackState'] option[value='-1']").attr("selected", "selected");
+                        $("#InputFeedbackState").val($("select[name='selFeedbackState']").val());
+                        SetResumeStateValue(3);
+                        ShowExpiredCheckBox(false);
+                    } else if (btnid == "submitImproper" && resumeState != "4") {
+                        SetResumeStateValue(4);
+                        ShowExpiredCheckBox(false);
+                    } else if (btnid == "submitWait" && resumeState != "1") {
+                        SetResumeStateValue(1, true);
+                        ShowExpiredCheckBox(true);
+                    }
+                    ;
+                });
+                //应聘者反馈状态变化
+                $("#selFeedbackState").change(function (e) {
+                    if ($("#ResumeState").val() == "3") {
+                        //alert($("select[name='selFeedbackState']").val());
+                        $("#InputFeedbackState").val($("select[name='selFeedbackState']").val());
+                        SetResumeStateValue(3);
+                    }
+                });
+                //只查看即将过期简历
+                $("#btnExpiredApply").click(function (e) {
+                    LookExpiredApply(e);
+                });
+
+                var feedbackState = "";
+
+                if (feedbackState != null && feedbackState != "") {
+                    $("select[name='selFeedbackState'] option[value='" + feedbackState + "']").attr("selected", "selected");
+                }
+
+                $(".tab-ul li span").click(function () {
+                    var $this = $(this);
+                    //debugger;
+                    var imgArr = $this.parent().parent().find("img");//.attr("src").split(".");
+                    imgArr.each(function (index, item) {
+                        var imgObj = $(item);
+                        imgObj.attr("src", imgObj.attr("src").replace("a.png", ".png"))
+                    });
+                    var currImg = $this.find("img");
+                    var newSrc = currImg.attr("src").replace(".png", "a.png");
+                    currImg.attr("src", newSrc);
+
+                    $this.addClass("f_cur").parent().siblings().children().removeClass("f_cur");
+                    $(".tab-cont-box .tab-inner-cont").eq($this.index(this)).show().siblings().hide();
+                    var $span = $(".tab-ul li").eq(2).find("span");
+                    if ($span.hasClass("f_cur")) {
+                        $span.find("select").show();
+                        ;
+                        $(this).css({"text-align": "left"});
+                    } else {
+                        $span.css({"text-align": "center"})
+                            .find("select").hide();
+                    }
+
+                });
+
+                try {
+                    $.ajax({
+                        type: "GET",
+                        url: "//jobads.zhaopin.com/position/checkpoptips",
+                        dataType: "jsonp",
+                        data: 't=' + Math.random(),
+                        success: function (rlt) {
+                            if (rlt && rlt.Code == 200 && rlt.Data[0].indexOf('|show') != -1) {
+                                $('#home_poptips').show();
+                                $('i.addposi_close', '#home_poptips').bind('click', function () {
+                                    $.ajax({
+                                        type: "GET",
+                                        url: "//jobads.zhaopin.com/position/disablejobpoptips",
+                                        dataType: "jsonp",
+                                        success: function () {
+                                        }
+                                    });
+                                    $('#home_poptips').remove();
+                                });
+                            }
+                        },
+                        error: function (a, b, c) {
+                        }
+                    });
+                }
+                catch (e) {
+                }
+            });
+
+            //选中只看过期简历
+            function LookExpiredApply(e) {
+                var expiredApply = $("input[name='btnExpiredApply']").attr("ExpiredApply");
+                //alert(expiredApply);
+                if (expiredApply == "1") {//清除默认url带过来的查看过期简历
+                    $("input[name='btnExpiredApply']").removeAttr("checked");
+                    $("input[name='btnExpiredApply']").removeAttr("ExpiredApply");
+                }
+                var expiredApplyChecked = $("input[name='btnExpiredApply']").attr("checked");
+
+                if (expiredApplyChecked == "checked") {
+                    $("#hiddenExpired").val("1");
+                } else {
+                    $("#hiddenExpired").val("0");
+                }
+                SetResumeStateValue($("#ResumeState").val(), true);
+            }
+
+            //设置简历状态值
+            function SetResumeStateValue(resumeState, isClickExpiredChkBox) {
+                //选中过期选项就会查询全部简历
+                $("#ResumeState").val(resumeState);//记录当前简历状态值
+                $("#CurrentPageNum").val("1");//初始化页码为1
+                var expiredApplyChecked = $("#btnExpiredApply").attr("checked");
+                if (resumeState == 3 || resumeState == 4) {
+                    $("#hiddenExpired").val("0");
+                    $("#btnExpiredApply").removeAttr("checked");
+                }
+                $('#click_search_op_type').val(resumeState)
+                if ($("#hiddenExpired").val() == "1" && (resumeState == 1 || resumeState == 2)) {
+                    if (isClickExpiredChkBox)
+                        clearQueryDict();
+                    var url = "/rdapply/resumes/apply/search";
+                    if ($.query.get('debug') != null && $.query.get('debug') != '') {
+                        url += '?debug=1';
+                    }
+                    $("#form1").attr("action", url);
+                    $("#form1").submit();//提交查询
+                } else {
+                    buttonSubmit(true, true)
+                }
+            }
+
+            //显示、隐藏过期的复选框
+            function ShowExpiredCheckBox(isShow) {
+                if (isShow) {
+                    $(".see_past_resume").show();
+                } else {
+                    $(".see_past_resume").hide();
+                }
+            }
+        </script>
+        <!--list-->
+        <link type="text/css" rel="stylesheet" href="//rd2.zhaopin.com/s/css/erd2/rd_style.css?20110803"/>
+        <form action="/RdApply/Resumes/Apply/Search" data-ajax="true" data-ajax-begin="loadingList"
+              data-ajax-failure="getListFailure" data-ajax-method="post" data-ajax-mode="replace"
+              data-ajax-success="refreshDocument" data-ajax-update="#resumeList" id="form1" method="post" name="form1"
+              onkeydown="if(event.keyCode==13){return false;}">
+            <div id="resumeList">
+                <!-- begin tab -->
+                <div class="topControl clearfix" style="display: none;">
+                    <div style="position: relative;">
+                        <div class="leftCon ajaxErr" id="cvAJAXInfoCon">
+                        </div>
+                    </div>
+                    <div class="leftCon">
+                        <span id="info" class="infoClass" style="display: none"></span>
+                    </div>
+                </div>
+                <!-- end tab -->
+                <div class="mainListCon">
+                    <div class="infoCon clearfix">
+                        <div class="leftCon leftconfont" id="recordShow">
+                            共有<span class="focus">63</span>份简历
+
+                        </div>
+                        <div class="fl">
+                        </div>
+                        <div class="toprightCon">
+                            查看方式：<span rdmodule="reDetailSimpleFac" id="triggerSD_con"
+                                       defaultstate="simple"><img src="//img04.zhaopin.cn/rd2/s/images/erd2/blank.gif"
+                                                                  border="0" align="absmiddle">
+                    <img src="//img04.zhaopin.cn/rd2/s/images/erd2/blank.gif"
+                         border="0" align="absmiddle"></span>&nbsp;第<span class='red12px'>1/4</span>页，去
+                            <input type="text" value='' name='PageList2' size='2' class='searchnum' id="pageList1"/>
+                            页&nbsp;&nbsp;<input type='button' value='Go' class='genButton3'
+                                                onclick='gotoPage($("#pageList1").val())'/>
+                        </div>
+                    </div>
+
+
+                    <div class="tableCon">
+                        <div style="display: none; text-align: center; margin: 10px 0;">
+                            您 没有收到新的简历，到<a href="javascript:SetPosState(3);" onfocus="this.blur()">发布中职位</a>或<a
+                                href="javascript:SetPosState(4);" onfocus="this.blur()">发布结束职位</a>中查看。
+                        </div>
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0" id="zpResumeListTable"
+                               class="listTab" style="">
+                            <tr class="tabHead">
+                                <td class="blankTd"></td>
+                                <td></td>
+                                <td width="52" nowrap>标签</td>
+                                <td width="102" style="padding-left: 15px;" nowrap>姓 名</td>
+                                <td id="positionAnchor">职位名称</td>
+                                <td width="40" nowrap>性别</td>
+                                <td width="66" nowrap>工作年限</td>
+                                <td width="100" class="toDis" nowrap>
+                                    <select id="DColumn_sel0"></select></td>
+                                <td width="100" nowrap>
+                                    <select id="DColumn_sel1"></select></td>
+                                <td width="100" nowrap>
+                                    <select id="DColumn_sel2"></select></td>
+                                <td width="100" nowrap>
+                                    <select id="DColumn_sel3"></select></td>
+                                <td width="150" nowrap>&nbsp;
+                                    &nbsp;&nbsp;投递日期
+                                </td>
+                            </tr>
+                            <!--BeginListRecord -->
+                            <tr resume-number="JR420272028R90250000000" data-type="1" class="list1"
+                                title="单击一下打开或关闭详细信息" rdmodule="resumeMoreInfoFac" id="moreinfo_100083975558"
+                                resume_bh="" resume_number="1" resume_source="简历来源:主动投递初次投递:(上海) 投递时间:"
+                                re_jobtime='2012-07至今' re_self="本人为人热情、思维活跃、逻辑和创新思维能力强，具有较强的组织能力和适应能力，处事沉稳、对工作认真负责。"
+                                re_company='手术器械厂' re_jobname='HR主管' re_description="1、根据公司发展及各部门的招聘需求，优化人员结构，督导制定人员招聘计划。对应聘者进行面试（复试）考核评分，出具综合评价意见
+2、建立和完善公司的招聘流程和招聘体系，及时更新审查员工档案，做好人员异动统计（包括离职、入职、晋升、调动、降职等）
+3、负责公司1000人员考勤、休假、月度人事薪酬报表的审核和下放，确保薪资发放的及时性、准确性
+4、调查各部门培训需求，同时结合公司发展需要，协助各部门负责人建立培训体系，拟定全年员工培训计划及中长期培训规划，具体组织实施并负责培训结果评估和考核
+6、熟悉公司对员工社会保险及公积金的缴纳流程
+7、协调公司与员工的劳动关系，处理劳资纠纷
+8、结合公司实际情况和岗位设置情况，定岗定编、制定并修撰岗位说明书
+9、制定公司年度薪酬福利预算，并对预算计划的执行进行监督
+10、审核人工成本、人工费用的分析报告，合理管控公司人力成本
+11、编制各类人力资源报表，为内外部的管理需求提供及时、有效的支持
+12、与技术部同事沟通，把薪酬系统编辑成程序，简化薪酬数据的统计与分析
+13、负责收集各地区人才市场招聘信息及同行业各岗位的薪资待遇情况并做出分析报告
+14、负责组织企业文化建设工作，包括公司庆典、年会安排、会务组织、文体活动安排
+">
+                                <td class="tdCheckbox">
+                                    <input type="checkbox" data-invited="0" data-isfeedback="true"
+                                           id="resoutorsend_100083975558" data-language="1" data-cnname="章静"
+                                           data-resumebh="JR420272028R90250000000" data-resumenumber="1"
+                                           data-resguid="100083975558" name="chkid" dev_name=""
+                                           userinfo_forsend="章静$142027202$691489889@qq.com$13472659564$100083975558$&amp;*&amp;$女$27$本科$JR420272028R90250000000$市场营销 交通运输$医疗设备/器械-通信/电信运营、增值服务-专业服务/咨询(财会/法律/人力资源等)$1$CC383920829J90250779000$6$上海$13472659564"
+                                           value="100083975558" onclick="unChkSelectAll('chkall')" class="smpcheckbox"
+                                           data-smpcvid="JR420272028R90250000000_1" data-smpownerid="100083975558"
+                                           data-smpkpi="M2" data-smpxtable="1"/>
+                                </td>
+                                <td class="fkt_ico_position">
+
+                                </td>
+
+                                <td label="" rdmodule="cvLabelOneFac" id="r_label100083975558" cvname="章静" title=""
+                                    class="td4cvIcon"><span class="cvLabelColorDot"><span class=" cvLabelBlank"></span></span>
+                                </td>
+                                <td>
+                                    <a style=color:#315aaa isread="0"
+                                       onclick="javascript:ViewOneResume(this,'0','100083975558');"
+                                       href="//rd.zhaopin.com/resumepreview/resume/viewone/1/100083975558?resume=100083975558&star=&companyid=38392082&pfd=7_301"
+                                       target="_blank" class="link " id="100083975558">章静</a>
+                                    <img src="//rd2.zhaopin.com/s/images/erd2/blank.gif"
+                                         photosrc="/pic/2017/10/17/5c342e8d-90e3-4283-b084-0c49bb7573b9.jpg" border="0"
+                                         class="iconRePhoto" id="photo_100083975558" rdmodule="resumePhotoFac"/>
+
+                                </td>
+                                <!--jobCode==101时，显示闪聘图标-->
+                                <td name="pId" jobid="CC383920829J90250779000" jobcode="1"></td>
+                                <td>女</td>
+                                <td>6</td>
+                                <td class="toDis"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;">27</td>
+                                <td style="display: none;">上海</td>
+                                <td style="display: none;">本科</td>
+                                <td style="display: none;">HR主管</td>
+                                <td style="display: none;">上海财经大学 上海工会管理职业学院</td>
+                                <td style="display: none;">市场营销 交通运输</td>
+                                <td style="display: none;">手术器械厂</td>
+                                <td style="display: none;">医疗设备/器械-通信/电信运营、增值服务-专业服务/咨询(财会/法律/人力资源等)</td>
+
+                                <td style="display:none;" title="主动投递">
+                                    主动投递
+                                </td>
+                                <td title="2/8/2018 4:46:02 PM">
+
+                                    &nbsp;&nbsp;
+                                    02-08 16:46
+                                </td>
+                            </tr>
+                            <!--BeginListRecord -->
+                            <tr resume-number="JR276772806R90250000000" data-type="1" class="list2"
+                                title="单击一下打开或关闭详细信息" rdmodule="resumeMoreInfoFac" id="moreinfo_100083956633"
+                                resume_bh="" resume_number="1" resume_source="简历来源:主动投递初次投递:(湖北-黄石) 投递时间:"
+                                re_jobtime='2010-06至今'
+                                re_self="这几年工作下来，一直从事Sony手机供应链系统相关的维护和开发，从MES到ERP，再到PSI系统，让我对工业制造的流程以及数据的处理有了很大的了解，特别是在开发ERP和PSI系统上，它很直观的反应了销售订单数据到工厂需求到采购订单以及到库存控制的逻辑，这是我多年来的收获，一直想单独开发这样一个小产品。同时，随着时代进步，社会的发展，人工智能的到来，工业4.0的定义，开始接触一些新的知识体系，如：Hadoop、Hive、HBase、Storm、Spark、redis，R语言等大数据分析工具，已成为我业余学习的重点。希望能在一个新的平台上发挥余热，跟上时代的脚步~"
+                                re_company='上海伊玛斯软件科技有限公司' re_jobname='项目经理' re_description="1.为ERP系统的客户化做支持；
+2.新项目的需求分析和系统设计；
+3.数据流程管理；
+4.培训用户，项目维护。">
+                                <td class="tdCheckbox">
+                                    <input type="checkbox" data-invited="0" data-isfeedback="true"
+                                           id="resoutorsend_100083956633" data-language="1" data-cnname="郭敏"
+                                           data-resumebh="JR276772806R90250000000" data-resumenumber="1"
+                                           data-resguid="100083956633" name="chkid" dev_name="计算机软、硬件/互联网/IT  JAVA"
+                                           userinfo_forsend="郭敏$127677280$rabbit0610sc@163.com$13001220588$100083956633$&amp;*&amp;$男$31$本科$JR276772806R90250000000$教育技术学$计算机软件-教育/培训/院校$1$CC383920829J90250724000$8$湖北-黄石$13001220588"
+                                           value="100083956633" onclick="unChkSelectAll('chkall')" class="smpcheckbox"
+                                           data-smpcvid="JR276772806R90250000000_1" data-smpownerid="100083956633"
+                                           data-smpkpi="M2" data-smpxtable="1"/>
+                                </td>
+                                <td class="fkt_ico_position">
+
+                                </td>
+
+                                <td label="" rdmodule="cvLabelOneFac" id="r_label100083956633" cvname="郭敏" title=""
+                                    class="td4cvIcon"><span class="cvLabelColorDot"><span class=" cvLabelBlank"></span></span>
+                                </td>
+                                <td>
+                                    <a style=color:#315aaa isread="0"
+                                       onclick="javascript:ViewOneResume(this,'0','100083956633');"
+                                       href="//rd.zhaopin.com/resumepreview/resume/viewone/1/100083956633?resume=100083956633&star=&companyid=38392082&pfd=10_310"
+                                       target="_blank" class="link " id="100083956633">郭敏</a>
+
+                                </td>
+                                <!--jobCode==101时，显示闪聘图标-->
+                                <td name="pId" jobid="CC383920829J90250724000" jobcode="0"></td>
+                                <td>男</td>
+                                <td>8</td>
+                                <td class="toDis"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;">31</td>
+                                <td style="display: none;">湖北-黄石</td>
+                                <td style="display: none;">本科</td>
+                                <td style="display: none;">项目经理</td>
+                                <td style="display: none;">湖北师范学院</td>
+                                <td style="display: none;">教育技术学</td>
+                                <td style="display: none;">上海伊玛斯软件科技有限公司</td>
+                                <td style="display: none;">计算机软件-教育/培训/院校</td>
+
+                                <td style="display:none;" title="主动投递">
+                                    主动投递
+                                </td>
+                                <td title="2/8/2018 4:20:08 PM">
+
+                                    &nbsp;&nbsp;
+                                    02-08 16:20
+                                </td>
+                            </tr>
+                            <!--BeginListRecord -->
+                            <tr resume-number="JM670594155R90500000000" data-type="1" class="list1"
+                                title="单击一下打开或关闭详细信息" rdmodule="resumeMoreInfoFac" id="moreinfo_100083950023"
+                                resume_bh="" resume_number="1" resume_source="简历来源:主动投递初次投递:(上海) 投递时间:"
+                                re_jobtime='2016-12至今'
+                                re_self="4年传统行业高管3年互联网金融行业高管，历任小米生态链米筹金服业务发展总监/爱就投市场总监，先后在甲级医院，SOHO 中国，希尔顿担任项目区域运营经理。现任创投未来领袖俱乐部联合发起人/启迪众创公社导师/星创师创业导师，精通互联网行业市场推广、渠道开拓、政府关系、产品运营全套打法，成功打造多场千人峰会，拥有丰富的大型团队管理经验。全程策划多场创业投资公开培训、大咖私享会。拥有丰富的优秀创业/企业家、全国产业园孵化器、知名天使投资人、一线投资机构、政府机构、银行、网贷平台等渠道资源，致力于以自身创业经历和产业资源助力高成长性创业企业家。"
+                                re_company='上海米筹互联网金融服务股份有限公司' re_jobname='业务发展总监（FA业务）' re_description="品牌&amp;amp;市场：
+1、全程负责多场创业投资公开课的组织和策划，独立负责每场分享导师的邀请、课程内容安排、学员招募等工作；邀请行业大咖、政府人物、社会名流等作为参会嘉宾。
+2、主导米筹金服对外合作举办各类活动、会议2场，主导筹备小米生态链CEO会议1场，主办精品投行路演会5场，负责各类商业活动策划与组织实施。
+前期负责合作方及赞助商洽谈、定向邀约参会的创投机构、投资人、创业项目；指导团队与外部供应商对接，负责活动物料的设计、制作、预算把控；活动场地选取、布置；对活动现场进行整体协调和全程把控，负责活动现场的统筹管理，制作多套方案。
+3、负责米筹金服股权投资部“精品投行”品牌策划，指导微信公众号运营、组织撰写各类公关活动推文；
+渠道：
+与多个创业园区、孵化器、商会、协会建立长期合作关系，掌握大量优质创业项目资源，成功为公司对接数百个项目资源及数百个孵化器资源；拥有上海地区丰富政府关系，负责公司政府关系管理。
+运营：
+1、持续跟踪后续合作机会，成功促成米筹与谷仓学院战略合作，并就合作方式进行深入洽谈，负责相关产品设计和运营。
+2、利用自身一线投资机构、知名天使投资人、政府机构、媒体、基金及海外丰富资源结合公司小米生态链企业资源，负责投行业务承揽工作及基金募集工作；并负责投资机构及投资人长期关系维护。
+管理：
+1、负责市场、运营团队的搭建与维护，定期对团队员工进行培训，培养团队协作能力，提升专业度；
+2、制定行之有效的绩效考核方案及运营策略，带领团队为公司开拓业务资源与合作机会；负责与其他部门保持良好沟通与协作。">
+                                <td class="tdCheckbox">
+                                    <input type="checkbox" data-invited="0" data-isfeedback="true"
+                                           id="resoutorsend_100083950023" data-language="1" data-cnname="刘海"
+                                           data-resumebh="JM670594155R90500000000" data-resumenumber="1"
+                                           data-resguid="100083950023" name="chkid" dev_name="刘海  市场总监 7年 上海"
+                                           userinfo_forsend="刘海$667059415$15038156614@163.com$13917852676$100083950023$&amp;*&amp;$男$30$本科$JM670594155R90500000000$工商管理$基金/证券/期货/投资$1$CC383920829J90250691000$8$上海$13917852676"
+                                           value="100083950023" onclick="unChkSelectAll('chkall')" class="smpcheckbox"
+                                           data-smpcvid="JM670594155R90500000000_1" data-smpownerid="100083950023"
+                                           data-smpkpi="M2" data-smpxtable="1"/>
+                                </td>
+                                <td class="fkt_ico_position">
+
+                                </td>
+
+                                <td label="" rdmodule="cvLabelOneFac" id="r_label100083950023" cvname="刘海" title=""
+                                    class="td4cvIcon"><span class="cvLabelColorDot"><span class=" cvLabelBlank"></span></span>
+                                </td>
+                                <td>
+                                    <a style=color:#315aaa isread="0"
+                                       onclick="javascript:ViewOneResume(this,'0','100083950023');"
+                                       href="//rd.zhaopin.com/resumepreview/resume/viewone/1/100083950023?resume=100083950023&star=&companyid=38392082&pfd=5019_1041"
+                                       target="_blank" class="link " id="100083950023">刘海</a>
+                                    <img src="//rd2.zhaopin.com/s/images/erd2/blank.gif"
+                                         photosrc="/pic/2017/11/28/5b0d87d4-b08e-4125-aa95-735aad9b73c4.jpg" border="0"
+                                         class="iconRePhoto" id="photo_100083950023" rdmodule="resumePhotoFac"/>
+
+                                </td>
+                                <!--jobCode==101时，显示闪聘图标-->
+                                <td name="pId" jobid="CC383920829J90250691000" jobcode="601"></td>
+                                <td>男</td>
+                                <td>8</td>
+                                <td class="toDis"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;">30</td>
+                                <td style="display: none;">上海</td>
+                                <td style="display: none;">本科</td>
+                                <td style="display: none;">业务发展总监（FA业务）</td>
+                                <td style="display: none;">上海电视大学</td>
+                                <td style="display: none;">工商管理</td>
+                                <td style="display: none;">上海米筹互联网金融服务股份有限公司</td>
+                                <td style="display: none;">基金/证券/期货/投资</td>
+
+                                <td style="display:none;" title="主动投递">
+                                    主动投递
+                                </td>
+                                <td title="2/8/2018 4:10:07 PM">
+
+                                    &nbsp;&nbsp;
+                                    02-08 16:10
+                                </td>
+                            </tr>
+                            <!--BeginListRecord -->
+                            <tr resume-number="JM991023417R90250000000" data-type="1" class="list2"
+                                title="单击一下打开或关闭详细信息" rdmodule="resumeMoreInfoFac" id="moreinfo_100083925703"
+                                resume_bh="" resume_number="1" resume_source="简历来源:主动投递初次投递:(上海-闵行区) 投递时间:"
+                                re_jobtime='2013-08至今' re_self="对待工作认真踏实，兢兢业业，克己复礼；对待团队乐于合作，甘于奉献。"
+                                re_company='上海景峰制药有限公司' re_jobname='项目组长' re_description="1、负责公司专利及商标的申请、维护工作；
+2、负责公司各类项目申报、跟踪、验收工作，项目类型主要有：国家重大新药创造、国家863计划、中国驰名商标、上海市科技小巨人项目、上海市科技支撑项目、上海市产学研项目、上海市重点技术改造项目、上海市加快自主品牌建设项目、上海市名牌、上海市著名商标、上海市专利示范企业、专利贯标、高新技术企业等。
+3、负责新员工知识产权培训工作；
+4、负责行业信息收集、分析，制作简报推送公众号；
+5、负责政府关系维护工作（科技口、经信口、市场口、行业协会、高校研究院等）；
+6、负责部分展会参展布展工作；
+7、配合学术部完成部分专家维护、潜在项目开发工作；
+8、负责配合领导及其他部门工作，做好相应支撑。">
+                                <td class="tdCheckbox">
+                                    <input type="checkbox" data-invited="0" data-isfeedback="true"
+                                           id="resoutorsend_100083925703" data-language="1" data-cnname="陈仁爱"
+                                           data-resumebh="JM991023417R90250000000" data-resumenumber="1"
+                                           data-resguid="100083925703" name="chkid" dev_name="知识产权/专利顾问/代理人 7年 上海"
+                                           userinfo_forsend="陈仁爱$699102341$172023607@qq.com$18516020617$100083925703$&amp;*&amp;$男$31$本科$JM991023417R90250000000$生物工程 建筑学$医药/生物工程$1$CC383920829J90250700000$8$上海-闵行区$18516020617"
+                                           value="100083925703" onclick="unChkSelectAll('chkall')" class="smpcheckbox"
+                                           data-smpcvid="JM991023417R90250000000_1" data-smpownerid="100083925703"
+                                           data-smpkpi="M2" data-smpxtable="1"/>
+                                </td>
+                                <td class="fkt_ico_position">
+
+                                </td>
+
+                                <td label="" rdmodule="cvLabelOneFac" id="r_label100083925703" cvname="陈仁爱" title=""
+                                    class="td4cvIcon"><span class="cvLabelColorDot"><span class=" cvLabelBlank"></span></span>
+                                </td>
+                                <td>
+                                    <a style=color:#315aaa isread="0"
+                                       onclick="javascript:ViewOneResume(this,'0','100083925703');"
+                                       href="//rd.zhaopin.com/resumepreview/resume/viewone/1/100083925703?resume=100083925703&star=&companyid=38392082&pfd=50_2001"
+                                       target="_blank" class="link " id="100083925703">陈仁爱</a>
+                                    <img src="//rd2.zhaopin.com/s/images/erd2/blank.gif"
+                                         photosrc="/pic/2017/8/16/510cf631-1fa4-47e3-b32b-7987e76dddb9.jpg" border="0"
+                                         class="iconRePhoto" id="photo_100083925703" rdmodule="resumePhotoFac"/>
+
+                                </td>
+                                <!--jobCode==101时，显示闪聘图标-->
+                                <td name="pId" jobid="CC383920829J90250700000" jobcode="601"></td>
+                                <td>男</td>
+                                <td>8</td>
+                                <td class="toDis"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;">31</td>
+                                <td style="display: none;">上海-闵行区</td>
+                                <td style="display: none;">本科</td>
+                                <td style="display: none;">项目组长</td>
+                                <td style="display: none;">上海应用技术大学 上海济光职业技术学院</td>
+                                <td style="display: none;">生物工程 建筑学</td>
+                                <td style="display: none;">上海景峰制药有限公司</td>
+                                <td style="display: none;">医药/生物工程</td>
+
+                                <td style="display:none;" title="主动投递">
+                                    主动投递
+                                </td>
+                                <td title="2/8/2018 3:36:15 PM">
+
+                                    &nbsp;&nbsp;
+                                    02-08 15:36
+                                </td>
+                            </tr>
+                            <!--BeginListRecord -->
+                            <tr resume-number="JM991023417R90250000000" data-type="1" class="list1"
+                                title="单击一下打开或关闭详细信息" rdmodule="resumeMoreInfoFac" id="moreinfo_100083925693"
+                                resume_bh="" resume_number="1" resume_source="简历来源:主动投递初次投递:(上海-闵行区) 投递时间:"
+                                re_jobtime='2013-08至今' re_self="对待工作认真踏实，兢兢业业，克己复礼；对待团队乐于合作，甘于奉献。"
+                                re_company='上海景峰制药有限公司' re_jobname='项目组长' re_description="1、负责公司专利及商标的申请、维护工作；
+2、负责公司各类项目申报、跟踪、验收工作，项目类型主要有：国家重大新药创造、国家863计划、中国驰名商标、上海市科技小巨人项目、上海市科技支撑项目、上海市产学研项目、上海市重点技术改造项目、上海市加快自主品牌建设项目、上海市名牌、上海市著名商标、上海市专利示范企业、专利贯标、高新技术企业等。
+3、负责新员工知识产权培训工作；
+4、负责行业信息收集、分析，制作简报推送公众号；
+5、负责政府关系维护工作（科技口、经信口、市场口、行业协会、高校研究院等）；
+6、负责部分展会参展布展工作；
+7、配合学术部完成部分专家维护、潜在项目开发工作；
+8、负责配合领导及其他部门工作，做好相应支撑。">
+                                <td class="tdCheckbox">
+                                    <input type="checkbox" data-invited="0" data-isfeedback="true"
+                                           id="resoutorsend_100083925693" data-language="1" data-cnname="陈仁爱"
+                                           data-resumebh="JM991023417R90250000000" data-resumenumber="1"
+                                           data-resguid="100083925693" name="chkid" dev_name="知识产权/专利顾问/代理人 7年 上海"
+                                           userinfo_forsend="陈仁爱$699102341$172023607@qq.com$18516020617$100083925693$&amp;*&amp;$男$31$本科$JM991023417R90250000000$生物工程 建筑学$医药/生物工程$1$CC383920829J90250588000$8$上海-闵行区$18516020617"
+                                           value="100083925693" onclick="unChkSelectAll('chkall')" class="smpcheckbox"
+                                           data-smpcvid="JM991023417R90250000000_1" data-smpownerid="100083925693"
+                                           data-smpkpi="M2" data-smpxtable="1"/>
+                                </td>
+                                <td class="fkt_ico_position">
+
+                                </td>
+
+                                <td label="" rdmodule="cvLabelOneFac" id="r_label100083925693" cvname="陈仁爱" title=""
+                                    class="td4cvIcon"><span class="cvLabelColorDot"><span class=" cvLabelBlank"></span></span>
+                                </td>
+                                <td>
+                                    <a style=color:#315aaa isread="0"
+                                       onclick="javascript:ViewOneResume(this,'0','100083925693');"
+                                       href="//rd.zhaopin.com/resumepreview/resume/viewone/1/100083925693?resume=100083925693&star=&companyid=38392082&pfd=50_2001"
+                                       target="_blank" class="link " id="100083925693">陈仁爱</a>
+                                    <img src="//rd2.zhaopin.com/s/images/erd2/blank.gif"
+                                         photosrc="/pic/2017/8/16/510cf631-1fa4-47e3-b32b-7987e76dddb9.jpg" border="0"
+                                         class="iconRePhoto" id="photo_100083925693" rdmodule="resumePhotoFac"/>
+
+                                </td>
+                                <!--jobCode==101时，显示闪聘图标-->
+                                <td name="pId" jobid="CC383920829J90250588000" jobcode="601"></td>
+                                <td>男</td>
+                                <td>8</td>
+                                <td class="toDis"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;">31</td>
+                                <td style="display: none;">上海-闵行区</td>
+                                <td style="display: none;">本科</td>
+                                <td style="display: none;">项目组长</td>
+                                <td style="display: none;">上海应用技术大学 上海济光职业技术学院</td>
+                                <td style="display: none;">生物工程 建筑学</td>
+                                <td style="display: none;">上海景峰制药有限公司</td>
+                                <td style="display: none;">医药/生物工程</td>
+
+                                <td style="display:none;" title="主动投递">
+                                    主动投递
+                                </td>
+                                <td title="2/8/2018 3:36:15 PM">
+
+                                    &nbsp;&nbsp;
+                                    02-08 15:36
+                                </td>
+                            </tr>
+                            <!--BeginListRecord -->
+                            <tr resume-number="JR016323156R90000001000" data-type="1" class="list2"
+                                title="单击一下打开或关闭详细信息" rdmodule="resumeMoreInfoFac" id="moreinfo_100083875403"
+                                resume_bh="" resume_number="1" resume_source="简历来源:主动投递初次投递:(上海) 投递时间:"
+                                re_jobtime='2017-02至今' re_self="1.性格开朗，与人相处和睦。
+2.执行力强，工作认真负责，具有钻研精神。
+3.管理能力强，具有较强的团队意识和创新意识。
+4.注重效率和实效性，工作时高度专注。
+5.有较高的自主学习能力和自控能力。
+" re_company='卓治企业管理咨询（上海）有限公司' re_jobname='人事经理' re_description="    1、就职于小微企业的工作经历，让我直接定位为HRBP，不仅要在人事职位上发挥自己的特长和专业性，还需要在业务能力上有新的突破。
+    2、该企业专注于家族财富的资产保全、传承及风险管理，主要为客户做好终身资产规划、税务筹划、现金流管理等一些列资产配置，同时也具备实操内容的分享和课题，为客户和学员提供长期的定制化服务和培训。
+    3、主要负责该公司的日常人事工作、财务工作、行政工作和后勤保障工作，同时也涉猎公司业务方面，熟悉目前金融市场的政策、行规、风险等信息面，对境外资产的处理也有所了解。
+    4、人事方面负责建立公司人事规章制度并实施，处理招退工、企业社保公积金开户和维护，完善员工档案及人事资料管理，完成公司全员的薪酬发放，跟踪员工考勤，落实岗位责任制。
+    5、财务方面负责月度财务数据处理，提供外包财务资料，完成公司社保和公积金的调整和汇缴，以及年度汇算清缴的相关工作。
+    6、税务方面负责把控公司税务风险，在ETAX系统和金税三期系统上完成公司月度财报的报送、个人所得税的报送、企业所得税的报送。同时负责公司日常经营的增值税开票工作，完成金税盘日常清税和维护工作。">
+                                <td class="tdCheckbox">
+                                    <input type="checkbox" data-invited="0" data-isfeedback="true"
+                                           id="resoutorsend_100083875403" data-language="1" data-cnname="徐申锦"
+                                           data-resumebh="JR016323156R90000001000" data-resumenumber="1"
+                                           data-resguid="100083875403" name="chkid" dev_name="徐申锦的中文简历"
+                                           userinfo_forsend="徐申锦$101632315$xushenjin@163.com$18930287489$100083875403$&amp;*&amp;$女$33$本科$JR016323156R90000001000$市场营销$专业服务/咨询(财会/法律/人力资源等)-交通/运输$1$CC383920829J90250779000$10$上海$18930287489"
+                                           value="100083875403" onclick="unChkSelectAll('chkall')" class="smpcheckbox"
+                                           data-smpcvid="JR016323156R90000001000_1" data-smpownerid="100083875403"
+                                           data-smpkpi="M2" data-smpxtable="1"/>
+                                </td>
+                                <td class="fkt_ico_position">
+
+                                </td>
+
+                                <td label="" rdmodule="cvLabelOneFac" id="r_label100083875403" cvname="徐申锦" title=""
+                                    class="td4cvIcon"><span class="cvLabelColorDot"><span class=" cvLabelBlank"></span></span>
+                                </td>
+                                <td>
+                                    <a style=color:#315aaa isread="0"
+                                       onclick="javascript:ViewOneResume(this,'0','100083875403');"
+                                       href="//rd.zhaopin.com/resumepreview/resume/viewone/1/100083875403?resume=100083875403&star=&companyid=38392082&pfd=50_2001"
+                                       target="_blank" class="link " id="100083875403">徐申锦</a>
+                                    <img src="//rd2.zhaopin.com/s/images/erd2/blank.gif"
+                                         photosrc="/pic/2017/08/29/e4f7ee1d-6e63-46e3-bdcd-14b348226cd7.jpg" border="0"
+                                         class="iconRePhoto" id="photo_100083875403" rdmodule="resumePhotoFac"/>
+
+                                </td>
+                                <!--jobCode==101时，显示闪聘图标-->
+                                <td name="pId" jobid="CC383920829J90250779000" jobcode="601"></td>
+                                <td>女</td>
+                                <td>10</td>
+                                <td class="toDis"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;">33</td>
+                                <td style="display: none;">上海</td>
+                                <td style="display: none;">本科</td>
+                                <td style="display: none;">人事经理</td>
+                                <td style="display: none;">华东理工大学</td>
+                                <td style="display: none;">市场营销</td>
+                                <td style="display: none;">卓治企业管理咨询（上海）有限公司</td>
+                                <td style="display: none;">专业服务/咨询(财会/法律/人力资源等)-交通/运输</td>
+
+                                <td style="display:none;" title="主动投递">
+                                    主动投递
+                                </td>
+                                <td title="2/8/2018 2:18:41 PM">
+
+                                    &nbsp;&nbsp;
+                                    02-08 14:18
+                                </td>
+                            </tr>
+                            <!--BeginListRecord -->
+                            <tr resume-number="JR146054908R90000001000" data-type="1" class="list1"
+                                title="单击一下打开或关闭详细信息" rdmodule="resumeMoreInfoFac" id="moreinfo_100083484748"
+                                resume_bh="" resume_number="1" resume_source="简历来源:主动投递初次投递:(安徽-合肥-政务文化新区) 投递时间:"
+                                re_jobtime='2014-12至2018-02'
+                                re_self="       本人性格稳重、自信，具有很强的沟通能力和团队意识.做事具有主动性，乐于接受挑战，具有开拓创新精神。近7年的外资企业从业经验，8区域销售经历，资深市场营销人员，具有很强的新市场开拓能力，熟悉卖场及销售渠道的维护及管理。有专业的财务教育背景，能更好的结合所学专业为公司创造最大的价值。同时具有较强的英语阅读，理解能力。 兴趣爱好广泛，热爱音乐，篮球."
+                                re_company='用友金融信息技术股份有限公司' re_jobname='安徽区域销售经理' re_description="负责安徽辖区内 所有银行的用友相关软件销售，具有很深的客情关系。
+具备陌生市场的开拓能力
+具备相关管理能力">
+                                <td class="tdCheckbox">
+                                    <input type="checkbox" data-invited="0" data-isfeedback="true"
+                                           id="resoutorsend_100083484748" data-language="1" data-cnname="孟魁伟"
+                                           data-resumebh="JR146054908R90000001000" data-resumenumber="1"
+                                           data-resguid="100083484748" name="chkid" dev_name="销售经理   合肥"
+                                           userinfo_forsend="孟魁伟$114605490$laomeng1978@163.com$15855147866$100083484748$&amp;*&amp;$男$36$MBA$JR146054908R90000001000$工商管理 会计学$计算机软件-计算机硬件-耐用消费品（服饰/纺织/皮革/家具/家电）-电子技术/半导体/集成电路-大型设备/机电设备/重工业$1$CC383920829J90250692000$13$安徽-合肥-政务文化新区$15855147866"
+                                           value="100083484748" onclick="unChkSelectAll('chkall')" class="smpcheckbox"
+                                           data-smpcvid="JR146054908R90000001000_1" data-smpownerid="100083484748"
+                                           data-smpkpi="M2" data-smpxtable="1"/>
+                                </td>
+                                <td class="fkt_ico_position">
+
+                                </td>
+
+                                <td label="" rdmodule="cvLabelOneFac" id="r_label100083484748" cvname="孟魁伟" title=""
+                                    class="td4cvIcon"><span class="cvLabelColorDot"><span class=" cvLabelBlank"></span></span>
+                                </td>
+                                <td>
+                                    <a style=color:#315aaa isread="0"
+                                       onclick="javascript:ViewOneResume(this,'0','100083484748');"
+                                       href="//rd.zhaopin.com/resumepreview/resume/viewone/1/100083484748?resume=100083484748&star=&companyid=38392082&pfd=5019_1014"
+                                       target="_blank" class="link " id="100083484748">孟魁伟</a>
+                                    <img src="//rd2.zhaopin.com/s/images/erd2/blank.gif"
+                                         photosrc="/pic/2018/1/16/32cd7e9e-8401-4559-8d8a-82e5fc143f7d.jpg" border="0"
+                                         class="iconRePhoto" id="photo_100083484748" rdmodule="resumePhotoFac"/>
+
+                                </td>
+                                <!--jobCode==101时，显示闪聘图标-->
+                                <td name="pId" jobid="CC383920829J90250692000" jobcode="601"></td>
+                                <td>男</td>
+                                <td>13</td>
+                                <td class="toDis"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;">36</td>
+                                <td style="display: none;">安徽-合肥-政务文化新区</td>
+                                <td style="display: none;">MBA</td>
+                                <td style="display: none;">安徽区域销售经理</td>
+                                <td style="display: none;">安徽大学 华东交通大学</td>
+                                <td style="display: none;">工商管理 会计学</td>
+                                <td style="display: none;">用友金融信息技术股份有限公司</td>
+                                <td style="display: none;">
+                                    计算机软件-计算机硬件-耐用消费品（服饰/纺织/皮革/家具/家电）-电子技术/半导体/集成电路-大型设备/机电设备/重工业
+                                </td>
+
+                                <td style="display:none;" title="主动投递">
+                                    主动投递
+                                </td>
+                                <td title="2/7/2018 6:51:21 PM">
+
+                                    &nbsp;&nbsp;
+                                    02-07 18:51
+                                </td>
+                            </tr>
+                            <!--BeginListRecord -->
+                            <tr resume-number="JM835794208R90250001000" data-type="1" class="list2"
+                                title="单击一下打开或关闭详细信息" rdmodule="resumeMoreInfoFac" id="moreinfo_100083370688"
+                                resume_bh="" resume_number="1" resume_source="简历来源:主动投递初次投递:(上海-浦东新区) 投递时间:"
+                                re_jobtime='2009-02至2018-01' re_self="        从未出校门到现在一直在一家企业脚踏实地工作，积极完成领导分配的各项工作。具有团队合作精神，有较强的独立工作能力，思维活跃，能独当一面。
+      学习意识强， 爱好广泛，会弹奏一点钢琴、一点古筝，吹奏一点陶笛，会说一点西语。
+      在从事近九年的财务工作过程中，除了自身的会计本职工作，还兼职公司工会审计职位、部分人事工作，由于本人性格随和幽默开朗，常常负责与银行、税务、证券公司、社保、上级工会等部门打交道，进一步提高了我的交际能力和语言表达能力，加上自己亲和力十足的性格，使我在任何工作岗位都能游刃有余的做好。
+      我相信每个人在不同的年龄段，经历不同的事情，对人生就都有着不同的感悟，当下我想重新投入到一份事业，我相信凭我的韧劲与耐力，只要您给我一个机会，我定会为您带来一份惊喜！
+   " re_company='上海康诺国际贸易有限公司' re_jobname='会计' re_description="工作描述：
+财务工作：
+
+1、每月与所有银行、证券公司的本外币对账工作
+2、办理房屋抵押和股票质押等贷款事宜，以及每年贷款续授信事宜
+3、办理银行承兑汇票
+4、追踪银行的票据到期和贷款的还款事宜
+5、用用友软件编制现金、转账、银行凭证、每月与银行对账，编制银行调节余额表
+6、处理结汇、购汇等外币业务
+7、固定资产的登记和处置工作
+8、核对应付账款、应付票据、其他应收、应付  等科目的往来款
+9、打印销售发票并入账
+10、编制财务报表、向税务机关申报纳税、填送统计报表
+11、开具介绍信
+12、IPO网下和网上申购
+、缴款等工作
+13、准备每年的审计资料
+
+工会工作描述：
+1、保管工会的有效证件
+2、定期缴纳工会会费
+3、积极配合工会下达的相关文件及组织公司员4、工参加工会组织的各项活动
+
+人事工作：
+1、制作工资表及工资发放
+2、办理新进/离职人员招工/退工手续
+3、办理新进/离职人员社保账户开立/封存
+4、办理新进/离职人员住房公积金开立/封存
+5、办理居住证及居转户
+6、每月/每季度/每年 工资申报
+7、签订劳动合同
+
+">
+                                <td class="tdCheckbox">
+                                    <input type="checkbox" data-invited="0" data-isfeedback="true"
+                                           id="resoutorsend_100083370688" data-language="1" data-cnname="张雨新"
+                                           data-resumebh="JM835794208R90250001000" data-resumenumber="1"
+                                           data-resguid="100083370688" name="chkid" dev_name="简历"
+                                           userinfo_forsend="张雨新$683579420$emilia521518@126.com$13764059130$100083370688$&amp;*&amp;$女$32$本科$JM835794208R90250001000$会计学 会计电算化$贸易/进出口$1$CC383920829J90250691000$9$上海-浦东新区$13764059130"
+                                           value="100083370688" onclick="unChkSelectAll('chkall')" class="smpcheckbox"
+                                           data-smpcvid="JM835794208R90250001000_1" data-smpownerid="100083370688"
+                                           data-smpkpi="M2" data-smpxtable="1"/>
+                                </td>
+                                <td class="fkt_ico_position">
+
+                                </td>
+
+                                <td label="" rdmodule="cvLabelOneFac" id="r_label100083370688" cvname="张雨新" title=""
+                                    class="td4cvIcon"><span class="cvLabelColorDot"><span class=" cvLabelBlank"></span></span>
+                                </td>
+                                <td>
+                                    <a style=color:#315aaa isread="0"
+                                       onclick="javascript:ViewOneResume(this,'0','100083370688');"
+                                       href="//rd.zhaopin.com/resumepreview/resume/viewone/1/100083370688?resume=100083370688&star=&companyid=38392082&pfd=5019_1014"
+                                       target="_blank" class="link " id="100083370688">张雨新</a>
+                                    <img src="//rd2.zhaopin.com/s/images/erd2/blank.gif"
+                                         photosrc="/pic/2017/11/30/9ffd3bba-2332-43a9-ba0c-bd0f26267d91.jpg" border="0"
+                                         class="iconRePhoto" id="photo_100083370688" rdmodule="resumePhotoFac"/>
+                                    <img src="//img00.zhaopin.cn/2014/rd2/img/wxico.png" width="16" height="14"
+                                         align="absmiddle" class="mr5" title="绑定智联微信公众号"/>
+
+                                </td>
+                                <!--jobCode==101时，显示闪聘图标-->
+                                <td name="pId" jobid="CC383920829J90250691000" jobcode="601"></td>
+                                <td>女</td>
+                                <td>9</td>
+                                <td class="toDis"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;">32</td>
+                                <td style="display: none;">上海-浦东新区</td>
+                                <td style="display: none;">本科</td>
+                                <td style="display: none;">会计</td>
+                                <td style="display: none;">中央广播电视大学 哈尔滨职业技术学院</td>
+                                <td style="display: none;">会计学 会计电算化</td>
+                                <td style="display: none;">上海康诺国际贸易有限公司</td>
+                                <td style="display: none;">贸易/进出口</td>
+
+                                <td style="display:none;" title="主动投递">
+                                    主动投递
+                                </td>
+                                <td title="2/7/2018 3:47:44 PM">
+
+                                    &nbsp;&nbsp;
+                                    02-07 15:47
+                                </td>
+                            </tr>
+                            <!--BeginListRecord -->
+                            <tr resume-number="JR126914526R90000001000" data-type="1" class="list1"
+                                title="单击一下打开或关闭详细信息" rdmodule="resumeMoreInfoFac" id="moreinfo_100083249093"
+                                resume_bh="" resume_number="1" resume_source="简历来源:主动投递初次投递:(安徽-合肥) 投递时间:"
+                                re_jobtime='2016-08至今' re_self="为人忠恳豁达，极具亲和力。擅长承上启下贯彻经营思想，组建团队达到经营目标。崇尚团队协作精神，倡导永久经营理念，期望加盟外资、合资大型优秀企业，共创美好明天！
+" re_company='芜湖恒天易开软件科技股份有限公司' re_jobname='区域市场总监' re_description="安徽易开汽车运营股份有限公司,成立于2015年7月，公司注册资金1亿元，公司位于具有“皖江明珠”之称的芜湖市，由芜湖市交通投资有限公司、安徽旗翔新能源有限公司和奇瑞新能源汽车技术有限公司强强联手成立。 公司主营新能源汽车分时租赁运营管理、汽车停车场(位)运营管理、新能源智能充电服务、汽车(除出租车)租赁以及新能源汽车租赁软件(APP)开发应用推广业务。 易开公司打造的是电动汽车共享云出行，将旗下电动汽车、充电设备、停车位等资源进行高效整合调配，以“租车、充电和停车服务”三大关键环节为重点，构建新能源汽车一体化的运营服务平台，在“分时租赁、智慧充电、智能停车、智能监控、智能结算”等五大领域为用户提供智能、方便、快捷的电动汽车整套服务。 安徽易开汽车运营股份有限公司作为我国目前新能源汽车推广行业的开拓者，公司立足于芜湖，将逐步向周边甚至全国辐射。
+本人负责福建省、广东省、海南省（兼顾安徽省）区域市场开城及项目落地工作！">
+                                <td class="tdCheckbox">
+                                    <input type="checkbox" data-invited="0" data-isfeedback="true"
+                                           id="resoutorsend_100083249093" data-language="1" data-cnname="孙晓东"
+                                           data-resumebh="JR126914526R90000001000" data-resumenumber="1"
+                                           data-resguid="100083249093" name="chkid" dev_name="资深营销"
+                                           userinfo_forsend="孙晓东$112691452$290758751@qq.com$13905513542$100083249093$&amp;*&amp;$男$47$本科$JR126914526R90000001000$电气工程$汽车/摩托车-通信/电信运营、增值服务-房地产/建筑/建材/工程-跨领域经营$1$CC383920829J90250692000$26$安徽-合肥$13905513542"
+                                           value="100083249093" onclick="unChkSelectAll('chkall')" class="smpcheckbox"
+                                           data-smpcvid="JR126914526R90000001000_1" data-smpownerid="100083249093"
+                                           data-smpkpi="M2" data-smpxtable="1"/>
+                                </td>
+                                <td class="fkt_ico_position">
+
+                                </td>
+
+                                <td label="" rdmodule="cvLabelOneFac" id="r_label100083249093" cvname="孙晓东" title=""
+                                    class="td4cvIcon"><span class="cvLabelColorDot"><span class=" cvLabelBlank"></span></span>
+                                </td>
+                                <td>
+                                    <a style=color:#315aaa isread="0"
+                                       onclick="javascript:ViewOneResume(this,'0','100083249093');"
+                                       href="//rd.zhaopin.com/resumepreview/resume/viewone/1/100083249093?resume=100083249093&star=&companyid=38392082&pfd=50_2001"
+                                       target="_blank" class="link " id="100083249093">孙晓东</a>
+                                    <img src="//rd2.zhaopin.com/s/images/erd2/blank.gif"
+                                         photosrc="/pic/2008/6/13/DD037069FA9349A3808D01764B2D6F27.jpg" border="0"
+                                         class="iconRePhoto" id="photo_100083249093" rdmodule="resumePhotoFac"/>
+                                    <img src="//img00.zhaopin.cn/2014/rd2/img/wxico.png" width="16" height="14"
+                                         align="absmiddle" class="mr5" title="绑定智联微信公众号"/>
+
+                                </td>
+                                <!--jobCode==101时，显示闪聘图标-->
+                                <td name="pId" jobid="CC383920829J90250692000" jobcode="601"></td>
+                                <td>男</td>
+                                <td>26</td>
+                                <td class="toDis"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;">47</td>
+                                <td style="display: none;">安徽-合肥</td>
+                                <td style="display: none;">本科</td>
+                                <td style="display: none;">区域市场总监</td>
+                                <td style="display: none;">安徽建工学院</td>
+                                <td style="display: none;">电气工程</td>
+                                <td style="display: none;">芜湖恒天易开软件科技股份有限公司</td>
+                                <td style="display: none;">汽车/摩托车-通信/电信运营、增值服务-房地产/建筑/建材/工程-跨领域经营</td>
+
+                                <td style="display:none;" title="主动投递">
+                                    主动投递
+                                </td>
+                                <td title="2/7/2018 1:06:55 PM">
+
+                                    &nbsp;&nbsp;
+                                    02-07 13:06
+                                </td>
+                            </tr>
+                            <!--BeginListRecord -->
+                            <tr resume-number="JM683980101R90500004000" data-type="1" class="list2"
+                                title="单击一下打开或关闭详细信息" rdmodule="resumeMoreInfoFac" id="moreinfo_100083217058"
+                                resume_bh="" resume_number="1" resume_source="简历来源:主动投递初次投递:(上海-嘉定区) 投递时间:"
+                                re_jobtime='2015-11至2017-01' re_self="熟练掌握php开发及常用框架如CI, TP, smarty;
+熟悉HTML/H5、CSS/CSS3、JS、JQuery等前端开发；
+熟练掌握MySql数据库开发，并有一定的性能优化经验；
+熟练操作Linux服务器，熟悉LAMP、LNMP环境；
+了解大并发的相关处理，及系统调优方案；
+熟悉电商系统的业务架构，熟悉常用的开源电商系统：Ecshop/Shopnc/Ecstore等；
+熟悉移动端开发，了解微信开发的流程和接口；
+有较强的独立工作能力和解决问题的能力；
+有良好的沟通能力及团队合作精神，责任心强；" re_company='上海邻耘电子商务等' re_jobname='php开发工程师' re_description="电商网站二次开发，接口开发">
+                                <td class="tdCheckbox">
+                                    <input type="checkbox" data-invited="0" data-isfeedback="true"
+                                           id="resoutorsend_100083217058" data-language="1" data-cnname="贺斌"
+                                           data-resumebh="JM683980101R90500004000" data-resumenumber="1"
+                                           data-resguid="100083217058" name="chkid" dev_name="php开发工程师上海"
+                                           userinfo_forsend="贺斌$668398010$dird258@sina.com$18621688284$100083217058$&amp;*&amp;$男$30$本科$JM683980101R90500004000$环境工程$互联网/电子商务-房地产/建筑/建材/工程$1$CC383920829J90250778000$7$上海-嘉定区$18621688284"
+                                           value="100083217058" onclick="unChkSelectAll('chkall')" class="smpcheckbox"
+                                           data-smpcvid="JM683980101R90500004000_1" data-smpownerid="100083217058"
+                                           data-smpkpi="M2" data-smpxtable="1"/>
+                                </td>
+                                <td class="fkt_ico_position">
+
+                                </td>
+
+                                <td label="" rdmodule="cvLabelOneFac" id="r_label100083217058" cvname="贺斌" title=""
+                                    class="td4cvIcon"><span class="cvLabelColorDot"><span class=" cvLabelBlank"></span></span>
+                                </td>
+                                <td>
+                                    <a style=color:#315aaa isread="0"
+                                       onclick="javascript:ViewOneResume(this,'0','100083217058');"
+                                       href="//rd.zhaopin.com/resumepreview/resume/viewone/1/100083217058?resume=100083217058&star=&companyid=38392082&pfd=5019_1226"
+                                       target="_blank" class="link " id="100083217058">贺斌</a>
+
+                                </td>
+                                <!--jobCode==101时，显示闪聘图标-->
+                                <td name="pId" jobid="CC383920829J90250778000" jobcode="601"></td>
+                                <td>男</td>
+                                <td>7</td>
+                                <td class="toDis"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;">30</td>
+                                <td style="display: none;">上海-嘉定区</td>
+                                <td style="display: none;">本科</td>
+                                <td style="display: none;">php开发工程师</td>
+                                <td style="display: none;">同济大学</td>
+                                <td style="display: none;">环境工程</td>
+                                <td style="display: none;">上海邻耘电子商务等</td>
+                                <td style="display: none;">互联网/电子商务-房地产/建筑/建材/工程</td>
+
+                                <td style="display:none;" title="主动投递">
+                                    主动投递
+                                </td>
+                                <td title="2/7/2018 12:09:18 PM">
+
+                                    &nbsp;&nbsp;
+                                    02-07 12:09
+                                </td>
+                            </tr>
+                            <!--BeginListRecord -->
+                            <tr resume-number="JM571137368R90250000000" data-type="1" class="list1"
+                                title="单击一下打开或关闭详细信息" rdmodule="resumeMoreInfoFac" id="moreinfo_100083090643"
+                                resume_bh="" resume_number="1" resume_source="简历来源:主动投递初次投递:(山东-青岛-市南区) 投递时间:"
+                                re_jobtime='2016-09至今' re_self="随机应变能力、思维能力和协调执行力较强" re_company='山东渤海实业'
+                                re_jobname='项目经理' re_description="科研项目管理">
+                                <td class="tdCheckbox">
+                                    <input type="checkbox" data-invited="0" data-isfeedback="true"
+                                           id="resoutorsend_100083090643" data-language="1" data-cnname="庞女士"
+                                           data-resumebh="JM571137368R90250000000" data-resumenumber="1"
+                                           data-resguid="100083090643" name="chkid" dev_name="我的简历"
+                                           userinfo_forsend="庞女士$657113736$emmaouc@126.com$13012532851$100083090643$&amp;*&amp;$女$29$硕士$JM571137368R90250000000$食品加工与安全 生物工程$医药/生物工程$1$CC383920829J90250737000$4$山东-青岛-市南区$13012532851"
+                                           value="100083090643" onclick="unChkSelectAll('chkall')" class="smpcheckbox"
+                                           data-smpcvid="JM571137368R90250000000_1" data-smpownerid="100083090643"
+                                           data-smpkpi="M2" data-smpxtable="1"/>
+                                </td>
+                                <td class="fkt_ico_position">
+
+                                </td>
+
+                                <td label="" rdmodule="cvLabelOneFac" id="r_label100083090643" cvname="庞女士" title=""
+                                    class="td4cvIcon"><span class="cvLabelColorDot"><span class=" cvLabelBlank"></span></span>
+                                </td>
+                                <td>
+                                    <a style=color:#315aaa isread="0"
+                                       onclick="javascript:ViewOneResume(this,'0','100083090643');"
+                                       href="//rd.zhaopin.com/resumepreview/resume/viewone/1/100083090643?resume=100083090643&star=&companyid=38392082&pfd=50_2001"
+                                       target="_blank" class="link " id="100083090643">庞女士</a>
+                                    <img src="//rd2.zhaopin.com/s/images/erd2/blank.gif"
+                                         photosrc="/pic/2017/1/10/e096d0cc-db30-47bd-9aaa-c1c9c96c0898.jpg" border="0"
+                                         class="iconRePhoto" id="photo_100083090643" rdmodule="resumePhotoFac"/>
+
+                                </td>
+                                <!--jobCode==101时，显示闪聘图标-->
+                                <td name="pId" jobid="CC383920829J90250737000" jobcode="601"></td>
+                                <td>女</td>
+                                <td>4</td>
+                                <td class="toDis"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;">29</td>
+                                <td style="display: none;">山东-青岛-市南区</td>
+                                <td style="display: none;">硕士</td>
+                                <td style="display: none;">项目经理</td>
+                                <td style="display: none;">中国海洋大学 中国海洋大学</td>
+                                <td style="display: none;">食品加工与安全 生物工程</td>
+                                <td style="display: none;">山东渤海实业</td>
+                                <td style="display: none;">医药/生物工程</td>
+
+                                <td style="display:none;" title="主动投递">
+                                    主动投递
+                                </td>
+                                <td title="2/7/2018 9:08:58 AM">
+
+                                    &nbsp;&nbsp;
+                                    02-07 09:08
+                                </td>
+                            </tr>
+                            <!--BeginListRecord -->
+                            <tr resume-number="JM040167307R90250001000" data-type="1" class="list2"
+                                title="单击一下打开或关闭详细信息" rdmodule="resumeMoreInfoFac" id="moreinfo_100083038878"
+                                resume_bh="" resume_number="1" resume_source="简历来源:主动投递初次投递:(安徽-合肥) 投递时间:"
+                                re_jobtime='2015-03至2017-12'
+                                re_self="工作认真负责,不推卸责任；能承受工作中的压力；工作上可以独当一面；具有团队精神，能与同事，其它部门积极配合，公司利益至上； 服从性好,能与上司保持良好的沟通，尊重上司的安排；为人诚实，正直；且好学上进,不断提高工作能力； 相信您的选择会让您我更加成功！"
+                                re_company='安徽七天教育科技有限公司' re_jobname='业务经理销售经理' re_description="1，完成所负责区域内的业绩销售任务。
+2，维护大客户业务关系。
+3，培训和指导新员工业务水平和技能。">
+                                <td class="tdCheckbox">
+                                    <input type="checkbox" data-invited="0" data-isfeedback="true"
+                                           id="resoutorsend_100083038878" data-language="1" data-cnname="张飞"
+                                           data-resumebh="JM040167307R90250001000" data-resumenumber="1"
+                                           data-resguid="100083038878" name="chkid" dev_name="电子/电器工艺/制程工程师 4年 合肥"
+                                           userinfo_forsend="张飞$604016730$871031124@qq.com$15305603200$100083038878$&amp;*&amp;$男$28$大专$JM040167307R90250001000$机械设计制造及其自动化$教育/培训/院校-房地产/建筑/建材/工程-印刷/包装/造纸$1$CC383920829J90250770000$7$安徽-合肥$15305603200"
+                                           value="100083038878" onclick="unChkSelectAll('chkall')" class="smpcheckbox"
+                                           data-smpcvid="JM040167307R90250001000_1" data-smpownerid="100083038878"
+                                           data-smpkpi="M2" data-smpxtable="1"/>
+                                </td>
+                                <td class="fkt_ico_position">
+
+                                </td>
+
+                                <td label="" rdmodule="cvLabelOneFac" id="r_label100083038878" cvname="张飞" title=""
+                                    class="td4cvIcon"><span class="cvLabelColorDot"><span class=" cvLabelBlank"></span></span>
+                                </td>
+                                <td>
+                                    <a style=color:#315aaa isread="0"
+                                       onclick="javascript:ViewOneResume(this,'0','100083038878');"
+                                       href="//rd.zhaopin.com/resumepreview/resume/viewone/1/100083038878?resume=100083038878&star=&companyid=38392082&pfd=5019_1167"
+                                       target="_blank" class="link " id="100083038878">张飞</a>
+                                    <img src="//rd2.zhaopin.com/s/images/erd2/blank.gif"
+                                         photosrc="/pic/2017/12/6/7c74fba7-2bdd-4e3e-a191-be5ccd68ea6f.jpg" border="0"
+                                         class="iconRePhoto" id="photo_100083038878" rdmodule="resumePhotoFac"/>
+
+                                </td>
+                                <!--jobCode==101时，显示闪聘图标-->
+                                <td name="pId" jobid="CC383920829J90250770000" jobcode="601"></td>
+                                <td>男</td>
+                                <td>7</td>
+                                <td class="toDis"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;">28</td>
+                                <td style="display: none;">安徽-合肥</td>
+                                <td style="display: none;">大专</td>
+                                <td style="display: none;">业务经理销售经理</td>
+                                <td style="display: none;">蚌埠高级技工学校</td>
+                                <td style="display: none;">机械设计制造及其自动化</td>
+                                <td style="display: none;">安徽七天教育科技有限公司</td>
+                                <td style="display: none;">教育/培训/院校-房地产/建筑/建材/工程-印刷/包装/造纸</td>
+
+                                <td style="display:none;" title="主动投递">
+                                    主动投递
+                                </td>
+                                <td title="2/7/2018 12:49:25 AM">
+
+                                    &nbsp;&nbsp;
+                                    02-07 00:49
+                                </td>
+                            </tr>
+                            <!--BeginListRecord -->
+                            <tr resume-number="JL103121405R90500000000" data-type="1" class="list1"
+                                title="单击一下打开或关闭详细信息" rdmodule="resumeMoreInfoFac" id="moreinfo_100082941328"
+                                resume_bh="" resume_number="1" resume_source="简历来源:主动投递初次投递:(上海-长宁区) 投递时间:"
+                                re_jobtime='2010-01至2018-01' re_self="" re_company='无' re_jobname='软件'
+                                re_description="没有什么工作经验">
+                                <td class="tdCheckbox">
+                                    <input type="checkbox" data-invited="0" data-isfeedback="true"
+                                           id="resoutorsend_100082941328" data-language="1" data-cnname="徐乙超"
+                                           data-resumebh="JL103121405R90500000000" data-resumenumber="1"
+                                           data-resguid="100082941328" name="chkid" dev_name="软件工程师 8年 上海"
+                                           userinfo_forsend="徐乙超$710312140$862820908@qq.com$18916451860$100082941328$&amp;*&amp;$男$24$中技$JL103121405R90500000000$微电子学$计算机软件$1$CC383920829J90250782000$8$上海-长宁区$18916451860"
+                                           value="100082941328" onclick="unChkSelectAll('chkall')" class="smpcheckbox"
+                                           data-smpcvid="JL103121405R90500000000_1" data-smpownerid="100082941328"
+                                           data-smpkpi="M2" data-smpxtable="1"/>
+                                </td>
+                                <td class="fkt_ico_position">
+
+                                </td>
+
+                                <td label="" rdmodule="cvLabelOneFac" id="r_label100082941328" cvname="徐乙超" title=""
+                                    class="td4cvIcon"><span class="cvLabelColorDot"><span class=" cvLabelBlank"></span></span>
+                                </td>
+                                <td>
+                                    <a style=color:#315aaa isread="0"
+                                       onclick="javascript:ViewOneResume(this,'0','100082941328');"
+                                       href="//rd.zhaopin.com/resumepreview/resume/viewone/1/100082941328?resume=100082941328&star=&companyid=38392082&pfd=5019_2001"
+                                       target="_blank" class="link " id="100082941328">徐乙超</a>
+                                    <img src="//rd2.zhaopin.com/s/images/erd2/blank.gif"
+                                         photosrc="/avatar/2018/2/1/2d66dc3f-2f8f-4a3c-b6c3-7059aa17509a.jpg" border="0"
+                                         class="iconRePhoto" id="photo_100082941328" rdmodule="resumePhotoFac"/>
+
+                                </td>
+                                <!--jobCode==101时，显示闪聘图标-->
+                                <td name="pId" jobid="CC383920829J90250782000" jobcode="601"></td>
+                                <td>男</td>
+                                <td>8</td>
+                                <td class="toDis"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;">24</td>
+                                <td style="display: none;">上海-长宁区</td>
+                                <td style="display: none;">中技</td>
+                                <td style="display: none;">软件</td>
+                                <td style="display: none;">达州职业技术学院</td>
+                                <td style="display: none;">微电子学</td>
+                                <td style="display: none;">无</td>
+                                <td style="display: none;">计算机软件</td>
+
+                                <td style="display:none;" title="主动投递">
+                                    主动投递
+                                </td>
+                                <td title="2/6/2018 8:37:48 PM">
+
+                                    &nbsp;&nbsp;
+                                    02-06 20:37
+                                </td>
+                            </tr>
+                            <!--BeginListRecord -->
+                            <tr resume-number="JM840666952R90500002000" data-type="1" class="list2"
+                                title="单击一下打开或关闭详细信息" rdmodule="resumeMoreInfoFac" id="moreinfo_100082912148"
+                                resume_bh="" resume_number="1" resume_source="简历来源:主动投递初次投递:(湖北-荆门) 投递时间:"
+                                re_jobtime='2013-01至今' re_self="" re_company='钟祥市民政局' re_jobname='扶贫办'
+                                re_description="协调部门工作">
+                                <td class="tdCheckbox">
+                                    <input type="checkbox" data-invited="0" data-isfeedback="true"
+                                           id="resoutorsend_100082912148" data-language="1" data-cnname="安辈"
+                                           data-resumebh="JM840666952R90500002000" data-resumenumber="1"
+                                           data-resguid="100082912148" name="chkid" dev_name="销售管理 物业管理 生产管理/运营 4年 荆门"
+                                           userinfo_forsend="安辈$684066695$anb182@sina.com$18672617870$100082912148$&amp;*&amp;$男$29$本科$JM840666952R90500002000$教育学$政府/公共事业/非盈利机构$1$CC383920829J90250588000$5$湖北-荆门$18672617870"
+                                           value="100082912148" onclick="unChkSelectAll('chkall')" class="smpcheckbox"
+                                           data-smpcvid="JM840666952R90500002000_1" data-smpownerid="100082912148"
+                                           data-smpkpi="M2" data-smpxtable="1"/>
+                                </td>
+                                <td class="fkt_ico_position">
+
+                                </td>
+
+                                <td label="" rdmodule="cvLabelOneFac" id="r_label100082912148" cvname="安辈" title=""
+                                    class="td4cvIcon"><span class="cvLabelColorDot"><span class=" cvLabelBlank"></span></span>
+                                </td>
+                                <td>
+                                    <a style=color:#315aaa isread="0"
+                                       onclick="javascript:ViewOneResume(this,'0','100082912148');"
+                                       href="//rd.zhaopin.com/resumepreview/resume/viewone/1/100082912148?resume=100082912148&star=&companyid=38392082&pfd=50_2001"
+                                       target="_blank" class="link " id="100082912148">安辈</a>
+                                    <img src="//rd2.zhaopin.com/s/images/erd2/blank.gif"
+                                         photosrc="/pic/2017/12/8/821d8f36-0765-4f12-90e0-e941a7e72878.jpg" border="0"
+                                         class="iconRePhoto" id="photo_100082912148" rdmodule="resumePhotoFac"/>
+
+                                </td>
+                                <!--jobCode==101时，显示闪聘图标-->
+                                <td name="pId" jobid="CC383920829J90250588000" jobcode="601"></td>
+                                <td>男</td>
+                                <td>5</td>
+                                <td class="toDis"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;">29</td>
+                                <td style="display: none;">湖北-荆门</td>
+                                <td style="display: none;">本科</td>
+                                <td style="display: none;">扶贫办</td>
+                                <td style="display: none;">武汉体育学院</td>
+                                <td style="display: none;">教育学</td>
+                                <td style="display: none;">钟祥市民政局</td>
+                                <td style="display: none;">政府/公共事业/非盈利机构</td>
+
+                                <td style="display:none;" title="主动投递">
+                                    主动投递
+                                </td>
+                                <td title="2/6/2018 7:28:30 PM">
+
+                                    &nbsp;&nbsp;
+                                    02-06 19:28
+                                </td>
+                            </tr>
+                            <!--BeginListRecord -->
+                            <tr resume-number="JS141433607R90250000000" data-type="1" class="list1"
+                                title="单击一下打开或关闭详细信息" rdmodule="resumeMoreInfoFac" id="moreinfo_100082659243"
+                                resume_bh="" resume_number="1" resume_source="简历来源:主动投递初次投递:(湖北-武汉-武昌区) 投递时间:"
+                                re_jobtime='2010-09至今'
+                                re_self="本人从事销售工作14年，销售额过2000万。熟悉一般工业行业的运做模式。其中从事销售管理12年，对电子政务，市场营销, 渠道开发, 经销商管理有丰富的经验, 并且与当地的高校，医院，电力，，汽车，。交通，市政，高速公路，政府，党委，林业，环保，公安，电信，移动，联通，轨道交通，烟草，等行业保持良好的关系。对大型招标流程比较熟悉。可以经常出差。"
+                                re_company='华拓科技股份有限公司' re_jobname='分公司总经理' re_description="负责对华中市场的整体规划以及市场划分，网络布局。人员招聘与调配，客户管理，费用预算与控制，负责对区域市场经营和管理，负责各区域的办事处的建立与管理，对办事处日常的管理和运做进行指导，负责对业务以及技术人员的定期考核，贯彻执行公司的销售策略；因地制宜，制定和实施区域性的市场发展计划；培训和管理销售队伍，提高每个销售人员的单兵作战能力。负责产品品牌在当地的市场推广和品牌推广活动，制定本区域内的合理价格体系，以及促销办法，扩大销售额以及市场占有率。负责区域内的费用管理以及客户管理。培训负责当地销售渠道的建立与维护，对销售网络的建设和布局进行规划和管理对继成商进行定期或者不定期的培训与沟通，随时了解客户需求。负责对当地的政府，党委，组织，交通行业，高速公路，林业，环保，市政，设计院，公安，交警，电信，网通，高校，轨道交通，烟草，等客户的拜访与深层次挖掘与沟通与其建立良好的沟通渠道以及合做关系，尤其是与各地交通，公安，政府等管理单位以及各地行政服务中心和监察局关系密切。积极参与当地的行业建设。了解客户的需求以及现实情况，帮助客户需求分析，提供客户所需的具体方案，与个具体业务部门建立良好的沟通渠道。负责品派在当地的推广，组织和参与地区性的行业会议，组织各地的演示会的安排与计划。积极参加行业的展会，增加与客户以及行业内相关人士的沟通与了解，更好地了解当今的最新科学技术。
+工作业绩： 在当地建立了比较完善的销售网络和销售渠道，适时把握市场动态做出相应处理。与党委，政府，交通，监察，高速公路，市政，公安，交警，电信，网通等单位的相关部分建立了良好的合作与沟通关系。取得了年销售额2000万的业绩，得到了公司的认可">
+                                <td class="tdCheckbox">
+                                    <input type="checkbox" data-invited="0" data-isfeedback="true"
+                                           id="resoutorsend_100082659243" data-language="1" data-cnname="郭凯"
+                                           data-resumebh="JS141433607R90250000000" data-resumenumber="1"
+                                           data-resguid="100082659243" name="chkid" dev_name="123"
+                                           userinfo_forsend="郭凯$14143360$285621721@qq.com$13971106186$100082659243$&amp;*&amp;$男$40$大专$JS141433607R90250000000$旅游管理$计算机软件-计算机硬件$1$CC383920829J90250767000$15$湖北-武汉-武昌区$13971106186"
+                                           value="100082659243" onclick="unChkSelectAll('chkall')" class="smpcheckbox"
+                                           data-smpcvid="JS141433607R90250000000_1" data-smpownerid="100082659243"
+                                           data-smpkpi="M2" data-smpxtable="1"/>
+                                </td>
+                                <td class="fkt_ico_position">
+
+                                </td>
+
+                                <td label="" rdmodule="cvLabelOneFac" id="r_label100082659243" cvname="郭凯" title=""
+                                    class="td4cvIcon"><span class="cvLabelColorDot"><span class=" cvLabelBlank"></span></span>
+                                </td>
+                                <td>
+                                    <a style=color:#315aaa isread="0"
+                                       onclick="javascript:ViewOneResume(this,'0','100082659243');"
+                                       href="//rd.zhaopin.com/resumepreview/resume/viewone/1/100082659243?resume=100082659243&star=&companyid=38392082&pfd=3_201"
+                                       target="_blank" class="link " id="100082659243">郭凯</a>
+
+                                </td>
+                                <!--jobCode==101时，显示闪聘图标-->
+                                <td name="pId" jobid="CC383920829J90250767000" jobcode="1"></td>
+                                <td>男</td>
+                                <td>15</td>
+                                <td class="toDis"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;">40</td>
+                                <td style="display: none;">湖北-武汉-武昌区</td>
+                                <td style="display: none;">大专</td>
+                                <td style="display: none;">分公司总经理</td>
+                                <td style="display: none;">武汉商院</td>
+                                <td style="display: none;">旅游管理</td>
+                                <td style="display: none;">华拓科技股份有限公司</td>
+                                <td style="display: none;">计算机软件-计算机硬件</td>
+
+                                <td style="display:none;" title="主动投递">
+                                    主动投递
+                                </td>
+                                <td title="2/6/2018 12:33:33 PM">
+
+                                    &nbsp;&nbsp;
+                                    02-06 12:33
+                                </td>
+                            </tr>
+                            <!--BeginListRecord -->
+                            <tr resume-number="JL090934235R90500000000" data-type="1" class="list2"
+                                title="单击一下打开或关闭详细信息" rdmodule="resumeMoreInfoFac" id="moreinfo_100082654493"
+                                resume_bh="" resume_number="1" resume_source="简历来源:主动投递初次投递:(江苏-南京) 投递时间:"
+                                re_jobtime='2011-04至今' re_self="做事脚踏实地，有始有终，善于总结，敢于挑战困难，对时间观念较为珍惜，希望能为贵公司创造效益。"
+                                re_company='南京紫津融畅信息科技服务有限公司' re_jobname='项目经理' re_description="一、主要负责银行网络新建及运维，负责主要客户有平安银行、浙商银行、广发银行、招商银行、浦发银行和广州银行；主要职责是负责项目沟通协调、项目计划、阶段控制、项目指导和验证收尾等工作。
+二、部门日常管理，协助主管资源协调以及优化流程规范、制度和团队建设；人员绩效考核，部门人员招聘以及公司IT基础设施的运维等工作。">
+                                <td class="tdCheckbox">
+                                    <input type="checkbox" data-invited="0" data-isfeedback="true"
+                                           id="resoutorsend_100082654493" data-language="1" data-cnname="顾秋平"
+                                           data-resumebh="JL090934235R90500000000" data-resumenumber="1"
+                                           data-resguid="100082654493" name="chkid" dev_name="项目经理/项目主管 11年 南京"
+                                           userinfo_forsend="顾秋平$709093423$83105606@qq.com$18061478647$100082654493$&amp;*&amp;$男$34$本科$JL090934235R90500000000$计算机科学与应用$IT服务(系统/数据/维护)$1$CC383920829J90250730000$11$江苏-南京$18061478647"
+                                           value="100082654493" onclick="unChkSelectAll('chkall')" class="smpcheckbox"
+                                           data-smpcvid="JL090934235R90500000000_1" data-smpownerid="100082654493"
+                                           data-smpkpi="M2" data-smpxtable="1"/>
+                                </td>
+                                <td class="fkt_ico_position">
+
+                                </td>
+
+                                <td label="" rdmodule="cvLabelOneFac" id="r_label100082654493" cvname="顾秋平" title=""
+                                    class="td4cvIcon"><span class="cvLabelColorDot"><span class=" cvLabelBlank"></span></span>
+                                </td>
+                                <td>
+                                    <a style=color:#315aaa isread="0"
+                                       onclick="javascript:ViewOneResume(this,'0','100082654493');"
+                                       href="//rd.zhaopin.com/resumepreview/resume/viewone/1/100082654493?resume=100082654493&star=&companyid=38392082&pfd=10_310"
+                                       target="_blank" class="link " id="100082654493">顾秋平</a>
+
+                                </td>
+                                <!--jobCode==101时，显示闪聘图标-->
+                                <td name="pId" jobid="CC383920829J90250730000" jobcode="0"></td>
+                                <td>男</td>
+                                <td>11</td>
+                                <td class="toDis"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;">34</td>
+                                <td style="display: none;">江苏-南京</td>
+                                <td style="display: none;">本科</td>
+                                <td style="display: none;">项目经理</td>
+                                <td style="display: none;">南京晓庄学院</td>
+                                <td style="display: none;">计算机科学与应用</td>
+                                <td style="display: none;">南京紫津融畅信息科技服务有限公司</td>
+                                <td style="display: none;">IT服务(系统/数据/维护)</td>
+
+                                <td style="display:none;" title="主动投递">
+                                    主动投递
+                                </td>
+                                <td title="2/6/2018 12:24:15 PM">
+
+                                    &nbsp;&nbsp;
+                                    02-06 12:24
+                                </td>
+                            </tr>
+                            <!--BeginListRecord -->
+                            <tr resume-number="JM539160149R90250003000" data-type="1" class="list1"
+                                title="单击一下打开或关闭详细信息" rdmodule="resumeMoreInfoFac" id="moreinfo_100082491183"
+                                resume_bh="" resume_number="1" resume_source="简历来源:主动投递初次投递:(山东-临沂) 投递时间:"
+                                re_jobtime='2015-08至今'
+                                re_self="       本人是勤奋好学、敢于挑战、不怕吃苦、品格坚韧，我相信，给我一个机会，我就会全力以赴，并使自己发光发亮！"
+                                re_company='临沂市兰山区清春蔬菜种植农民专业合作社' re_jobname='项目申报专员' re_description="      1.对接科技局、发改委、农业局、金融办、财政局和农业综合开发办，负责项目的申报、实施和验收；
+      2.简单运营管理企业网站；
+      3.负责客人的接待和后勤服务工作。
+      4.负责公司日常资料的整理">
+                                <td class="tdCheckbox">
+                                    <input type="checkbox" data-invited="0" data-isfeedback="true"
+                                           id="resoutorsend_100082491183" data-language="1" data-cnname="杨伟峰"
+                                           data-resumebh="JM539160149R90250003000" data-resumenumber="1"
+                                           data-resguid="100082491183" name="chkid" dev_name="杨伟峰的简历"
+                                           userinfo_forsend="杨伟峰$653916014$1945930426@qq.com$13455976253$100082491183$&amp;*&amp;$男$27$本科$JM539160149R90250003000$资源环境与城乡规划管理$专业服务/咨询(财会/法律/人力资源等)$1$CC383920829J90250737000$3$山东-临沂$13455976253"
+                                           value="100082491183" onclick="unChkSelectAll('chkall')" class="smpcheckbox"
+                                           data-smpcvid="JM539160149R90250003000_1" data-smpownerid="100082491183"
+                                           data-smpkpi="M2" data-smpxtable="1"/>
+                                </td>
+                                <td class="fkt_ico_position">
+
+                                </td>
+
+                                <td label="" rdmodule="cvLabelOneFac" id="r_label100082491183" cvname="杨伟峰" title=""
+                                    class="td4cvIcon"><span class="cvLabelColorDot"><span class=" cvLabelBlank"></span></span>
+                                </td>
+                                <td>
+                                    <a style=color:#315aaa isread="0"
+                                       onclick="javascript:ViewOneResume(this,'0','100082491183');"
+                                       href="//rd.zhaopin.com/resumepreview/resume/viewone/1/100082491183?resume=100082491183&star=&companyid=38392082&pfd=30_301"
+                                       target="_blank" class="link " id="100082491183">杨伟峰</a>
+                                    <img src="//rd2.zhaopin.com/s/images/erd2/blank.gif"
+                                         photosrc="/pic/2016/7/8/A7743082562146C6B212C8D221672481.jpg" border="0"
+                                         class="iconRePhoto" id="photo_100082491183" rdmodule="resumePhotoFac"/>
+
+                                </td>
+                                <!--jobCode==101时，显示闪聘图标-->
+                                <td name="pId" jobid="CC383920829J90250737000" jobcode="0"></td>
+                                <td>男</td>
+                                <td>3</td>
+                                <td class="toDis"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;">27</td>
+                                <td style="display: none;">山东-临沂</td>
+                                <td style="display: none;">本科</td>
+                                <td style="display: none;">项目申报专员</td>
+                                <td style="display: none;">临沂大学</td>
+                                <td style="display: none;">资源环境与城乡规划管理</td>
+                                <td style="display: none;">临沂市兰山区清春蔬菜种植农民专业合作社</td>
+                                <td style="display: none;">专业服务/咨询(财会/法律/人力资源等)</td>
+
+                                <td style="display:none;" title="主动投递">
+                                    主动投递
+                                </td>
+                                <td title="2/6/2018 8:06:55 AM">
+
+                                    &nbsp;&nbsp;
+                                    02-06 08:06
+                                </td>
+                            </tr>
+                            <!--BeginListRecord -->
+                            <tr resume-number="JR007091296R90250005000" data-type="1" class="list2"
+                                title="单击一下打开或关闭详细信息" rdmodule="resumeMoreInfoFac" id="moreinfo_100082481363"
+                                resume_bh="" resume_number="1" resume_source="简历来源:主动投递初次投递:(山东-青岛) 投递时间:"
+                                re_jobtime='2017-01至今' re_self="11年工作经验，其中：
+（1）6年政府项目申报经验，能独立进行项目申报，已累计申请政府资金到账5000余万元；
+（2）4年展览策划销售经验，能独立策划美术展览及销售，有艺术家资源；
+（3）1年行政人事经验，熟悉员工招聘、行政制度、后勤管理；
+（4）驾驶熟练，已有二孩，无再生育计划。" re_company='华盛绿能农业科技有限公司' re_jobname='扶贫产业研究院副院长' re_description="1、全国36个分公司所在地18个省36个市（县）新政策搜集、申报通知下发。
+2、全国36个分公司政策申报材料撰写支持。
+3、全国36个分公司政策申报成功经验分享复制，不足教训及时规避。">
+                                <td class="tdCheckbox">
+                                    <input type="checkbox" data-invited="0" data-isfeedback="true"
+                                           id="resoutorsend_100082481363" data-language="1" data-cnname="陈凤霞"
+                                           data-resumebh="JR007091296R90250005000" data-resumenumber="1"
+                                           data-resguid="100082481363" name="chkid"
+                                           dev_name="政府 政策 科技 科研 申报  研究 补贴 青岛 有机肥"
+                                           userinfo_forsend="陈凤霞$100709129$chenfengxia521521@126.com$13863685786$100082481363$&amp;*&amp;$女$35$本科$JR007091296R90250005000$美术学$农/林/牧/渔-加工制造（原料加工/模具）-礼品/玩具/工艺美术/收藏品/奢侈品$1$CC383920829J90250737000$12$山东-青岛$13863685786"
+                                           value="100082481363" onclick="unChkSelectAll('chkall')" class="smpcheckbox"
+                                           data-smpcvid="JR007091296R90250005000_1" data-smpownerid="100082481363"
+                                           data-smpkpi="M2" data-smpxtable="1"/>
+                                </td>
+                                <td class="fkt_ico_position">
+
+                                </td>
+
+                                <td label="" rdmodule="cvLabelOneFac" id="r_label100082481363" cvname="陈凤霞" title=""
+                                    class="td4cvIcon"><span class="cvLabelColorDot"><span class=" cvLabelBlank"></span></span>
+                                </td>
+                                <td>
+                                    <a style=color:#315aaa isread="0"
+                                       onclick="javascript:ViewOneResume(this,'0','100082481363');"
+                                       href="//rd.zhaopin.com/resumepreview/resume/viewone/1/100082481363?resume=100082481363&star=&companyid=38392082&pfd=5019_1028"
+                                       target="_blank" class="link " id="100082481363">陈凤霞</a>
+
+                                </td>
+                                <!--jobCode==101时，显示闪聘图标-->
+                                <td name="pId" jobid="CC383920829J90250737000" jobcode="601"></td>
+                                <td>女</td>
+                                <td>12</td>
+                                <td class="toDis"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;">35</td>
+                                <td style="display: none;">山东-青岛</td>
+                                <td style="display: none;">本科</td>
+                                <td style="display: none;">扶贫产业研究院副院长</td>
+                                <td style="display: none;">中国美术学院</td>
+                                <td style="display: none;">美术学</td>
+                                <td style="display: none;">华盛绿能农业科技有限公司</td>
+                                <td style="display: none;">农/林/牧/渔-加工制造（原料加工/模具）-礼品/玩具/工艺美术/收藏品/奢侈品</td>
+
+                                <td style="display:none;" title="主动投递">
+                                    主动投递
+                                </td>
+                                <td title="2/6/2018 7:07:10 AM">
+
+                                    &nbsp;&nbsp;
+                                    02-06 07:07
+                                </td>
+                            </tr>
+                            <!--BeginListRecord -->
+                            <tr resume-number="JR042044632R90000000000" data-type="1" class="list1"
+                                title="单击一下打开或关闭详细信息" rdmodule="resumeMoreInfoFac" id="moreinfo_100082405603"
+                                resume_bh="" resume_number="1" resume_source="简历来源:主动投递初次投递:(广东-惠州-惠城区) 投递时间:"
+                                re_jobtime='2008-10至2013-07'
+                                re_self="本人具备较为全面的综合素质，形象气质佳。一直在大中型企业从事营销管理、战略规划与项目管理等工作，并创办过咨询策划公司，本人擅长于内部沟通、对外公关以及各环节的协调管理，并会运用Project软件，对项目中的人员、资源以及时间进行规划与管理，专长于企业品牌推广与渠道管理。"
+                                re_company='广东巨洋集团有限公司' re_jobname='运营中心负责人'
+                                re_description="负责巨洋集团整体业务运营管理，客户公关，媒体公关，专项跟进公司内大型项目的运营管理。">
+                                <td class="tdCheckbox">
+                                    <input type="checkbox" data-invited="0" data-isfeedback="true"
+                                           id="resoutorsend_100082405603" data-language="1" data-cnname="夏天"
+                                           data-resumebh="JR042044632R90000000000" data-resumenumber="1"
+                                           data-resguid="100082405603" name="chkid" dev_name="高级管理 4年 惠州"
+                                           userinfo_forsend="夏天$104204463$xtian@126.com$13500179100$100082405603$&amp;*&amp;$男$37$本科$JR042044632R90000000000$工商管理$环保-耐用消费品（服饰/纺织/皮革/家具/家电）-通信/电信运营、增值服务$1$CC383920829J90250588000$12$广东-惠州-惠城区$13500179100"
+                                           value="100082405603" onclick="unChkSelectAll('chkall')" class="smpcheckbox"
+                                           data-smpcvid="JR042044632R90000000000_1" data-smpownerid="100082405603"
+                                           data-smpkpi="M2" data-smpxtable="1"/>
+                                </td>
+                                <td class="fkt_ico_position">
+
+                                </td>
+
+                                <td label="" rdmodule="cvLabelOneFac" id="r_label100082405603" cvname="夏天" title=""
+                                    class="td4cvIcon"><span class="cvLabelColorDot"><span class=" cvLabelBlank"></span></span>
+                                </td>
+                                <td>
+                                    <a style=color:#315aaa isread="0"
+                                       onclick="javascript:ViewOneResume(this,'0','100082405603');"
+                                       href="//rd.zhaopin.com/resumepreview/resume/viewone/1/100082405603?resume=100082405603&star=&companyid=38392082&pfd=50_2001"
+                                       target="_blank" class="link " id="100082405603">夏天</a>
+                                    <img src="//rd2.zhaopin.com/s/images/erd2/blank.gif"
+                                         photosrc="/pic/2007/6/2/2C5135BD68104A79AFE865FF5D899101.jpg" border="0"
+                                         class="iconRePhoto" id="photo_100082405603" rdmodule="resumePhotoFac"/>
+
+                                </td>
+                                <!--jobCode==101时，显示闪聘图标-->
+                                <td name="pId" jobid="CC383920829J90250588000" jobcode="601"></td>
+                                <td>男</td>
+                                <td>12</td>
+                                <td class="toDis"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;">37</td>
+                                <td style="display: none;">广东-惠州-惠城区</td>
+                                <td style="display: none;">本科</td>
+                                <td style="display: none;">运营中心负责人</td>
+                                <td style="display: none;">武汉科技大学</td>
+                                <td style="display: none;">工商管理</td>
+                                <td style="display: none;">广东巨洋集团有限公司</td>
+                                <td style="display: none;">环保-耐用消费品（服饰/纺织/皮革/家具/家电）-通信/电信运营、增值服务</td>
+
+                                <td style="display:none;" title="主动投递">
+                                    主动投递
+                                </td>
+                                <td title="2/5/2018 10:30:06 PM">
+
+                                    &nbsp;&nbsp;
+                                    02-05 22:30
+                                </td>
+                            </tr>
+                            <!--BeginListRecord -->
+                            <tr resume-number="JR338758787R90250001000" data-type="1" class="list2"
+                                title="单击一下打开或关闭详细信息" rdmodule="resumeMoreInfoFac" id="moreinfo_100082389938"
+                                resume_bh="" resume_number="1" resume_source="简历来源:主动投递初次投递:(安徽-合肥) 投递时间:"
+                                re_jobtime='2017-11至今'
+                                re_self="本人吃苦耐劳 责任心强 善于沟通 合作能力良好  具备良好的沟通能力和组织领导能力 上进心强 喜欢挑战新事物。参与了蒙城县职业教育中心和安徽电子工程学校两所学校的国家示范校项目建设，期间担任机电专业项目经理一职。"
+                                re_company='科大讯飞股份有限公司' re_jobname='营销策划经理' re_description="1.负责高校市场开发，制定渠道策略和销售目标计划。
+2.参与市场调研、竞争对手研究，反馈市场行情，提供市场开拓建设性意见。
+3.与高职、本科类高校洽谈人工智能学科建设以及共建人工智能学院相关细节。挖掘学校需求并找到合适的合作切入点。
+4.学校持续跟踪以及后期商务谈判。
+5.与江西省几所院校达成初步合作框架协议，主要涉及到实训室共建以及师资培训等。
+6.建立客户档案，客户关系维护。
+">
+                                <td class="tdCheckbox">
+                                    <input type="checkbox" data-invited="0" data-isfeedback="true"
+                                           id="resoutorsend_100082389938" data-language="1" data-cnname="周峰"
+                                           data-resumebh="JR338758787R90250001000" data-resumenumber="1"
+                                           data-resguid="100082389938" name="chkid" dev_name="简历"
+                                           userinfo_forsend="周峰$133875878$zhoufengchr@163.com$18755179381$100082389938$&amp;*&amp;$男$32$本科$JR338758787R90250001000$生物科学$教育/培训/院校-媒体/出版/影视/文化传播$1$CC383920829J90250770000$9$安徽-合肥$18755179381"
+                                           value="100082389938" onclick="unChkSelectAll('chkall')" class="smpcheckbox"
+                                           data-smpcvid="JR338758787R90250001000_1" data-smpownerid="100082389938"
+                                           data-smpkpi="M2" data-smpxtable="1"/>
+                                </td>
+                                <td class="fkt_ico_position">
+
+                                </td>
+
+                                <td label="" rdmodule="cvLabelOneFac" id="r_label100082389938" cvname="周峰" title=""
+                                    class="td4cvIcon"><span class="cvLabelColorDot"><span class=" cvLabelBlank"></span></span>
+                                </td>
+                                <td>
+                                    <a style=color:#315aaa isread="0"
+                                       onclick="javascript:ViewOneResume(this,'0','100082389938');"
+                                       href="//rd.zhaopin.com/resumepreview/resume/viewone/1/100082389938?resume=100082389938&star=&companyid=38392082&pfd=5019_1014"
+                                       target="_blank" class="link " id="100082389938">周峰</a>
+
+                                </td>
+                                <!--jobCode==101时，显示闪聘图标-->
+                                <td name="pId" jobid="CC383920829J90250770000" jobcode="601"></td>
+                                <td>男</td>
+                                <td>9</td>
+                                <td class="toDis"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td width="100"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;"></td>
+                                <td style="display: none;">32</td>
+                                <td style="display: none;">安徽-合肥</td>
+                                <td style="display: none;">本科</td>
+                                <td style="display: none;">营销策划经理</td>
+                                <td style="display: none;">黄山学院</td>
+                                <td style="display: none;">生物科学</td>
+                                <td style="display: none;">科大讯飞股份有限公司</td>
+                                <td style="display: none;">教育/培训/院校-媒体/出版/影视/文化传播</td>
+
+                                <td style="display:none;" title="主动投递">
+                                    主动投递
+                                </td>
+                                <td title="2/5/2018 10:00:13 PM">
+
+                                    &nbsp;&nbsp;
+                                    02-05 22:00
+                                </td>
+                            </tr>
+                        </table>
+                        <input type="hidden" name="DColumn_hidden" id="DColumn_hidden" value=""/>
+                        <input type="hidden" name="searchKeyword" id="searchKeyword" value=""/>
+                    </div>
+
+
+                </div>
+                <input type="hidden" name="curSubmitRecord" id="curSubmitRecord" value="63"/>
+                <input type="hidden" name="curMaxPageNum" id="curMaxPageNum" value="4"/>
+                <div class="turnpageCon clearfix">
+                    <div class="checkAll">
+                        <input type="checkbox" name="chkall" id="chkall" value="1"
+                               onclick="ChkSelectAll('chkid', 'chkall')"/><label for="chkall" style="cursor: pointer">
+                        全选</label>
+                    </div>
+                    <div style="float: left; margin: 3px 0 0 13px;">
+                        <img src="//img04.zhaopin.cn/rd2/s/images/erd2/blank.gif" border="0" hspace="5"
+                             class="iconHasEng"/>有英文简历&nbsp;&nbsp;<img
+                            src="//img04.zhaopin.cn/rd2/s/images/erd2/blank.gif" border="0" hspace="5"
+                            class="iconHasPhoto"/>有照片&nbsp;&nbsp;
+                        <img src="//img04.zhaopin.cn/rd2/s/images/erd2/blank.gif" border="0" hspace="5"
+                             class="iconHasSMSPhoto"/>
+                        已发送短信&nbsp;&nbsp; <img src="//img04.zhaopin.cn/rd2/s/images/erd2/blank.gif" border="0"
+                                               hspace="5" class="iconHasEmailPhoto"/>
+                        已发送邮件 <img width="16" height="14" align="absmiddle" class="mr5"
+                                   src="//img00.zhaopin.cn/2014/rd2/img/wxico.png"/>
+                        绑定智联微信公众号
+                    </div>
+                    <div class="turnpage">
+                        <a href="javascript:void(0)" class='color000'>首页</a>
+                        <a href="javascript:gotoPage('2');">下页</a>
+                        <a href="javascript:gotoPage('4');">尾页</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;第<span class='red12px'>1/4</span>页，去
+
+                        <input type="text" value='' name='PageList2' size='2' class='searchnum' id="pageList2"/>
+                        页&nbsp;
+                        <input type='button' value='Go' class='genButton3' onclick='gotoPage($("#pageList2").val())'/>
+                    </div>
+                </div>
+                <!--abc 1 -->
+                <div class="bottomControl">
+                    <strong class="addm markBtn">
+                        <input type="button" name="btnBack" value="标记为待沟通"
+                               class="__ga__RDresumeA_toalternate_002 genButton6 smpevent"
+                               onclick="return ShowBack(this)">
+
+                        <input type="button" name="btn" value="标记为不合适"
+                               class="__ga__RDresumeA_torefuse_002 genButton6 smpevent"
+                               onclick="return ShowImproper(this)">
+                    </strong> <span id="moreAction" style="display: inline-block">
+            <input type="hidden" name="buttonAsse" value="导入测评系统" onclick="return assessmentExport()"
+                   id="talentAssessment" class="genButton6 smpevent" data-smpposition="latestresumelist"
+                   data-smpaction="importtoassessment"/>
+            <input type="hidden" name="buttonInfo" value="发通知信" tdindex="3" rdmodule="sendInfoFac" id="sendInfoTrigger"
+                   cvbox="document.form1.chkid" sender="上海信隆行信息科技股份有限公司" reply="xfj@xinlonghang.cn"
+                   class="genButton1 smpevent" data-smpposition="latestresumelist" data-smpaction="sendmessage"/>
+
+            <input type="button" name="buttonLabel" value="添/删标签" rdmodule="cvActionPortFac" id="cvLabelTrigger"
+                   cvbox="document.form1.chkid" class="genButton1">
+            <input type="button" name="view" value="显示简历" onclick="Javascript: ViewMoreResume(); viewmore()"
+                   class="genButton1">
+            <input type="button" id="resoutbtn" value="保存到我的电脑" class="genButton6 smpevent" data-down="1"
+                   onclick="ResXOut.ShowResOutDiv(0)" data-smpposition="latestresumelist"
+                   data-smpaction="savetocomputer">
+            <input type="button" value="转发简历到邮箱" class="genButton6 smpevent" data-down="1" id="forwordResumeToEmail"
+                   data-smpposition="latestresumelist" data-smpaction="forwardemail">
+            <input type="button" name="Submit223" value="推荐职位" class="genButton1 smpevent" onclick="goToRecommendJob()"
+                   data-smpposition="latestresumelist" data-smpaction="recommendposition">
+            <input type="button" name="Submit4" value="放入回收站" class="genButton2" onclick="goToMoveToRecycle()"
+                   style="color:#315aaa;cursor:pointer"/>
+        </span>
+                    &nbsp;
+                </div>
+                <script type="text/javascript">
+                    function hasFeedbackResume() {
+                        var resumeState = "1";
+                        var flag = false;
+                        if (resumeState == 1 || resumeState == 2) {
+                            var elemList = document.getElementById("zpResumeListTable").getElementsByTagName("input");
+                            for (var i = 0, len = elemList.length; i < len; i++) {
+                                if (elemList[i].type == "checkbox" && elemList[i].checked && elemList[i].getAttribute("data-isfeedback") == "true") {
+                                    flag = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (flag) {
+                            alert("您选择了承诺反馈的简历，未处理前不可做此操作");
+                            return flag;
+                        }
+                        return flag;
+                    }
+
+                    function goToRecommendJob() {
+                        if (hasFeedbackResume() == false)
+                            movetovacancy(1)
+                    }
+
+                    function goToMoveToRecycle() {
+                        var ret = recycleResume(1);
+                        if (ret == true) {
+                            SetRowState(GetIds());
+                        }
+                    }
+
+                    //放入回收站
+                    function recycleResume(type) {
+                        var ret
+                        ret = confirm("是否删除选中的简历？回收箱中的简历将在7天自动清空一次。");
+                        if (!ret) return
+                        var e;
+                        var ret = false;
+                        var length = document.form1.chkid.length;
+                        var str = "";
+                        if (length >= 1) {
+                            for (var i = 0; i < document.form1.chkid.length; i++) {
+                                e = document.form1.chkid[i];
+                                if (e.checked == true) {
+                                    t = e.value;
+                                    ret = true;
+                                    str += t + ";";
+                                }
+                            }
+                        }
+                        else {
+                            if (document.form1.chkid.checked == true) {
+                                t = document.form1.chkid.value;
+                                ret = true;
+                                str += t + ";";
+                            }
+                            else ret = false;
+                        }
+                        if (ret) {
+
+                            str = str.substring(0, str.length - 1)
+                            var v, v2
+                            v = document.form1.action
+                            v2 = document.form1.target
+                            openPopup('', 'movetofavorite', 450, 200);
+                            document.form1.select_unique_id.value = str;
+                            document.form1.action = "//rd2.zhaopin.com/s/resuadmi/RemoveResumeFromFavo.asp?url=search_job2&search_type=" + type;
+                            document.form1.target = "movetofavorite";
+                            document.form1.submit();
+                            document.form1.action = v;
+                            document.form1.target = v2;
+                            return true;
+                        }
+                        else alert("请选择要删除的简历！");
+                    }
+
+                </script>
+
+                <script type="text/javascript">
+                    function ViewOneResume(link, isRead, ids) {
+                        //alert(isRead+$("#" + ids).attr("isread"));
+                        //防止第二次点击同一简历时，发送消息
+                        if (isRead == "0" && $("#" + ids).attr("isread") == "0") {
+                            Post(ids);
+                        }
+                        //修改链接样式
+                        $("#" + ids).addClass("viewedres");
+                        $("#" + ids).attr("isread", "1");
+                    }
+
+                    function ViewMoreResume() {
+                        var ids = GetCheckedAndUnReadIds();
+                        Post(ids);
+                    }
+
+                    //获取选中且没查看过的简历编号
+                    //并做样式处理
+                    function GetCheckedAndUnReadIds() {
+                        var applyids = "";
+                        $("input:checkbox[name='chkid']:checked").each(function () {
+                            var applyid = $(this).val();
+                            if ($("#" + applyid).attr("isread") == "0") {
+                                //当没有看过时
+                                applyids += applyid + ";";//获取应聘简历id
+                                $("#" + applyid).addClass("viewedres");
+                                $("#" + applyid).attr("isread", "1");
+                            }
+                        });
+                        return applyids;
+                    };
+
+                    function setViewRecordForDownload() {
+                        var ids = GetCheckedAndUnReadIds();
+                        Post(ids);
+                    }
+
+                    function Post(ids) {
+                        $.post(
+                            "/RdApply/Resumes/Apply/SetHRAction",//要访问的地址
+                            {ids: ids},//要发送的数据
+                            function (data) {
+                                if (data != null && data.result == "success") {
+                                }
+                                else {
+                                }
+                                ResXOut.Close();
+                            },
+                            "json"
+                        );
+                    }
+                </script>
+            </div>
+            <input type="hidden" name="SF_1_1_50" id="ResumeState" value="1"/>
+            <input type="hidden" name="SF_1_1_51" id="InputFeedbackState" value="-1"/>
+            <input type="hidden" name="SF_1_1_45" id="PositionNumber" value=""/>
+            <input type="hidden" name="SF_1_1_44" id="GroupID" value=""/>
+            <input type="hidden" name="SF_1_1_52" id="hiddenExpired" value="0"/>
+            <input type="hidden" name="SF_1_1_49" id="FeedBack" value="0"/>
+            <input type="hidden" name="IsInvited" id="IsInvited" value="0"/>
+            <input type="hidden" name="position_city" value="[%%POSITION_CITY%%]"/>
+            <input type="hidden" name="deptName" value=""/>
+            <input type="hidden" name="select_unique_id" value=""/>
+            <input type="hidden" name="selectedResumeList" value=""/>
+            <input type='hidden' name='PageNo'/>
+            <input type='hidden' name='PosState'/>
+            <input type='hidden' name='MinRowID' value=""/>
+            <input type='hidden' name='MaxRowID' value="2722819791"/>
+            <input type='hidden' name='RowsCount' value="123"/>
+            <input type='hidden' name='PagesCount' value="5"/>
+            <input type='hidden' name='PageType' value="0"/>
+            <input type='hidden' name='CurrentPageNum' id='CurrentPageNum' value="1"/>
+            <input type="hidden" name="Position_IDs" value="[%%POSITION_IDS%%]"/>
+            <input type="hidden" name="Position_ID" value="[%%POSITION_ID%%]"/>
+            <input type="hidden" name="SortType" value="0"/>
+            <input type="hidden" name="isCmpSum" value="0"/>
+            <input type="hidden" name="SelectIndex_Opt" value="0"/>
+            <input type="hidden" name="Resume_count" value="0"/>
+            <input type="hidden" name="CID" value="38392082" id="CID"/>
+            <!-- warlock.deng Begin-->
+            <input type="hidden" name="forwardingEmailList" id="forwardingEmailList"
+                   value=""/>
+            <input type="hidden" id="ressendemailbody" value=""/>
+            <!-- warlock.deng End-->
+            <!-- Trace Data Start -->
+            <input type="hidden" id="dda_operatorid" value="200102146"/>
+            <input type="hidden" id="dda_companyid" value="12007036"/>
+            <input type="hidden" id="dda_type" value="cvinterview"/>
+            <input type="hidden" id="dda_custom" value=""/>
+            <input type="hidden" id="dda_source" value=""/>
+            <input type="hidden" id="dda_position" value="latestresumelist"/>
+            <input type="hidden" id="click_search_op_type" name="click_search_op_type" value="-1"/>
+            <input type="hidden" id="isDmJob" value=""/>
+        </form>
+        <div id="divLoading" style="display: none">
+            <img src="//img00.zhaopin.cn/2012/img/rd/loading1202.gif" border="0"/>
+        </div>
+        <script type="text/javascript" src="/Scripts/apply/searchlist.js?v=20160323"></script>
+        <script type="text/javascript">
+
+            function loadingPanel() {
+                $.popupBase.init({div: $("#divLoading"), maskClose: false, posx: "center", posy: "center"});
+            }
+
+            function loadingList() {
+                var button = $("#searchSubmit").find("button");
+                var disable = button.hasClass("input-submit-disable");
+                if (disable) return false;
+                $.popupBase.init({div: $("#divLoading"), maskClose: false, posx: "center", posy: "center"});
+            }
+
+            var myDColumn;
+
+            $(document).ready(function () {
+                searchList_readyHander1();
+                myDColumn = new DColumn('myDColumn', 'zpResumeListTable', ['DColumn_sel0', 'DColumn_sel1', 'DColumn_sel2', 'DColumn_sel3'], 'DColumn_hidden', [7, 8, 9, 10], allData, [14, 15, 16, 17]);
+                myDColumn.init(true);
+                searchList_readyHander2();
+            });
+
+            function refreshDocument() {
+                searchList_readyHander1()
+                myDColumn = new DColumn('myDColumn', 'zpResumeListTable', ['DColumn_sel0', 'DColumn_sel1', 'DColumn_sel2', 'DColumn_sel3'], 'DColumn_hidden', [7, 8, 9, 10], allData, [14, 15, 16, 17]);
+                myDColumn.init(true);
+                searchList_readyHander2();
+                resumeDetailShow();
+
+                $(window).scrollTop(0);
+
+
+                $.popupBase.close($("#divLoading"));
+                var queryArr = getQueryArray();
+                if (queryArr.length > 0) {
+                    var searchParam = '?' + queryArr.join('&');
+                    addSearchLog(searchParam);
+                }
+                resetQueryRecordCount();
+                ZP.analysis.elements_analysis($("#resumeList"));
+            }
+
+            function refreshControl() {
+                //提交
+                $.popupBase.close($("#divLoading"));
+                var refreshListKey = cookieKeyFlag + refreshList;
+                var isRefreshList = $.cookie(refreshListKey);
+                if (isRefreshList === '1') {
+                    removeCookie(refreshListKey);
+                    buttonSubmit(true, true);
+                }
+                InitCustomArea();
+            }
+
+            function getListFailure() {
+                debugger;
+                window.location.reload();
+            }
+        </script>
+    </div>
+
+
+</div>
+<!--foot-->
+<div class="rd-resume-foot">
+    版权所有 zhaopin.com
+</div>
+<div class="ZPqrcode ZPqrcode4" id="ZPEWMcode" style="display: none;">
+    <a href="javascript:void(0);" class="__ga__jianliguanlibms_lijiliaojie_001" id="ensure-float"></a>
+    <span class="close_code" title="关闭"
+          onclick="this.parentNode.style.display = 'none'; setCookie('qrcodeFlag-EWM-RDApply',1,15);" title="关闭"></span>
+</div>
+<!-- 统计代码 -->
+<script type="text/javascript" src="//img00.zhaopin.cn/2014/common/js/za/ga_rd.js"></script>
+</body>
+</html>
+<script type="text/javascript" src="//rd2.zhaopin.com/s/js/erd2/animationPopupDiv.js"></script>
+<script type="text/javascript" src="//rd2.zhaopin.com/s/js/forapply/fnSearch.js"></script>
+<script type="text/javascript" src="//rd2.zhaopin.com/s/js/forapply/fnResuadmi.js"></script>
+<script type="text/javascript" src="//rd2.zhaopin.com/s/js/forapply/resumeLabel.js"></script>
+<script type="text/javascript">
+    var enterConfig = animPopupDiv_init('RD_menuItem_config', 'right', 10, 5);
+</script>
+<script src="/Scripts/apply/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
+
+<style type="text/css">
+    span.focus {
+        color: #f60;
+        font-weight: bold;
+    }
+
+    .matchingStyle {
+        background: url(//img02.zhaopin.cn/2012/img/rd/matchingStyle.png) no-repeat 46px 13px #f2f6f9;
+        width: 73px;
+        color: #315aaa;
+    }
+
+    .matchingHide {
+        color: #315aaa;
+        width: 98px;
+        height: 22px;
+        background: url(//img01.zhaopin.cn/2012/img/rd/rdsou_bg.png) 0 -118px no-repeat;
+        margin-right: 5px;
+        line-height: 22px;
+        text-align: center;
+        margin-top: 3px;
+    }
+
+    .matchingHide:hover {
+        cursor: pointer;
+    }
+
+    .matchingHide strong {
+        font-size: 12px;
+        font-weight: normal;
+    }
+
+    .starHover {
+        width: 52px;
+        height: 16px;
+        padding: 6px 0 0 2px;
+    }
+
+    .starHover:hover {
+        background: url(//img02.zhaopin.cn/2012/img/rd/star-hover.png) no-repeat 0 0;
+        cursor: pointer;
+    }
+
+    .star {
+        display: block;
+        width: 50px;
+        height: 9px;
+        background: url(//img02.zhaopin.cn/2012/img/rd/matching-mark.png) no-repeat 0 0;
+        font-size: 0;
+    }
+
+    .star5 {
+        background-position: 0 0;
+    }
+
+    .star4 {
+        background-position: 0 -9px;
+    }
+
+    .star3 {
+        background-position: 0 -18px;
+    }
+
+    .star2 {
+        background-position: 0 -27px;
+    }
+
+    .star1 {
+        background-position: 0 -36px;
+    }
+
+    .star0 {
+        background-position: 0 -45px;
+    }
+
+    .star6 {
+        background-position: 0 -54px;
+        height: 14px;
+    }
+
+    .deliverDay {
+        background: url(//img02.zhaopin.cn/2012/img/rd/matchingStyle.png) no-repeat 60px 13px;
+        color: #315aaa;
+    }
+
+    .padL33 {
+        padding-left: 33px;
+    }
+
+    #RD_bottomCon {
+        width: 950px;
+        height: 30px;
+        padding: 0;
+        margin: 0 auto;
+        clear: both;
+        font-size: 12px;
+        font-family: Verdana;
+        color: #333;
+        background: #fff;
+    }
+
+    #RD_bottomCon .textCon {
+        line-height: 30px;
+        border: #e0e0e0 1px solid;
+        background: #f1f1f1;
+        text-align: center;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#SF_1_1_38').find("option[value='2,9']").attr("selected", true);
+        $('#SF_1_1_38').change(function () {
+            //$("#SF_1_1_38").val($(this).val());
+            //debugger;
+            clearQueryDict();
+            $('#curTotalRecord').val('-1');
+            buttonSubmit(true, true);
+        });
+
+        //如果从B端消息中心过来的请求，URL中含ExpiredApply=1(看过期的记录)
+        var ExpiredApply = "0";
+        if (ExpiredApply == "1") {
+            $("#btnExpiredApply").attr("checked", true);
+            $("#btnExpiredApply").attr("ExpiredApply", "1");
+            $("#hiddenExpired").val("1");
+
+        }
+    });
+
+
+</script>
+
+<script type="text/javascript">
+
+    $.ajaxSetup({
+        cache: false
+    });
+
+    // ERD 主导航弹层
+    $('#headerNav').find('.popSubNav').mouseenter(function () {
+        $('.popoSubNavLay').hide();
+        if ($(this).hasClass('psn1')) {
+            $('#subNav1').show();
+        } else if ($(this).hasClass('psn2')) {
+            $('#subNav2').show();
+        } else if ($(this).hasClass('psn3')) {
+            $('#subNav3').show();
+        } else if ($(this).hasClass('psn4')) {
+            $('#subNav4').show();
+        } else if ($(this).hasClass('psn5')) {
+            $('#subNav5').show();
+        }
+    });
+
+    $('.popoSubNavLay').mouseleave(function () {
+        $(this).hide()
+    });
+
+    var showEWM = getCookie("qrcodeFlag-EWM-RDApply");
+    if (showEWM == undefined) {
+        $("#ZPEWMcode").show();
+    }
+
+    $(document).ready(function () {
+        if ($("#IsInvited").val() == "1") {
+            if ($("#SF_1_1_41").length > 0) {
+                $("#SF_1_1_41").parent().hide();
+            }
+        }
+    })
+</script>
+<!--监控脚本-->
+<script type="text/javascript" src="//img00.zhaopin.cn/2014/common/js/za/ga_rd.js"></script>

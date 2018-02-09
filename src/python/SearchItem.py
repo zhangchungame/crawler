@@ -1,20 +1,19 @@
 #coding:UTF-8
-import requests
-import jpype
-from jpype import *
 import json
-import time
 import re
-import redis
 import threading
+import time
+
+import jpype
+import redis
+import requests
 from bs4 import BeautifulSoup
-import configUtil
-import PyV8
+from jpype import *
 
 
+jpype.startJVM(jpype.getDefaultJVMPath(), "-ea", "-Djava.class.path=/code/java/forpython/target/classes/")
 
 class SearchItem(threading.Thread):
-    redisPool = configUtil.redisPool
     session=requests.session()
     keyword=""
     proxy=""
@@ -31,15 +30,6 @@ class SearchItem(threading.Thread):
         A = jpype.JClass("com.GovTest")
         self.Aobj=A()
         fu=self.Aobj.challenge(result.text)
-        # resp=resp[8:]
-        # tmp=resp.split('</script')
-        # resp=tmp[0]
-        # resp=resp.replace("eval(y.replace", "var aaa=(y.replace");
-        # resp = resp + "aaa=aaa.replace(\"while(window._phantom||window.__phantomas){};\", \"\");bbb = aaa.split(\"setTimeout\");aaa = bbb[0] + \"return dc;}\";aaa = aaa.replace(\"var l=\", \"\");";
-        # ctxt = PyV8.JSContext()
-        # ctxt.enter()
-        # func = ctxt.eval(resp)
-        # fu=ctxt.eval("("+func+")")
         print "fu="+fu
         jslarr= fu.split("=")
         jsl_clearance=jslarr[1]
@@ -54,11 +44,6 @@ class SearchItem(threading.Thread):
         localTime=time.localtime(time.time())
         url=url+str(localTime.tm_min+localTime.tm_sec)
         resp=self.session.get(url)
-        # ctxt = PyV8.JSContext()
-        # ctxt.enter()
-        # funstr="""(function(){var json="""+resp.text+""";return json.map( function(item){ return String.fromCharCode(item);}).join("");})"""
-        # func = ctxt.eval(funstr)
-        # aaa=func()
         aaa=self.Aobj.getImageGif(resp.text)
         matchObj = re.search( 'location_info = (\d+);', aaa)
         if matchObj:
@@ -70,11 +55,6 @@ class SearchItem(threading.Thread):
         print "getValidateInput start"
         url="http://www.gsxt.gov.cn/corp-query-geetest-validate-input.html?token="+location_info
         resp=self.session.get(url)
-        # ctxt = PyV8.JSContext()
-        # ctxt.enter()
-        # funstr="""(function(){var json="""+resp.text+""";return json.map( function(item){ return String.fromCharCode(item);}).join("");})"""
-        # func = ctxt.eval(funstr)
-        # aaa=func()
         aaa=self.Aobj.getImageGif(resp.text)
         matchObj = re.search( 'value: (\d+)}', aaa)
         if matchObj:
@@ -93,7 +73,7 @@ class SearchItem(threading.Thread):
 
     def jianYan(self,challengeJson):
         print "jianYan start"
-        url="http://jiyanapi.c2567.com/shibie?user=dandinglong&pass=aaa222&gt="+challengeJson["gt"]+"&challenge="+challengeJson["challenge"]+"&referer=http://www.gsxt.gov.cn&return=json&format=utf8"
+        url="http://jiyanapi.c2567.com/shibie?user=帐号&pass=密码&gt="+challengeJson["gt"]+"&challenge="+challengeJson["challenge"]+"&referer=http://www.gsxt.gov.cn&return=json&format=utf8"
         sess=requests.session()
         resp=sess.get(url);
         jiyanJson=  json.loads(resp.text)
@@ -120,10 +100,8 @@ class SearchItem(threading.Thread):
         soup = BeautifulSoup(html,"html.parser")
         urlsItem=soup.find_all("a",class_="search_list_item db")
         pageNums=0
-        r = redis.Redis(connection_pool=self.redisPool)
         for urlItem in urlsItem:
             print "urlItem['href']=",urlItem['href']
-            r.rpush("corpUrlList",urlItem['href'])
         if len(urlsItem)>1:
             pageForm=soup.find_all(id="pageForm")
             tabAs=pageForm[0].find_all("a",text=re.compile("\d+"))
@@ -133,7 +111,6 @@ class SearchItem(threading.Thread):
     def dealPageUrlNum(self,pageNums,postData):
         print "dealPageUrlNum start"
         url="http://www.gsxt.gov.cn/corp-query-search-advancetest.html"
-        r = redis.Redis(connection_pool=self.redisPool)
         for i in range(pageNums):
             postData['page']=i+1
             resp=self.session.get(url,params=postData)
@@ -141,7 +118,6 @@ class SearchItem(threading.Thread):
             urlsItem=soup.find_all("a",class_="search_list_item db")
             for urlItem in urlsItem:
                 print "urlItem['href']=",urlItem['href']
-                r.rpush("corpUrlList",urlItem['href'])
 
 
     def getCorpUrl(self):
@@ -170,7 +146,7 @@ class SearchItem(threading.Thread):
         self.dealPageUrlNum(pageNums,postData)
         return 1
 
-    def run(self):  # 定义每个线程要运行的函数
+    def run(self):
         try:
             self.getCorpUrl()
         except Exception,e:
@@ -184,6 +160,17 @@ class SearchItem(threading.Thread):
         self.keyword = keyword
         self.proxy = proxy
         self.semaphore = semaphore
+
+
+semaphore=threading.Semaphore(1)
+while 1:
+        try:
+            semaphore.acquire()
+            t1=SearchItem("百度",None,semaphore)
+            t1.start()
+        except Exception, e:
+            print 'main e.message:\t', e.message
+        time.sleep(1)
 
 
 
